@@ -1,54 +1,74 @@
 import React, { useState, useEffect } from 'react';
+import { NavBar } from '../components/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
-
-    const [descripcion, setDescripcion] = useState('');
-    const [img_publicacion, setImgPublicacion] = useState('');
-    const [hora_publicacion, setHoraPublicacion] = useState('');
-    const [id_usuario, setIdUsuario] = useState('');
-    const [id_tipo_publicacion, setIdTipoPublicacion] = useState('');
-    const [titulo, setTitulo] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        recibirPublicaciones();
-    }, []);
+        // Verificar si el token está presente en localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return; // Evita continuar si no hay token
+        }
 
-    function recibirPublicaciones() {
+        // Fetch para obtener las publicaciones
         fetch('http://localhost:3000/obtener_publicaciones', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Enviar token en el encabezado si es necesario
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((responseConvert) => {
+            if (Array.isArray(responseConvert)) {
+                setPublicaciones(responseConvert);
+            } else {
+                setError('Datos de publicaciones no válidos.');
             }
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((responseConverted) => {
-                console.log('Publicaciones recibidas:', responseConverted);
-                setPublicaciones(responseConverted.publicaciones); // Asegúrate de que la respuesta tiene la estructura correcta
-            })
-            .catch((error) => {
-                console.error('Ups algo salió mal 😞', error);
-            });
+        .catch((error) => {
+            setError(error.message);
+            console.error('Error fetching data:', error);
+        });
+    }, [navigate]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
     }
 
     return (
-        <div className="card text-center">
-          <div className="card-header" onChange={setIdUsuario}>
-            {setIdUsuario}
-          </div>
-          <div className="card-body" onChange={setTitulo}>
-            <h5 className="card-title" onChange={setImgPublicacion}>Special title treatment</h5>
-            <p className="card-text" onChange={setDescripcion}>With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary" onChange={setIdTipoPublicacion}>Go somewhere</a>
-          </div>
-          <div className="card-footer text-body-secondary" onChange={setHoraPublicacion}>
-            2 days ago
-          </div>
+        <>
+        <NavBar /> 
+        <div className="container">
+            <div className="row">
+                {publicaciones.length > 0 ? (
+                    publicaciones.map((post, index) => ( 
+                        <div className="col-3" key={post.id || index}> 
+                            <div className="card">
+                                <img src={post.img_publicacion} className="card-img-top" alt="Post" />
+                                <div className="card-body">
+                                    <h5 className="card-title">{post.titulo}</h5>
+                                    <p className="card-text">{post.descripcion}</p>
+                                    <a href="#" className="btn btn-primary">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>No hay publicaciones disponibles.</p>
+                )}
+            </div>
         </div>
+        </>
     );
 }

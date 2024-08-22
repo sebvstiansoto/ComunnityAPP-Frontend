@@ -1,0 +1,22 @@
+.banner {
+    background: url("https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg")
+      no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

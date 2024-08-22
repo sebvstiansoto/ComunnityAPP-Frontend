@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";  // Importar useNavigate
 
 export function RegisterPage() {
     let [nombre_usuario, setUsername] = useState("");
@@ -6,6 +7,8 @@ export function RegisterPage() {
     let [email, setEmail] = useState("");
     let [telefono, setPhone] = useState("");
     let [identificacion, setIdentification] = useState("");
+
+    const navigate = useNavigate();  // Crear una instancia de useNavigate
 
     function changeUsername(e) {
         setUsername(e.target.value);
@@ -59,11 +62,14 @@ export function RegisterPage() {
                 setEmail("");
                 setPhone("");
                 setIdentification("");
+                
+                // Redirigir a la página de inicio
+                navigate("/");  // Redirige a "/"
             })
             .catch((error) => {
                 console.error('Ups algo salió mal 🙄', error);
             });
-    }
+    } 
 
     return (
         <form className="" onSubmit={sendData}>

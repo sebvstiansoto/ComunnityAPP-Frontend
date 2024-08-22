@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function LoginPage() {
     const [email, setEmail] = useState('');
     const [contraseña, setContraseña] = useState('');
+    const navigate = useNavigate();  // Crear una instancia de useNavigate
 
     function changeEmail(e) {
         setEmail(e.target.value);
@@ -11,17 +13,13 @@ export function LoginPage() {
     function changeContraseña(e) {
         setContraseña(e.target.value);
     }
-
+    
     function sendData(e) {
         e.preventDefault();
-
         if (!email || !contraseña) {
             alert('Por favor, ingresa todos los campos.');
             return;
         }
-
-        console.log({ email, contraseña });
-        console.log('Preparando para enviar datos al backend');
 
         fetch('http://localhost:3000/login', {
             method: 'POST',
@@ -43,7 +41,13 @@ export function LoginPage() {
         })
         .then((responseConverted) => {
             alert(responseConverted.message + " 🤩🙂🤩🤗");
+            if (responseConverted.token) {
+                localStorage.setItem('token', responseConverted.token);
+                localStorage.setItem('username', responseConverted.username);
 
+                // Redirigir a la página de inicio
+                navigate("/");  // Redirige a "/"
+            }
             setEmail('');
             setContraseña('');
         })
@@ -54,33 +58,29 @@ export function LoginPage() {
 
     return (
         <form onSubmit={sendData}>
-            <div className="col-6 col-sm-4">
-                <label htmlFor="email" className="visually-hidden">Email</label>
+            <div className="form-group">
+                <label htmlFor="email">Email</label>
                 <input 
                     type="email" 
-                    onChange={changeEmail} 
                     className="form-control" 
                     id="email" 
-                    placeholder="Ingresa Email"
-                    value={email}
+                    value={email} 
+                    onChange={changeEmail} 
+                    placeholder="Ingresa tu email"
                 />
             </div>
-
-            <div className="col-3">
-                <label htmlFor="password" className="visually-hidden">Contraseña</label>
+            <div className="form-group">
+                <label htmlFor="contraseña">Contraseña</label>
                 <input 
                     type="password" 
-                    onChange={changeContraseña} 
                     className="form-control" 
-                    id="password" 
-                    placeholder="Ingresa Contraseña"
-                    value={contraseña}
+                    id="contraseña" 
+                    value={contraseña} 
+                    onChange={changeContraseña} 
+                    placeholder="Ingresa tu contraseña"
                 />
             </div>
-
-            <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3">Conectarse</button>
-            </div>
+            <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
         </form>
     );
 }
