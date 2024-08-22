@@ -1,86 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [contraseña, setContraseña] = useState('');
+  const [email, setEmail] = useState("");
+  const [contraseña, setContraseña] = useState("");
 
-    function changeEmail(e) {
-        setEmail(e.target.value);
+  function changeEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function changeContraseña(e) {
+    setContraseña(e.target.value);
+  }
+
+  function sendData(e) {
+    e.preventDefault();
+
+    if (!email || !contraseña) {
+      alert("Por favor, ingresa todos los campos.");
+      return;
     }
 
-    function changeContraseña(e) {
-        setContraseña(e.target.value);
-    }
+    console.log({ email, contraseña });
+    console.log("Preparando para enviar datos al backend");
 
-    function sendData(e) {
-        e.preventDefault();
-
-        if (!email || !contraseña) {
-            alert('Por favor, ingresa todos los campos.');
-            return;
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        contraseña: contraseña,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(
+              `HTTP error! status: ${response.status}, details: ${text}`
+            );
+          });
         }
+        return response.json();
+      })
+      .then((responseConverted) => {
+        alert(responseConverted.message + " 🤩🙂🤩🤗");
 
-        console.log({ email, contraseña });
-        console.log('Preparando para enviar datos al backend');
+        setEmail("");
+        setContraseña("");
+      })
+      .catch((error) => {
+        console.error("Ups algo salió mal 🙄", error);
+      });
+  }
 
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                email: email,
-                contraseña: contraseña
-            }),
-        })
-        .then((response) => {
-            if (!response.ok) {
-                return response.text().then((text) => {
-                    throw new Error(`HTTP error! status: ${response.status}, details: ${text}`);
-                });
-            }
-            return response.json();
-        })
-        .then((responseConverted) => {
-            alert(responseConverted.message + " 🤩🙂🤩🤗");
+  return (
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100 text-success-emphasis">
+      <h1>Bienvenido a Comunidapp!</h1>
+      <div class="col-6 col-md-4 d-flex flex-column m-3 p-3">
+        <input
+          type="email"
+          class="form-control border-2 border-success-subtle mb-3"
+          id="validationDefault02"
+          placeholder="UserName / Email"
+          required
+        />
+        <input
+          type="password"
+          class="form-control border-2 border-success-subtle mb-3"
+          id="validationDefault03"
+          placeholder="Contraseña"
+          required
+        />
 
-            setEmail('');
-            setContraseña('');
-        })
-        .catch((error) => {
-            console.error('Ups algo salió mal 🙄', error);
-        });
-    }
+        <div class="d-flex justify-content-center">
+          <button
+            class="btn btn-success btn-outline-dark m-1 col-4"
+            type="submit"
+          >
+            Ingresar
+          </button>
+        </div>
 
-    return (
-        <form onSubmit={sendData}>
-            <div className="col-6 col-sm-4">
-                <label htmlFor="email" className="visually-hidden">Email</label>
-                <input 
-                    type="email" 
-                    onChange={changeEmail} 
-                    className="form-control" 
-                    id="email" 
-                    placeholder="Ingresa Email"
-                    value={email}
-                />
-            </div>
-
-            <div className="col-3">
-                <label htmlFor="password" className="visually-hidden">Contraseña</label>
-                <input 
-                    type="password" 
-                    onChange={changeContraseña} 
-                    className="form-control" 
-                    id="password" 
-                    placeholder="Ingresa Contraseña"
-                    value={contraseña}
-                />
-            </div>
-
-            <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3">Conectarse</button>
-            </div>
-        </form>
-    );
+        <div class="d-flex justify-content-between mb-3">
+          <button
+            class="btn btn-warning btn-outline-dark col-6 m-1"
+            type="submit"
+          >
+            Registrate
+          </button>
+          <button
+            class="btn btn-warning btn-outline-dark col-6 m-1"
+            type="submit"
+          >
+            Olvidaste tu contraseña?
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
