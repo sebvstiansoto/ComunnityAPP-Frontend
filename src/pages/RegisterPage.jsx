@@ -66,35 +66,89 @@ export function RegisterPage() {
     }
 
     return (
-        <form className="" onSubmit={sendData}>
-            <div className="col-6 col-sm-4">
-                <label htmlFor="nombreUsuario" className="visually-hidden">Nombre Usuario</label>
-                <input type="text" value={nombre_usuario} onChange={changeUsername} className="form-control" id="usuario" placeholder="Ingresa Nombre Usuario"/>
+        <>
+            <div className="d-flex justify-content-center m-3 p-3 text-success-emphasis">
+                <h1>Registrate en Comunidapp</h1>
             </div>
-
-            <div className="col-6 col-sm-4">
-                <label htmlFor="correo" className="visually-hidden">Email</label>
-                <input type="email" value={email} onChange={changeEmail} className="form-control" id="correos" placeholder="Ingresa Email"/>
+            <div className="d-flex justify-content-center m-3 p-3">
+                <form className="row g-3" onSubmit={sendData}>
+                    <div className="col-md-6">
+                        <label htmlFor="validationDefault02" className="form-label fw-semibold">Email</label>
+                        <input 
+                            type="email" 
+                            className="form-control border-2 border-success-subtle" 
+                            id="validationDefault02" 
+                            placeholder="usuario@gmail.com" 
+                            required
+                            value={email}
+                            onChange={changeEmail}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationDefaultUsername" className="form-label fw-semibold">Username</label>
+                        <div className="input-group">
+                            <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle" id="inputGroupPrepend2">@</span>
+                            <input 
+                                type="text" 
+                                className="form-control border-2 border-success-subtle" 
+                                id="validationDefaultUsername" 
+                                placeholder="Nombre de usuario" 
+                                required
+                                value={nombre_usuario}
+                                onChange={changeUsername}
+                            />
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationDefaultPassword" className="form-label fw-semibold">Password</label>
+                        <input 
+                            type="password" 
+                            className="form-control border-2 border-success-subtle" 
+                            id="validationDefaultPassword" 
+                            placeholder="Contraseña" 
+                            required
+                            value={contraseña}
+                            onChange={changePassword}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationDefaultDocument" className="form-label fw-semibold">Número de documento</label>
+                        <input 
+                            type="text" 
+                            className="form-control border-2 border-success-subtle" 
+                            id="validationDefaultDocument" 
+                            placeholder="00000000-0" 
+                            required
+                            value={identificacion}
+                            onChange={changeIdentification}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationDefaultPhone" className="form-label fw-semibold">Teléfono</label>
+                        <input 
+                            type="tel" 
+                            className="form-control border-2 border-success-subtle" 
+                            id="validationDefaultPhone" 
+                            placeholder="Número de teléfono" 
+                            required
+                            value={telefono}
+                            onChange={changePhone}
+                        />
+                    </div>
+                    
+                    <div className="col-md-12">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
+                            <label className="form-check-label fw-semibold" htmlFor="invalidCheck2">
+                                Acepto los términos y condiciones
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-12 text-center">
+                        <button className="btn btn-warning btn-outline-dark" type="submit">Enviar formulario</button>
+                    </div>
+                </form>
             </div>
-
-            <div className="col-3">
-                <label htmlFor="contrasena" className="visually-hidden">Contrasena</label>
-                <input type="password" value={contraseña} onChange={changePassword} className="form-control" id="password" placeholder="Ingresa Contrasena"/>
-            </div>
-
-            <div className="col-3">
-                <label htmlFor="phoneNumber" className="visually-hidden">Telefono</label>
-                <input type="number" value={telefono} onChange={changePhone} className="form-control" id="telefono" placeholder="Ingresa Telefono"/>
-            </div>
-
-            <div className="col-3">
-                <label htmlFor="dniNumber" className="visually-hidden">RUT</label>
-                <input type="text" value={identificacion} onChange={changeIdentification} className="form-control" id="identification" placeholder="Ingresa RUT"/>
-            </div>
-
-            <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3">Registrarse</button>
-            </div>
-        </form>
+        </>
     );
 }

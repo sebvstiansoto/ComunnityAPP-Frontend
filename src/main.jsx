@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { RecoveryPage } from "./pages/RecoveryPage";
 import { HomePage } from "./pages/HomePage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { PublishPage } from "./pages/PublishPage";
 
 const router = createBrowserRouter([
   { path: "/register", element: <RegisterPage /> },
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   { path: "/recovery", element: <RecoveryPage /> },
   { path: "/profile", element: <ProfilePage /> },
   { path: "/", element: <HomePage /> }, // Default route
+  { path: "/publish", element: <PublishPage />},
 
   // Add more routes here...
 ]);

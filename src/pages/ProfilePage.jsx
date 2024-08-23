@@ -4,31 +4,33 @@ import "./ProfilePage.css";
 export function ProfilePage() {
   return (
     <>
-      <div class="banner"></div>
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-3 text-center profile-container">
+      <div className="banner"></div>
+
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-md-3 text-center profile-container">
             <img
               src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
               alt="Profile Picture"
-              class="profile-image"
+              className="profile-image"
             />
             <h2>UserName</h2>
           </div>
-          <div class="col-md-9">
-            <div class="d-flex justify-content-between align-items-center">
+          <div className="col-md-9">
+            <div className="d-flex justify-content-between align-items-center">
               <h2>Biografía</h2>
+              {/* Botón para abrir el modal */}
               <button
-                class="btn btn-warning btn-outline-dark"
-                data-toggle="modal"
-                data-target="#editProfileModal"
+                className="btn btn-warning btn-outline-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#editProfileModal"
               >
                 Editar Perfil
               </button>
             </div>
-            <div class="mt-3">
+            <div className="mt-3">
               <textarea
-                class="form-control"
+                className="form-control"
                 rows="5"
                 placeholder="Información adicional..."
               ></textarea>
@@ -36,51 +38,52 @@ export function ProfilePage() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="editProfileModal"
-        tabindex="-1"
-        role="dialog"
+        tabIndex="-1"
         aria-labelledby="editProfileModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editProfileModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="editProfileModalLabel">
                 Editar Perfil
               </h5>
               <button
                 type="button"
-                class="close"
-                data-dismiss="modal"
+                className="close"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body bg-success-subtle">
               <form>
-                <div class="form-group text-center">
-                  <label for="profilePic" class="d-block">
+                <div className="form-group text-center">
+                  <label htmlFor="profilePic" className="d-block">
                     Actualizar Foto de Perfil
                   </label>
                   <img
                     src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
                     alt="Profile Picture"
-                    class="profile-image mb-3"
+                    className="profile-image mb-3"
                     style={{ width: "150px", height: "150px" }}
                   />
                   <input
                     type="file"
-                    class="form-control-file"
+                    className="form-control-file"
                     id="profilePic"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="bio">Biografía</label>
+                <div className="form-group">
+                  <label htmlFor="bio">Biografía</label>
                   <textarea
-                    class="form-control"
+                    className="form-control"
                     id="bio"
                     rows="3"
                     placeholder="Biografía"
@@ -88,15 +91,15 @@ export function ProfilePage() {
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
               >
                 Cerrar
               </button>
-              <button type="button" class="btn-warning btn-outline-dark">
+              <button type="button" className="btn btn-warning btn-outline-dark">
                 Guardar cambios
               </button>
             </div>
