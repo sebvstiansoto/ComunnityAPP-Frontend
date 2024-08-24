@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function RegisterPage() {
     let [nombre_usuario, setUsername] = useState("");
@@ -6,6 +7,8 @@ export function RegisterPage() {
     let [email, setEmail] = useState("");
     let [telefono, setPhone] = useState("");
     let [identificacion, setIdentification] = useState("");
+
+    const navigate = useNavigate();
 
     function changeUsername(e) {
         setUsername(e.target.value);
@@ -32,7 +35,7 @@ export function RegisterPage() {
         console.log({ nombre_usuario, contraseña, email, telefono, identificacion });
         console.log("Todo preparado para enviar a mi backend 😀");
 
-        fetch('http://localhost:3000/registro', {
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,13 +55,7 @@ export function RegisterPage() {
                 return response.json();
             })
             .then((responseConverted) => {
-                alert(responseConverted.message + " 🤩🙂🤩🤗");
-                // Clear all fields after successful registration
-                setUsername("");
-                setPassword("");
-                setEmail("");
-                setPhone("");
-                setIdentification("");
+                navigate("/login");
             })
             .catch((error) => {
                 console.error('Ups algo salió mal 🙄', error);
