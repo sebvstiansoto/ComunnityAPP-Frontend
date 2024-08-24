@@ -1,120 +1,57 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faXTwitter,
+  faGithub,
+  faLinkedin,
+  faUser,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import { useCart } from "../contexts/CartContext";
 
-export function NavBar() {
-    const username = localStorage.getItem('username');
-    const navigate = useNavigate(); // Usa useNavigate para la navegación
+const NavBar = () => {
+  const { totalItems } = useCart();
+  const isLoggedIn = Boolean(localStorage.getItem("userEmail"));
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        // Redirige al usuario a la página de login
-        navigate('/login'); // Redirige a /login usando navigate
-    };
+  const renderIconLink = (href, icon) => (
+    <a href={href} className="hover:text-black">
+      <FontAwesomeIcon icon={icon} />
+    </a>
+  );
 
-    return (
-        <nav class="navbar bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-      
-          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-              <label class="btn btn-outline-primary btn btn-outline-success" for="btnradio1">
-                  <img
-                  style {{width: "20px", height: "20px"}}
-                  src="./Imágenes navbar/profile-user.png"
-                  alt=""/>
-              </label>
-              
-            
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-              <label class="btn btn-outline-primary btn btn-outline-success" for="btnradio2">
-                  <img
-                  style {{width: "20px", height: "20px"}}
-                  src="./Imágenes navbar/chat (1).png"
-                  alt=""/>
-  
-              </label>
-            
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-              <label class="btn btn-outline-primary btn btn-outline-success" for="btnradio3">
-                  <img
-                  style {{width: "20px", height: "20px"}}
-                  src="./Imágenes navbar/tag.png"
-                  alt=""/>
-              </label>
-  
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-              <label class="btn btn-outline-primary btn btn-outline-success" for="btnradio1">
-                  <img
-                  style {{width: "20px", height: "20px"}}
-                  src="./Imágenes navbar/bell.png"
-                  alt=""/>
-              </label>
-  
-            </div>
-      
-            <div class="d-flex flex-column">
-          <a class="btn btn-warning btn-outline-dark " href="#">
-              Publicar 
-          </a>
+  return (
+    <nav className="flex justify-between items-center text-white h-16 bg-gray-600">
+      <div className="flex items-center space-x-4 ml-8">
+        {renderIconLink("https://twitter.com", faXTwitter)}
+        {renderIconLink("https://github.com", faGithub)}
+        {renderIconLink("https://linkedin.com", faLinkedin)}
+      </div>
+      <div className="flex flex-col items-center">
+        <a href="/" className="flex items-center flex-col">
+          <img
+            src="../assets/light-icon.png"
+            alt="Project Icon"
+            className="w-auto rounded-full object-cover h-12 mr-2 px-2"
+          />
+        </a>
+      </div>
+      <div className="flex items-center space-x-2 mr-8">
+        <a
+          href={isLoggedIn ? "/account" : "/login"}
+          className="hover:text-black"
+        >
+          <FontAwesomeIcon icon={faUser} />
+          <span>{isLoggedIn ? "ACCOUNT" : "LOGIN"}</span>
+        </a>
+        <a href="/cart" className="hover:text-black">
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faShoppingCart} />
+            <span className="ml-1">{totalItems}</span>
           </div>
-  
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="offcanvas offcanvas-end"
-            tabindex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                ComunidApp
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Noticias</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Publicaciones
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Salud</a></li>
-                    <li><a class="dropdown-item" href="#">Eventos</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Servicios</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-          
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
-        );
-                       }
+        </a>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;
