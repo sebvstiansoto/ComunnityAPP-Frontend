@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function LoginPage() {
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
 
@@ -15,15 +19,10 @@ export function LoginPage() {
   function sendData(e) {
     e.preventDefault();
 
-    if (!email || !contraseña) {
-      alert("Por favor, ingresa todos los campos.");
-      return;
-    }
-
     console.log({ email, contraseña });
     console.log("Preparando para enviar datos al backend");
 
-    fetch("http://localhost:3000/login", {
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,10 +43,7 @@ export function LoginPage() {
         return response.json();
       })
       .then((responseConverted) => {
-        alert(responseConverted.message + " 🤩🙂🤩🤗");
-
-        setEmail("");
-        setContraseña("");
+        navigate("/profile");
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
@@ -55,42 +51,45 @@ export function LoginPage() {
   }
 
   return (
-    <div class="d-flex flex-column justify-content-center align-items-center vh-100 text-success-emphasis">
+    <div className="d-flex flex-column justify-content-center align-items-center vh-100 text-success-emphasis">
       <h1>Bienvenido a Comunidapp!</h1>
-      <div class="col-6 col-md-4 d-flex flex-column m-3 p-3">
+      <div className="col-6 col-md-4 d-flex flex-column m-3 p-3">
         <input
+          onChange={changeEmail}
           type="email"
-          class="form-control border-2 border-success-subtle mb-3"
+          className="form-control border-2 border-success-subtle mb-3"
           id="validationDefault02"
           placeholder="UserName / Email"
           required
         />
         <input
+          onChange={changeContraseña}
           type="password"
-          class="form-control border-2 border-success-subtle mb-3"
+          className="form-control border-2 border-success-subtle mb-3"
           id="validationDefault03"
           placeholder="Contraseña"
           required
         />
 
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <button
-            class="btn btn-success btn-outline-dark m-1 col-4"
+            className="btn btn-success btn-outline-dark m-1 col-4"
             type="submit"
+            onClick={sendData}
           >
             Ingresar
           </button>
         </div>
 
-        <div class="d-flex justify-content-between mb-3">
+        <div className="d-flex justify-content-between mb-3">
           <button
-            class="btn btn-warning btn-outline-dark col-6 m-1"
+            className="btn btn-warning btn-outline-dark col-6 m-1"
             type="submit"
           >
             Registrate
           </button>
           <button
-            class="btn btn-warning btn-outline-dark col-6 m-1"
+            className="btn btn-warning btn-outline-dark col-6 m-1"
             type="submit"
           >
             Olvidaste tu contraseña?
