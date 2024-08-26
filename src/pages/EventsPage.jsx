@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export function Component (props) {
+export function EventsPage () {
 
 return (
     <main className="mt-5 pt-5">

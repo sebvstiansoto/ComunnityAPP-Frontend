@@ -7,7 +7,7 @@ import { HealthPage } from "./pages/HealthPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { NewsPage } from "./pages/NewsPage";
-// import { NoticesPage } from "./pages/NoticesPage";
+import { NoticesPage } from "./pages/NoticesPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { PublishPage } from "./pages/PublishPage";
 import { RecoveryPage } from "./pages/RecoveryPage";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   { path: "/", element: <HomePage />},
   { path: "/login", element: <LoginPage />},
   { path: "/news", element: <NewsPage />},
-  // { path: "/notices", element: <NoticesPage />},
+  { path: "/notices", element: <NoticesPage />},
   { path: "/profile", element: <ProfilePage />},
   { path: "/publish", element: <PublishPage />},
   { path: "/recovery", element: <RecoveryPage />},
