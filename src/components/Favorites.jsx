@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
-export function Component   (props) {
+
+export function Component (props) {
     
+
+
 
 
 return (

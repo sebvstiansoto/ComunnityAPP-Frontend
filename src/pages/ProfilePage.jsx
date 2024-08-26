@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export function ProfilePage() {
   const navigate = useNavigate();
+  const [username, setUsername] = useState(localStorage.getItem("username"));
 
   let [biografia, setBiografia] = useState("");
   let [fotoPerfil, setFotoPerfil] = useState("");
@@ -64,7 +65,7 @@ export function ProfilePage() {
               alt="Profile Picture"
               className="profile-image"
             />
-            <h2>UserName</h2>
+            <h2>{username}</h2>
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">

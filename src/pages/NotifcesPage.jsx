@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
-export function Component   (props) {
-    
+
+
+export function Component (props) {
+
+
+
 
 
 return (
@@ -9,14 +13,13 @@ return (
       <div className="d-flex flex-column justify-content-start align-items-center gap-3">
         <div
           className="card m-auto d-flex justify-content-center"
-          style="max-width: 500px"
+          style="maxWidth: 500px"
         >
           <div className="card-body">
-            <h5 className="card-title">Centro Médico Almendral</h5>
+            <h5 className="card-title">Pattynouel</h5>
             <p className="card-text">
-              Nuevo Centro Médico en el Almendral: El Centro de Salud Familiar
-              Almendral inaugura modernas instalaciones con atención
-              especializada en cardiología y pediatría. ¡Agende su cita hoy!
+              ¡Alerta! Se cayó un árbol en la entrada de la Av. Valparaiso 500 y
+              no hay paso, tomen sus precauciones.
             </p>
             <div className="row">
               <div className="col-12">
@@ -119,14 +122,14 @@ return (
 
         <div
           className="card m-auto justify-content-center"
-          style="max-width: 500px"
+          style="maxWidth: 500px"
         >
           <div className="card-body">
-            <h5 className="card-title">Hospital Van Buren</h5>
+            <h5 className="card-title">Camipizarro</h5>
             <p className="card-text">
-              Ampliación en Hospital Van Buren: El Hospital Carlos Van Buren
-              suma 20 nuevas camas UCI y refuerza su equipo de profesionales
-              para mejorar la atención de pacientes críticos.
+              Me encuentro en la búsqueda de mi gatito, es negro, ojos verdes y
+              la última vez que lo vi fue en la costa. Se llama Salem, si lo ven
+              por favor contáctenme +56 9 4562 1256.
             </p>
             <div className="row">
               <div className="col-12">
@@ -230,14 +233,14 @@ return (
 
         <div
           className="card m-auto justify-content-center"
-          style="max-width: 500px"
+          style="maxWidth: 500px"
         >
           <div className="card-body">
-            <h5 className="card-title">Clínica Valparaíso</h5>
+            <h5 className="card-title">Sebasoto</h5>
             <p className="card-text">
-              Clínica Valparaíso Lanza Programa de Telemedicina: Clínica
-              Valparaíso ahora ofrece consultas médicas online para todas sus
-              especialidades. Atención segura y cómoda desde su hogar.
+              El día de ayer Chile se enfrentó contra la selección Albiceleste,
+              obteniendo un resultado favorable para nuestros país quedando 1-0
+              ¡Vamos Chile!
             </p>
             <div className="row">
               <div className="col-12">
