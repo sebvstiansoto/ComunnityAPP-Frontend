@@ -1,7 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfilePage.css";
+import { useNavigate } from "react-router-dom";
 
 export function ProfilePage() {
+  const navigate = useNavigate();
+
+  let [biografia, setBiografia] = useState("");
+  let [fotoPerfil, setFotoPerfil] = useState("");
+
+  function changeBiografia(e) {
+    setBiografia(e.target.value);
+  }
+
+  function changeFotoPerfil(e) {
+    const file = e.target.files[0];
+    setFotoPerfil(file);
+  }
+
+  function sendData(e) {
+    e.preventDefault();
+    console.log({ biografia, fotoPerfil });
+    console.log("Todo preparado para enviar a mi backend 😀");
+
+    const formData = new FormData();
+    formData.append("biografia", biografia);
+    formData.append("fotoPerfil", fotoPerfil);
+
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(
+              `HTTP error! status: ${response.status}, details: ${text}`
+            );
+          });
+        }
+        return response.json();
+      })
+      .then((responseConverted) => {
+        navigate("/profile");
+      })
+      .catch((error) => {
+        console.error("Ups algo salió mal 🙄", error);
+      });
+
+    const modalElement = document.getElementById("editProfileModal");
+    const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
+  }
+
   return (
     <>
       <div className="banner"></div>
@@ -33,6 +83,8 @@ export function ProfilePage() {
                 className="form-control"
                 rows="5"
                 placeholder="Información adicional..."
+                value={biografia} 
+                readOnly
               ></textarea>
             </div>
           </div>
@@ -78,6 +130,7 @@ export function ProfilePage() {
                     type="file"
                     className="form-control-file"
                     id="profilePic"
+                    onChange={changeFotoPerfil}
                   />
                 </div>
                 <div className="form-group">
@@ -87,6 +140,8 @@ export function ProfilePage() {
                     id="bio"
                     rows="3"
                     placeholder="Biografía"
+                    value={biografia}
+                    onChange={changeBiografia}
                   ></textarea>
                 </div>
               </form>
@@ -99,7 +154,11 @@ export function ProfilePage() {
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-warning btn-outline-dark">
+              <button
+                type="button"
+                className="btn btn-warning btn-outline-dark"
+                onClick={sendData}
+              >
                 Guardar cambios
               </button>
             </div>

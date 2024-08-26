@@ -1,6 +1,7 @@
 import React from "react";
 
 export function PublishPage() {
+    
     return (
         <>
             <div className="container navbar-spacing">
