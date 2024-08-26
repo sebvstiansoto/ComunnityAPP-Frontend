@@ -7,10 +7,18 @@ import {
   faUser,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useCart } from "../contexts/CartContext";
+import { useNavigate } from 'react-router-dom'; 
+
+const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/login'); 
+};
+
+const username = localStorage.getItem('username');
+const navigate = useNavigate(); 
 
 const NavBar = () => {
-  const { totalItems } = useCart();
   const isLoggedIn = Boolean(localStorage.getItem("userEmail"));
 
   const renderIconLink = (href, icon) => (
