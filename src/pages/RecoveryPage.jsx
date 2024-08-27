@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export function RecoveryPage() {
     const [email, setEmail] = useState('');
@@ -9,10 +9,9 @@ export function RecoveryPage() {
 
     function sendData(e) {
         e.preventDefault();
-        console.log({ email });
-        console.log('Solicitud de recuperación enviada a mi backend');
+        console.log('Enviando datos...', { email });
 
-        fetch('http://localhost:3000/recuperacion', {
+        fetch('http://localhost:3000/recuperar_contraseña', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,32 +26,49 @@ export function RecoveryPage() {
             }
             return response.json();
         })
-        .then((responseConverted) => {
-            alert(responseConverted.message + " 🤩🙂🤩🤗");
+        .then(() => {
+            alert("Se ha enviado un mail para que recuperes tu contraseña 🤩🙂🤩🤗");
             setEmail('');
         })
         .catch((error) => {
             console.error('Ups algo salió mal 🙄', error);
+            alert("No se pudo enviar la solicitud. Por favor, intenta nuevamente.");
         });
     }
 
     return (
-        <form onSubmit={sendData}>
-            <div className="col-6 col-sm-4">
-                <label htmlFor="email" className="visually-hidden">Correo Electronico</label>
-                <input 
-                    type="text" 
-                    onChange={changeEmail} 
-                    className="form-control" 
-                    id="email" 
-                    placeholder="Ingresa Correo Electronico"
-                    value={email}
-                />
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5 border border-success">
+                        <div className="card-header text-center bg-warning">
+                            <h3>Recuperar Contraseña</h3>
+                        </div>
+                        <div className="card-body">
+                            <form onSubmit={sendData} className="text-center">
+                                <div className="form-group">
+                                    <input
+                                        type="email"
+                                        className="form-control m-auto"
+                                        id="email"
+                                        placeholder="Introduce tu correo electrónico"
+                                        required
+                                        value={email}
+                                        onChange={changeEmail}
+                                        style={{ maxWidth: "300px" }} 
+                                    />
+                                </div>
+                                <button 
+                                    type="submit"
+                                    className="btn btn-warning btn-outline-dark mt-3"
+                                >
+                                    Enviar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3">Recuperar contraseña</button>
-            </div>
-        </form>
+        </div>
     );
 }

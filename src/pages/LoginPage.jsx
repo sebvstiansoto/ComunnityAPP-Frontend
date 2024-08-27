@@ -16,6 +16,14 @@ export function LoginPage() {
     setContraseña(e.target.value);
   }
 
+  function redirectRegister(){
+    navigate("/register");
+  }
+
+  function redirectRecovery(){
+    navigate("/recovery");
+  }
+
   function sendData(e) {
     e.preventDefault();
 
@@ -83,12 +91,14 @@ export function LoginPage() {
 
         <div className="d-flex justify-content-between mb-3">
           <button
+            onClick={redirectRegister}
             className="btn btn-warning btn-outline-dark col-6 m-1"
             type="submit"
           >
             Registrate
           </button>
           <button
+            onClick={redirectRecovery}
             className="btn btn-warning btn-outline-dark col-6 m-1"
             type="submit"
           >
