@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function RecoveryPage() {
+
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
 
     function changeEmail(e) {
@@ -11,7 +15,7 @@ export function RecoveryPage() {
         e.preventDefault();
         console.log('Enviando datos...', { email });
 
-        fetch('http://localhost:3000/recuperar_contraseña', {
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/recuperar_contraseña', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,8 +31,7 @@ export function RecoveryPage() {
             return response.json();
         })
         .then(() => {
-            alert("Se ha enviado un mail para que recuperes tu contraseña 🤩🙂🤩🤗");
-            setEmail('');
+            navigate("/login");
         })
         .catch((error) => {
             console.error('Ups algo salió mal 🙄', error);
@@ -59,6 +62,7 @@ export function RecoveryPage() {
                                     />
                                 </div>
                                 <button 
+                                    onClick={sendData}
                                     type="submit"
                                     className="btn btn-warning btn-outline-dark mt-3"
                                 >
