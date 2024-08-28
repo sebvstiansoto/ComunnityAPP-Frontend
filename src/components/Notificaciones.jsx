@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from "../components/Navbar.jsx";
 
 export function Notificaciones() {
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState("");
   const [comentario, setComentario] = useState("");
-  
+
   //Fecha de creación
   const comentarios = [
     { usuario: 'Pattynouel', fecha: '2024-08-26T10:00:00Z', texto: 'Ha comentado tu publicación' },
@@ -82,6 +83,8 @@ export function Notificaciones() {
   }
 
   return (
+    <React.Fragment>
+      <Navbar />
       <main className="mt-5 pt-5">
         <div className="row justify-content-center">
           <div className="col-6">
@@ -89,7 +92,7 @@ export function Notificaciones() {
               {comentarios.map((comentario, index) => (
                 <li key={index} className="list-group-item p-3 d-flex justify-content-between">
                   <p className="m-0">
-                    {comentario.usuario} {comentario.texto} 
+                    {comentario.usuario} {comentario.texto}
                     <a className="text-success" href="">
                       publicación
                     </a>
@@ -101,5 +104,6 @@ export function Notificaciones() {
           </div>
         </div>
       </main>
+    </React.Fragment>
   );
 }

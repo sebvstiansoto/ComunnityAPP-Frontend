@@ -247,14 +247,6 @@ export function Publicacion({ publicacion }) {
                                 </div>
                             </div>
                         </div>
-                        <button type="button" className="btn btn-outline-warning">
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="./src/components/chat (1).png"
-                                alt=""
-                            />
-                        </button>
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <button type="button" className="btn btn-outline-success">
