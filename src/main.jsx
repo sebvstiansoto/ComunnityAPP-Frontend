@@ -10,11 +10,13 @@ import { NewsPage } from "./pages/NewsPage";
 import { NoticesPage } from "./pages/NoticesPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { PublishPage } from "./pages/PublishPage";
+import { ChangePassword } from "./pages/ChangePassword";
 import { RecoveryPage } from "./pages/RecoveryPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { Notificaciones } from "./components/Notificaciones";
 import { Favorites } from "./components/Favorites";
+
 
 
 const router = createBrowserRouter([
@@ -26,12 +28,12 @@ const router = createBrowserRouter([
   { path: "/notices", element: <NoticesPage />},
   { path: "/profile", element: <ProfilePage />},
   { path: "/publish", element: <PublishPage />},
+  { path: "/changepass", element: <ChangePassword/>},
   { path: "/recovery", element: <RecoveryPage />},
   { path: "/register", element: <RegisterPage />},
   { path: "/services", element: <ServicesPage />},
   { path: "/notificaciones", element: <Notificaciones />},
   { path: "/favorites", element: <Favorites />},
-  // Add more routes here... sssss
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
