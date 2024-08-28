@@ -31,8 +31,8 @@ export function PublishPage() {
           },
           body: JSON.stringify({
             titulo: tituloPublicacion,
-            seccion: seccionPublicacion,  
-            informacion: informacionPublicacion,
+            id_tipo_publicacion: seccionPublicacion,  
+            descripcion: informacionPublicacion,
           }),
         })
           .then((response) => {
