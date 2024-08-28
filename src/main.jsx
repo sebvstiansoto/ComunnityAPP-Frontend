@@ -13,7 +13,8 @@ import { PublishPage } from "./pages/PublishPage";
 import { RecoveryPage } from "./pages/RecoveryPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ServicesPage } from "./pages/ServicesPage";
-
+import { Notificaciones } from "./components/Notificaciones";
+import { Favorites } from "./components/Favorites";
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
   { path: "/recovery", element: <RecoveryPage />},
   { path: "/register", element: <RegisterPage />},
   { path: "/services", element: <ServicesPage />},
-
+  { path: "/notificaciones", element: <Notificaciones />},
+  { path: "/favorites", element: <Favorites />},
   // Add more routes here... sssss
 ]);
 

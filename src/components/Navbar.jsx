@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import profileUser from './images/profile-user.png';
-import chatIcon from './images/chat.png';
-import tagIcon from './images/tag.png';
-import bellIcon from './images/bell.png';
+import profileUser from './profile-user.png';
+import chatIcon from './chat.png';
+import tagIcon from './tag.png';
+import bellIcon from './bell.png';
+import './../styles/Navbar.css'
 
 const Navbar = () => {
   const [selectedRadio, setSelectedRadio] = useState('btnradio1');
