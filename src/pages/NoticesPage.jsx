@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-export function ServicesPage() {
+export function NoticesPage() {
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState("");
@@ -126,7 +126,7 @@ export function ServicesPage() {
                     <img
                       width="20px"
                       height="20px"
-                      src="./tag.png"
+                      src="./components/tag.png"
                       alt=""
                     />
                   </button>
@@ -139,7 +139,7 @@ export function ServicesPage() {
                     <img
                       width="20px"
                       height="20px"
-                      src="./star.png"
+                      src="./components/star.png"
                       alt=""
                     />
                   </button>
@@ -208,7 +208,7 @@ export function ServicesPage() {
                     <img
                       width="20px"
                       height="20px"
-                      src="./whatsapp (3).png"
+                      src="./components/whatsapp (3).png"
                       alt=""
                     />
                   </button>

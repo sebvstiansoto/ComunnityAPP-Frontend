@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-export function ServicesPage() {
+export function Favorites() {
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState("");
