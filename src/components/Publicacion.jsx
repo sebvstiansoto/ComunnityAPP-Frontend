@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx"
 
@@ -49,34 +49,6 @@ export function Publicacion({ publicacion }) {
         console.log({ usuario, valoracion, comentario, telefono });
         console.log("Preparando para enviar datos al backend");
 
-        fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                usuario: usuario,
-                valoracion: valoracion,
-                comentario: comentario,
-                telefono: telefono,
-            }),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.text().then((text) => {
-                        throw new Error(
-                            `HTTP error! status: ${response.status}, details: ${text}`
-                        );
-                    });
-                }
-                return response.json();
-            })
-            .then((responseConverted) => {
-                navigate("/favorites");
-            })
-            .catch((error) => {
-                console.error("Ups, algo salió mal 🙄", error);
-            });
     }
 
     // Función para calcular el tiempo transcurrido desde la publicación
@@ -105,12 +77,12 @@ export function Publicacion({ publicacion }) {
         >
             <div className="card-body">
                 <h5 className="card-title">{publicacion.titulo}</h5>
-                <p className="card-text">{publicacion.texto}</p>
+                <p className="card-text">{publicacion.descripcion}</p>
                 <div className="row">
                     <div className="col-12">
                         <p className="card-text mb-3">
                             <small className="text-body-secondary">
-                                {tiempoTranscurrido(publicacion.fechaPublicacion)}
+                                {tiempoTranscurrido(publicacion.hora_publicado)}
                             </small>
                         </p>
                     </div>

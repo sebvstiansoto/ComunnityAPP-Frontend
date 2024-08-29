@@ -1,54 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
+import { Publicacion } from '../components/Publicacion.jsx'
 
 export function HomePage() {
-    const [publicaciones, setPublicaciones] = useState([]);
 
-    const [descripcion, setDescripcion] = useState('');
-    const [img_publicacion, setImgPublicacion] = useState('');
-    const [hora_publicacion, setHoraPublicacion] = useState('');
-    const [id_usuario, setIdUsuario] = useState('');
-    const [id_tipo_publicacion, setIdTipoPublicacion] = useState('');
-    const [titulo, setTitulo] = useState('');
-
+    let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
-        recibirPublicaciones();
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
+            .then(response => response.json())
+            .then(data => setPublicaciones(data));
     }, []);
-
-    function recibirPublicaciones() {
-        fetch('http://localhost:3000/obtener_publicaciones', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((responseConverted) => {
-                console.log('Publicaciones recibidas:', responseConverted);
-                setPublicaciones(responseConverted.publicaciones); // Asegúrate de que la respuesta tiene la estructura correcta
-            })
-            .catch((error) => {
-                console.error('Ups algo salió mal 😞', error);
-            });
-    }
+console.log (publicaciones)
 
     return (
-        <div className="card text-center">
-          <div className="card-header" onChange={setIdUsuario}>
-            {setIdUsuario}
-          </div>
-          <div className="card-body" onChange={setTitulo}>
-            <h5 className="card-title" onChange={setImgPublicacion}>Special title treatment</h5>
-            <p className="card-text" onChange={setDescripcion}>With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary" onChange={setIdTipoPublicacion}>Go somewhere</a>
-          </div>
-          <div className="card-footer text-body-secondary" onChange={setHoraPublicacion}>
-            2 days ago
-          </div>
-        </div>
+        <React.Fragment>
+            <Navbar />
+            <main className="mt-5 pt-5">
+                <div className="d-flex flex-column justify-content-start align-items-center gap-3">
+                    {publicaciones.map((publicacion, index) => (
+                        <Publicacion publicacion={publicacion} key={index} />
+                    ))}
+                </div>
+            </main>
+        </React.Fragment>
     );
 }
