@@ -14,6 +14,7 @@ export function PublishPage() {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/tipos_publicaciones")
       .then((response) => response.json())
       .then((data) => {
+        console.log("Data fetched from backend:", data); // Añade un log para verificar los datos
         setTiposPublicaciones(data);
         if (data.length > 0) {
           setSeccion(data[0].id_tipo_publicaciones);  // Set the first option as the default selected value
@@ -44,7 +45,7 @@ export function PublishPage() {
       },
       body: JSON.stringify({
         titulo: tituloPublicacion,
-        id_tipo_publicacion: seccionPublicacion,  // This now holds the ID of the selected type
+        id_tipo_publicacion: seccionPublicacion,
         descripcion: informacionPublicacion,
       }),
     })
@@ -90,31 +91,6 @@ export function PublishPage() {
           </div>
           <div className="d-flex justify-content-center m-2">
             <button className="btn btn-warning btn-outline-dark" onClick={sendData}>Publicar</button>
-          </div>
-        </div>
-
-        <div className="col-md-6 d-flex flex-column justify-content-start align-items-center">
-          <div className="card text-bg-warning mb-3" style={{ width: "18rem" }}>
-            <div className="card-header">Hora</div>
-            <div className="card-body">
-              <p className="card-text">Espacio para colocar la API de la hora.</p>
-            </div>
-          </div>
-
-          <div className="card text-bg-warning mb-3" style={{ width: "18rem" }}>
-            <div className="card-header">Calendario</div>
-            <div className="card-body">
-              <p className="card-text">Espacio para colocar la API del calendario.</p>
-            </div>
-          </div>
-
-          <div className="card text-bg-warning mb-3" style={{ width: "18rem" }}>
-            <div className="card-header">Recordatorios</div>
-            <div className="card-body">
-              <p className="card-text">Espacio para colocar los recordatorios</p>
-              <p className="card-text">Espacio para colocar los recordatorios</p>
-              <p className="card-text">Espacio para colocar los recordatorios</p>
-            </div>
           </div>
         </div>
       </div>
