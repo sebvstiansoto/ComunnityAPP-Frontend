@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Publicaciones from '../components/Publicaciones';
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
-
-    const [descripcion, setDescripcion] = useState('');
-    const [img_publicacion, setImgPublicacion] = useState('');
-    const [hora_publicacion, setHoraPublicacion] = useState('');
-    const [id_usuario, setIdUsuario] = useState('');
-    const [id_tipo_publicacion, setIdTipoPublicacion] = useState('');
-    const [titulo, setTitulo] = useState('');
 
     useEffect(() => {
         recibirPublicaciones();
@@ -29,7 +23,7 @@ export function HomePage() {
             })
             .then((responseConverted) => {
                 console.log('Publicaciones recibidas:', responseConverted);
-                setPublicaciones(responseConverted.publicaciones); // Asegúrate de que la respuesta tiene la estructura correcta
+                setPublicaciones(responseConverted); // Asumiendo que la respuesta es un array de publicaciones
             })
             .catch((error) => {
                 console.error('Ups algo salió mal 😞', error);
@@ -37,18 +31,9 @@ export function HomePage() {
     }
 
     return (
-        <div className="card text-center">
-          <div className="card-header" onChange={setIdUsuario}>
-            {setIdUsuario}
-          </div>
-          <div className="card-body" onChange={setTitulo}>
-            <h5 className="card-title" onChange={setImgPublicacion}>Special title treatment</h5>
-            <p className="card-text" onChange={setDescripcion}>With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary" onChange={setIdTipoPublicacion}>Go somewhere</a>
-          </div>
-          <div className="card-footer text-body-secondary" onChange={setHoraPublicacion}>
-            2 days ago
-          </div>
+        <div className="container mt-5">
+            <h1 className="text-center">Bienvenido a la HomePage</h1>
+            <Publicaciones publicaciones={publicaciones} />
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
-import { Publicacion } from '../components/Publicacion.jsx'
+import { Publicacion } from '../components/Publicaciones.jsx'
 
 export function HealthPage() {
 
