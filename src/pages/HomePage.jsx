@@ -1,39 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import Publicaciones from '../components/Publicaciones';
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
+import { Publicacion } from '../components/Publicacion.jsx'
 
 export function HomePage() {
-    const [publicaciones, setPublicaciones] = useState([]);
 
+    let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
-        recibirPublicaciones();
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
+            .then(response => response.json())
+            .then(data => setPublicaciones(data));
     }, []);
-
-    function recibirPublicaciones() {
-        fetch('http://localhost:3000/obtener_publicaciones', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((responseConverted) => {
-                console.log('Publicaciones recibidas:', responseConverted);
-                setPublicaciones(responseConverted); // Asumiendo que la respuesta es un array de publicaciones
-            })
-            .catch((error) => {
-                console.error('Ups algo salió mal 😞', error);
-            });
-    }
+console.log (publicaciones)
 
     return (
-        <div className="container mt-5">
-            <h1 className="text-center">Bienvenido a la HomePage</h1>
-            <Publicaciones publicaciones={publicaciones} />
-        </div>
+        <React.Fragment>
+            <Navbar />
+            <main className="mt-5 pt-5">
+                <div className="d-flex flex-column justify-content-start align-items-center gap-3">
+                    {publicaciones.map((publicacion, index) => (
+                        <Publicacion publicacion={publicacion} key={index} />
+                    ))}
+                </div>
+            </main>
+        </React.Fragment>
     );
 }
