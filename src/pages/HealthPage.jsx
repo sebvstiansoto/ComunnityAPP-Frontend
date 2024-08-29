@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx'
 
-export function HomePage() {
+export function HealthPage() {
 
     let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
