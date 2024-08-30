@@ -92,7 +92,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="./src/components/tag.png"
+                                src="/src/assets/tag.png"
                                 alt=""
                             />
                         </button>
@@ -105,7 +105,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="./src/components/star.png"
+                                src="/src/assets/star.png"
                                 alt=""
                             />
                         </button>
@@ -225,7 +225,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="./src/components/whatsapp (3).png"
+                                src="/src/assets/whatsapp (3).png"
                                 alt=""
                             />
                         </button>
