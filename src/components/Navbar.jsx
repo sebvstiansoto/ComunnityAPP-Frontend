@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import profileUser from './profile-user.png';
-import chatIcon from './chat.png';
-import tagIcon from './tag.png';
-import bellIcon from './bell.png';
+import profileUser from '../assets/profile-user.png';
+import chatIcon from '../assets/chat.png';
+import tagIcon from '../assets/tag.png';
+import bellIcon from '../assets/bell.png';
 import './../styles/Navbar.css'
 
 const Navbar = () => {

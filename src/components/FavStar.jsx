@@ -1,6 +1,6 @@
 import React from 'react'
-import EmptyStar from './star2.png'
-import FilledStar from './star.png'
+import EmptyStar from '../assets/star2.png'
+import FilledStar from '../assets/star.png'
 
 export function FavStar ({isActive, activate}) {
 return (
