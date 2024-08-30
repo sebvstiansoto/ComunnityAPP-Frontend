@@ -40,12 +40,12 @@ export function RegisterPage() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 nombre_usuario: nombre_usuario,
                 contraseña: contraseña,
                 email: email,
                 telefono: telefono,
-                identificacion: identificacion 
+                identificacion: identificacion
             }),
         })
             .then((response) => {
@@ -71,11 +71,11 @@ export function RegisterPage() {
                 <form className="row g-3" onSubmit={sendData}>
                     <div className="col-md-6">
                         <label htmlFor="validationDefault02" className="form-label fw-semibold">Email</label>
-                        <input 
-                            type="email" 
-                            className="form-control border-2 border-success-subtle" 
-                            id="validationDefault02" 
-                            placeholder="usuario@gmail.com" 
+                        <input
+                            type="email"
+                            className="form-control border-2 border-success-subtle"
+                            id="validationDefault02"
+                            placeholder="usuario@gmail.com"
                             required
                             value={email}
                             onChange={changeEmail}
@@ -85,11 +85,11 @@ export function RegisterPage() {
                         <label htmlFor="validationDefaultUsername" className="form-label fw-semibold">Username</label>
                         <div className="input-group">
                             <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle" id="inputGroupPrepend2">@</span>
-                            <input 
-                                type="text" 
-                                className="form-control border-2 border-success-subtle" 
-                                id="validationDefaultUsername" 
-                                placeholder="Nombre de usuario" 
+                            <input
+                                type="text"
+                                className="form-control border-2 border-success-subtle"
+                                id="validationDefaultUsername"
+                                placeholder="Nombre de usuario"
                                 required
                                 value={nombre_usuario}
                                 onChange={changeUsername}
@@ -98,11 +98,11 @@ export function RegisterPage() {
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="validationDefaultPassword" className="form-label fw-semibold">Password</label>
-                        <input 
-                            type="password" 
-                            className="form-control border-2 border-success-subtle" 
-                            id="validationDefaultPassword" 
-                            placeholder="Contraseña" 
+                        <input
+                            type="password"
+                            className="form-control border-2 border-success-subtle"
+                            id="validationDefaultPassword"
+                            placeholder="Contraseña"
                             required
                             value={contraseña}
                             onChange={changePassword}
@@ -110,11 +110,11 @@ export function RegisterPage() {
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="validationDefaultDocument" className="form-label fw-semibold">Número de documento</label>
-                        <input 
-                            type="text" 
-                            className="form-control border-2 border-success-subtle" 
-                            id="validationDefaultDocument" 
-                            placeholder="00000000-0" 
+                        <input
+                            type="text"
+                            className="form-control border-2 border-success-subtle"
+                            id="validationDefaultDocument"
+                            placeholder="00000000-0"
                             required
                             value={identificacion}
                             onChange={changeIdentification}
@@ -122,25 +122,17 @@ export function RegisterPage() {
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="validationDefaultPhone" className="form-label fw-semibold">Teléfono</label>
-                        <input 
-                            type="tel" 
-                            className="form-control border-2 border-success-subtle" 
-                            id="validationDefaultPhone" 
-                            placeholder="Número de teléfono" 
+                        <input
+                            type="tel"
+                            className="form-control border-2 border-success-subtle"
+                            id="validationDefaultPhone"
+                            placeholder="Número de teléfono"
                             required
                             value={telefono}
                             onChange={changePhone}
                         />
                     </div>
-                    
-                    <div className="col-md-12">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
-                            <label className="form-check-label fw-semibold" htmlFor="invalidCheck2">
-                                Acepto los términos y condiciones
-                            </label>
-                        </div>
-                    </div>
+
                     <div className="col-12 text-center">
                         <button className="btn btn-warning btn-outline-dark" type="submit">Enviar formulario</button>
                     </div>

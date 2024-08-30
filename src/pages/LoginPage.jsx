@@ -16,11 +16,11 @@ export function LoginPage() {
     setContraseña(e.target.value);
   }
 
-  function redirectRegister(){
+  function redirectRegister() {
     navigate("/register");
   }
 
-  function redirectRecovery(){
+  function redirectRecovery() {
     navigate("/recovery");
   }
 
@@ -51,10 +51,13 @@ export function LoginPage() {
         return response.json();
       })
       .then((responseConverted) => {
+        localStorage.setItem("username", responseConverted.username);
+        localStorage.setItem("userId", responseConverted.userId);
         navigate("/profile");
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
+        alert("Hubo un problema al intentar iniciar sesión. Por favor, inténtalo de nuevo.");
       });
   }
 
@@ -82,7 +85,7 @@ export function LoginPage() {
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-success btn-outline-dark m-1 col-4"
-            type="submit"
+            type="button"
             onClick={sendData}
           >
             Ingresar

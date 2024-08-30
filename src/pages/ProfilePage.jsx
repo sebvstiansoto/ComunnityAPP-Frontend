@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState(localStorage.getItem("username"));
 
-  let [biografia, setBiografia] = useState("");
-  let [fotoPerfil, setFotoPerfil] = useState("");
+  const [biografia, setBiografia] = useState("");
+  const [fotoPerfil, setFotoPerfil] = useState(null);
+  const [banner, setBanner] = useState(null);
+  const [fotoPerfilPreview, setFotoPerfilPreview] = useState("");
+  const [bannerPreview, setBannerPreview] = useState("");
 
   function changeBiografia(e) {
     setBiografia(e.target.value);
@@ -16,16 +20,40 @@ export function ProfilePage() {
   function changeFotoPerfil(e) {
     const file = e.target.files[0];
     setFotoPerfil(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFotoPerfilPreview(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function changeBanner(e) {
+    const file = e.target.files[0];
+    setBanner(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBannerPreview(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   }
 
   function sendData(e) {
     e.preventDefault();
-    console.log({ biografia, fotoPerfil });
+    console.log({ biografia, fotoPerfil, banner });
     console.log("Todo preparado para enviar a mi backend 😀");
 
     const formData = new FormData();
     formData.append("biografia", biografia);
-    formData.append("fotoPerfil", fotoPerfil);
+    if (fotoPerfil) {
+      formData.append("fotoPerfil", fotoPerfil);
+    }
+    if (banner) {
+      formData.append("banner", banner);
+    }
 
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/", {
       method: "POST",
@@ -41,7 +69,7 @@ export function ProfilePage() {
         }
         return response.json();
       })
-      .then((responseConverted) => {
+      .then(() => {
         navigate("/profile");
       })
       .catch((error) => {
@@ -55,13 +83,16 @@ export function ProfilePage() {
 
   return (
     <>
+      <div className="m-5">
+        <Navbar />
+      </div>
       <div className="banner"></div>
 
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-3 text-center profile-container">
             <img
-              src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+              src={fotoPerfilPreview || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
               alt="Profile Picture"
               className="profile-image"
             />
@@ -70,7 +101,6 @@ export function ProfilePage() {
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
               <h2>Biografía</h2>
-              {/* Botón para abrir el modal */}
               <button
                 className="btn btn-warning btn-outline-dark"
                 data-bs-toggle="modal"
@@ -84,7 +114,7 @@ export function ProfilePage() {
                 className="form-control"
                 rows="5"
                 placeholder="Información adicional..."
-                value={biografia} 
+                value={biografia}
                 readOnly
               ></textarea>
             </div>
@@ -92,7 +122,6 @@ export function ProfilePage() {
         </div>
       </div>
 
-      {/* Modal */}
       <div
         className="modal fade"
         id="editProfileModal"
@@ -108,12 +137,10 @@ export function ProfilePage() {
               </h5>
               <button
                 type="button"
-                className="close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              ></button>
             </div>
             <div className="modal-body bg-success-subtle">
               <form>
@@ -122,7 +149,7 @@ export function ProfilePage() {
                     Actualizar Foto de Perfil
                   </label>
                   <img
-                    src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+                    src={fotoPerfilPreview || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
                     alt="Profile Picture"
                     className="profile-image mb-3"
                     style={{ width: "150px", height: "150px" }}
@@ -132,6 +159,17 @@ export function ProfilePage() {
                     className="form-control-file"
                     id="profilePic"
                     onChange={changeFotoPerfil}
+                  />
+                </div>
+                <div className="form-group text-center">
+                  <label htmlFor="bannerPic" className="d-block fw-bold">
+                    Actualizar Banner
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control-file"
+                    id="bannerPic"
+                    onChange={changeBanner}
                   />
                 </div>
                 <div className="form-group">
