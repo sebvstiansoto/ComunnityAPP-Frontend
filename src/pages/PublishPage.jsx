@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
 
 export function PublishPage() {
   const navigate = useNavigate();
@@ -66,34 +67,39 @@ export function PublishPage() {
   }
 
   return (
-    <div className="container navbar-spacing">
-      <div className="row">
-        <div className="col-md-6 bg-success-subtle rounded border border-warning">
-          <div className="d-flex justify-content-center mt-5 text-success-emphasis">
-            <h3>Nueva publicación</h3>
-          </div>
-          <div className="border p-5 text-center">
-            <div className="form-group">
-              <label htmlFor="titulo" className="fw-semibold text-success-emphasis">Título</label>
-              <input onChange={tittleChange} type="text" className="form-control mb-3 border border-success" id="titulo" placeholder="Ingresa el título" />
+    <>
+      <div className="m-5">
+        <Navbar />
+      </div>
+      <div className="container navbar-spacing mt-5 pt-5">
+        <div className="row">
+          <div className="col-md-6 bg-success-subtle rounded border border-warning">
+            <div className="d-flex justify-content-center mt-5 text-success-emphasis">
+              <h3>Nueva publicación</h3>
             </div>
-            <div className="form-group">
-              <label htmlFor="seccion" className="fw-semibold text-success-emphasis">Sección</label>
-              <select onChange={sectionChange} className="form-control mb-3 border border-success" id="seccion" value={seccionPublicacion}>
-                {tiposPublicaciones.map((tipo) => (
-                  <option key={tipo.id_tipo_publicaciones} value={tipo.id_tipo_publicaciones}>
-                    {tipo.nombre}
-                  </option>
-                ))}
-              </select>
+            <div className="border p-5 text-center">
+              <div className="form-group">
+                <label htmlFor="titulo" className="fw-semibold text-success-emphasis">Título</label>
+                <input onChange={tittleChange} type="text" className="form-control mb-3 border border-success" id="titulo" placeholder="Ingresa el título" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="seccion" className="fw-semibold text-success-emphasis">Sección</label>
+                <select onChange={sectionChange} className="form-control mb-3 border border-success" id="seccion" value={seccionPublicacion}>
+                  {tiposPublicaciones.map((tipo) => (
+                    <option key={tipo.id_tipo_publicaciones} value={tipo.id_tipo_publicaciones}>
+                      {tipo.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <textarea onChange={informationChange} className="form-control mb-3 border border-success" placeholder="Descripción de la publicación" rows="4"></textarea>
             </div>
-            <textarea onChange={informationChange} className="form-control mb-3 border border-success" placeholder="Descripción de la publicación" rows="4"></textarea>
-          </div>
-          <div className="d-flex justify-content-center m-2">
-            <button className="btn btn-warning btn-outline-dark" onClick={sendData}>Publicar</button>
+            <div className="d-flex justify-content-center m-2">
+              <button className="btn btn-warning btn-outline-dark" onClick={sendData}>Publicar</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

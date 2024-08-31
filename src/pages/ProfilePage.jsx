@@ -1,13 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const params = useParams(); // Se captura el id del usuario /profile/:id
 
-  let [biografia, setBiografia] = useState("");
-  let [fotoPerfil, setFotoPerfil] = useState("");
+  const [username, setUsername] = useState("");
+  const [biografia, setBiografia] = useState("");
+  const [fotoPerfil, setFotoPerfil] = useState("");
+  const [banner, setBanner] = useState("");
+  const [email, setEmail] = useState("");
+  const [fotoPerfilPreview, setFotoPerfilPreview] = useState("");
+  const [fotoPerfilPreviewFile, setFotoPerfilPreviewFile] = useState(null);
+  const [bannerPreviewFile, setBannerPreviewFile] = useState(null);
+
+  function getUserInfo(){
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
+      .then(response => {
+        return response.json();
+      })
+      .then(responseConverted => {
+        setUsername(responseConverted.nombre_usuario);
+        setEmail(responseConverted.email);
+        setFotoPerfil(responseConverted.img_perfil)
+        setBanner(responseConverted.banner);
+        setBiografia(responseConverted.biografia);
+        setFotoPerfilPreview(responseConverted.img_perfil);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  useEffect(()=> {
+    getUserInfo();
+  }, []);
+
 
   function changeBiografia(e) {
     setBiografia(e.target.value);
@@ -15,62 +45,79 @@ export function ProfilePage() {
 
   function changeFotoPerfil(e) {
     const file = e.target.files[0];
-    setFotoPerfil(file);
+    setFotoPerfilPreviewFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFotoPerfilPreview(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+  }
+
+  function changeBanner(e) {
+    const file = e.target.files[0];
+    setBannerPreviewFile(file);
   }
 
   function sendData(e) {
     e.preventDefault();
-    console.log({ biografia, fotoPerfil });
+    console.log({ biografia, fotoPerfil, banner });
     console.log("Todo preparado para enviar a mi backend 😀");
 
     const formData = new FormData();
     formData.append("biografia", biografia);
-    formData.append("fotoPerfil", fotoPerfil);
+    formData.append("banner", bannerPreviewFile);
+    formData.append("img_perfil", fotoPerfilPreviewFile);
 
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/", {
-      method: "POST",
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id, {
+      method: "PATCH",
       body: formData,
     })
       .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            throw new Error(
-              `HTTP error! status: ${response.status}, details: ${text}`
-            );
-          });
-        }
         return response.json();
       })
       .then((responseConverted) => {
-        navigate("/profile");
+        console.log(responseConverted);
+        getUserInfo();
+        const modalElement = document.getElementById("editProfileModal");
+        const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
       });
 
-    const modalElement = document.getElementById("editProfileModal");
-    const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
+    
   }
 
   return (
     <>
-      <div className="banner"></div>
+      <div className="m-5">
+        <Navbar />
+      </div>
+      <div className="banner">
+        <img 
+        width={"100%"}
+        height={"100%"}
+        src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
+      </div>
 
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-3 text-center profile-container">
             <img
-              src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+              src={fotoPerfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
               alt="Profile Picture"
               className="profile-image"
             />
             <h2>{username}</h2>
+            <h5>{email}</h5>
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
               <h2>Biografía</h2>
-              {/* Botón para abrir el modal */}
               <button
                 className="btn btn-warning btn-outline-dark"
                 data-bs-toggle="modal"
@@ -84,7 +131,7 @@ export function ProfilePage() {
                 className="form-control"
                 rows="5"
                 placeholder="Información adicional..."
-                value={biografia} 
+                value={biografia}
                 readOnly
               ></textarea>
             </div>
@@ -92,7 +139,6 @@ export function ProfilePage() {
         </div>
       </div>
 
-      {/* Modal */}
       <div
         className="modal fade"
         id="editProfileModal"
@@ -108,12 +154,10 @@ export function ProfilePage() {
               </h5>
               <button
                 type="button"
-                className="close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              ></button>
             </div>
             <div className="modal-body bg-success-subtle">
               <form>
@@ -122,7 +166,7 @@ export function ProfilePage() {
                     Actualizar Foto de Perfil
                   </label>
                   <img
-                    src="https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+                    src={fotoPerfilPreview || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
                     alt="Profile Picture"
                     className="profile-image mb-3"
                     style={{ width: "150px", height: "150px" }}
@@ -132,6 +176,17 @@ export function ProfilePage() {
                     className="form-control-file"
                     id="profilePic"
                     onChange={changeFotoPerfil}
+                  />
+                </div>
+                <div className="form-group text-center">
+                  <label htmlFor="bannerPic" className="d-block fw-bold">
+                    Actualizar Banner
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control-file"
+                    id="bannerPic"
+                    onChange={changeBanner}
                   />
                 </div>
                 <div className="form-group">
