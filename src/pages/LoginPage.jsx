@@ -41,19 +41,12 @@ export function LoginPage() {
       }),
     })
       .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            throw new Error(
-              `HTTP error! status: ${response.status}, details: ${text}`
-            );
-          });
-        }
         return response.json();
       })
       .then((responseConverted) => {
         localStorage.setItem("username", responseConverted.username);
-        localStorage.setItem("userId", responseConverted.userId);
-        navigate("/profile");
+        localStorage.setItem("id_usuario", responseConverted.id_usuario);
+        navigate("/profile/" + responseConverted.id_usuario);
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
