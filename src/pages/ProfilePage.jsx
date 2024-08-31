@@ -1,17 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const params = useParams(); // Se captura el id del usuario /profile/:id
 
+  const [username, setUsername] = useState("");
   const [biografia, setBiografia] = useState("");
-  const [fotoPerfil, setFotoPerfil] = useState(null);
-  const [banner, setBanner] = useState(null);
+  const [fotoPerfil, setFotoPerfil] = useState("");
+  const [banner, setBanner] = useState("");
+  const [email, setEmail] = useState("");
   const [fotoPerfilPreview, setFotoPerfilPreview] = useState("");
-  const [bannerPreview, setBannerPreview] = useState("");
+  const [fotoPerfilPreviewFile, setFotoPerfilPreviewFile] = useState(null);
+  const [bannerPreviewFile, setBannerPreviewFile] = useState(null);
+
+  function getUserInfo(){
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
+      .then(response => {
+        return response.json();
+      })
+      .then(responseConverted => {
+        setUsername(responseConverted.nombre_usuario);
+        setEmail(responseConverted.email);
+        setFotoPerfil(responseConverted.img_perfil)
+        setBanner(responseConverted.banner);
+        setBiografia(responseConverted.biografia);
+        setFotoPerfilPreview(responseConverted.img_perfil);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  useEffect(()=> {
+    getUserInfo();
+  }, []);
+
 
   function changeBiografia(e) {
     setBiografia(e.target.value);
@@ -19,7 +45,7 @@ export function ProfilePage() {
 
   function changeFotoPerfil(e) {
     const file = e.target.files[0];
-    setFotoPerfil(file);
+    setFotoPerfilPreviewFile(file);
     const reader = new FileReader();
     reader.onloadend = () => {
       setFotoPerfilPreview(reader.result);
@@ -27,18 +53,12 @@ export function ProfilePage() {
     if (file) {
       reader.readAsDataURL(file);
     }
+
   }
 
   function changeBanner(e) {
     const file = e.target.files[0];
-    setBanner(file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setBannerPreview(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    setBannerPreviewFile(file);
   }
 
   function sendData(e) {
@@ -48,37 +68,28 @@ export function ProfilePage() {
 
     const formData = new FormData();
     formData.append("biografia", biografia);
-    if (fotoPerfil) {
-      formData.append("fotoPerfil", fotoPerfil);
-    }
-    if (banner) {
-      formData.append("banner", banner);
-    }
+    formData.append("banner", bannerPreviewFile);
+    formData.append("img_perfil", fotoPerfilPreviewFile);
 
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/", {
-      method: "POST",
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id, {
+      method: "PATCH",
       body: formData,
     })
       .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            throw new Error(
-              `HTTP error! status: ${response.status}, details: ${text}`
-            );
-          });
-        }
         return response.json();
       })
-      .then(() => {
-        navigate("/profile");
+      .then((responseConverted) => {
+        console.log(responseConverted);
+        getUserInfo();
+        const modalElement = document.getElementById("editProfileModal");
+        const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
       });
 
-    const modalElement = document.getElementById("editProfileModal");
-    const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
+    
   }
 
   return (
@@ -86,17 +97,23 @@ export function ProfilePage() {
       <div className="m-5">
         <Navbar />
       </div>
-      <div className="banner"></div>
+      <div className="banner">
+        <img 
+        width={"100%"}
+        height={"100%"}
+        src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
+      </div>
 
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-3 text-center profile-container">
             <img
-              src={fotoPerfilPreview || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
+              src={fotoPerfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
               alt="Profile Picture"
               className="profile-image"
             />
             <h2>{username}</h2>
+            <h5>{email}</h5>
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
