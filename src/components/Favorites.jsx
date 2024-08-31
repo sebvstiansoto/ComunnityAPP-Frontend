@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Navbar from './Navbar';
 
 
 export function Favorites() {
@@ -101,6 +102,8 @@ export function Favorites() {
   ];
 
   return (
+    <React.Fragment>
+    <Navbar></Navbar>
     <main className="mt-5 pt-5">
       <div className="d-flex flex-column justify-content-start align-items-center gap-3">
         {publicaciones.map((publicacion, index) => (
@@ -219,5 +222,6 @@ export function Favorites() {
         ))}
       </div>
     </main>
+    </React.Fragment>
   );
 }

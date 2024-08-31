@@ -4,9 +4,26 @@ import chatIcon from '../assets/chat.png';
 import tagIcon from '../assets/tag.png';
 import bellIcon from '../assets/bell.png';
 import './../styles/Navbar.css'
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [selectedRadio, setSelectedRadio] = useState('btnradio1');
+  const navigate = useNavigate();
+
+  function redirectProfile(){
+    let id_usuario = localStorage.getItem("id_usuario");
+    navigate('/profile/' + id_usuario);
+  }
+
+  function redirectFavorites(){
+    navigate('/favorites');
+  }
+
+  function redirectNotification(){
+    navigate('/notificaciones');
+  }
+
+
 
   return (
     <nav className="navbar bg-body-tertiary fixed-top">
@@ -20,23 +37,13 @@ const Navbar = () => {
             autoComplete="off"
             checked={selectedRadio === 'btnradio1'}
             onChange={() => setSelectedRadio('btnradio1')}
+            onClick={redirectProfile}
           />
           <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio1">
             <img width="20px" height="20px" src={profileUser} alt="Profile" />
           </label>
 
-          <input
-            type="radio"
-            className="btn-check"
-            name="btnradio"
-            id="btnradio2"
-            autoComplete="off"
-            checked={selectedRadio === 'btnradio2'}
-            onChange={() => setSelectedRadio('btnradio2')}
-          />
-          <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio2">
-            <img width="20px" height="20px" src={chatIcon} alt="Chat" />
-          </label>
+          
 
           <input
             type="radio"
@@ -46,6 +53,7 @@ const Navbar = () => {
             autoComplete="off"
             checked={selectedRadio === 'btnradio3'}
             onChange={() => setSelectedRadio('btnradio3')}
+            onClick={redirectFavorites}
           />
           <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio3">
             <img width="20px" height="20px" src={tagIcon} alt="Tag" />
@@ -59,6 +67,7 @@ const Navbar = () => {
             autoComplete="off"
             checked={selectedRadio === 'btnradio4'}
             onChange={() => setSelectedRadio('btnradio4')}
+            onClick={redirectNotification}
           />
           <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio4">
             <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
