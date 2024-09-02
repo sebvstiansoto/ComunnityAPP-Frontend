@@ -1,49 +1,81 @@
 import React, { useState } from 'react';
 import profileUser from '../assets/profile-user.png';
-import chatIcon from '../assets/chat.png';
 import tagIcon from '../assets/tag.png';
 import bellIcon from '../assets/bell.png';
-import './../styles/Navbar.css'
+import post from '../assets/post.png';
+import homeIcon from '../assets/home.png';
+import './../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const [selectedRadio, setSelectedRadio] = useState('btnradio1');
+  const [selectedButton, setSelectedButton] = useState('');
+
   const navigate = useNavigate();
 
-  function redirectProfile(){
+  function redirectProfile() {
     let id_usuario = localStorage.getItem("id_usuario");
     navigate('/profile/' + id_usuario);
+    setSelectedButton('profile');
   }
 
-  function redirectFavorites(){
+  function redirectFavorites() {
     navigate('/favorites');
+    setSelectedButton('favorites');
   }
 
-  function redirectNotification(){
+  function redirectNotification() {
     navigate('/notificaciones');
+    setSelectedButton('notification');
   }
 
+  function redirectSection(section) {
+    navigate(section);
+    setSelectedButton(section);
+  }
 
+  function redirectHome() {
+    navigate('/');
+    setSelectedButton('home');
+  }
 
   return (
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
         <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+
+          <input
+            type="radio"
+            className="btn-check"
+            name="btnradio"
+            id="btnradio5"
+            autoComplete="off"
+            checked={selectedButton === 'home'}
+            onChange={() => setSelectedButton('home')}
+            onClick={redirectHome}
+          />
+          <label
+            className={`btn ${selectedButton === 'home' ? 'btn-success' : 'btn-outline-success'}`}
+            htmlFor="btnradio5"
+          >
+            <img width="20px" height="20px" src={homeIcon} alt="Home" />
+          </label>
+
           <input
             type="radio"
             className="btn-check"
             name="btnradio"
             id="btnradio1"
             autoComplete="off"
-            checked={selectedRadio === 'btnradio1'}
-            onChange={() => setSelectedRadio('btnradio1')}
+            checked={selectedButton === 'profile'}
+            onChange={() => setSelectedButton('profile')}
             onClick={redirectProfile}
           />
-          <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio1">
+          <label
+            className={`btn ${selectedButton === 'profile' ? 'btn-success' : 'btn-outline-success'}`}
+            htmlFor="btnradio1"
+          >
             <img width="20px" height="20px" src={profileUser} alt="Profile" />
           </label>
-
-          
 
           <input
             type="radio"
@@ -51,11 +83,14 @@ const Navbar = () => {
             name="btnradio"
             id="btnradio3"
             autoComplete="off"
-            checked={selectedRadio === 'btnradio3'}
-            onChange={() => setSelectedRadio('btnradio3')}
+            checked={selectedButton === 'favorites'}
+            onChange={() => setSelectedButton('favorites')}
             onClick={redirectFavorites}
           />
-          <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio3">
+          <label
+            className={`btn ${selectedButton === 'favorites' ? 'btn-success' : 'btn-outline-success'}`}
+            htmlFor="btnradio3"
+          >
             <img width="20px" height="20px" src={tagIcon} alt="Tag" />
           </label>
 
@@ -65,90 +100,71 @@ const Navbar = () => {
             name="btnradio"
             id="btnradio4"
             autoComplete="off"
-            checked={selectedRadio === 'btnradio4'}
-            onChange={() => setSelectedRadio('btnradio4')}
+            checked={selectedButton === 'notification'}
+            onChange={() => setSelectedButton('notification')}
             onClick={redirectNotification}
           />
-          <label className="btn btn-outline-primary btn btn-outline-success" htmlFor="btnradio4">
+          <label
+            className={`btn ${selectedButton === 'notification' ? 'btn-success' : 'btn-outline-success'}`}
+            htmlFor="btnradio4"
+          >
             <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
           </label>
-        </div>
 
-        <div className="d-flex flex-column">
-          <a className="btn btn-warning btn-outline-dark" href="#">
-            Publicar
-          </a>
-        </div>
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="offcanvas offcanvas-end"
-          tabIndex="-1"
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              ComunidApp
-            </h5>
+          {/* Botón con dropdown */}
+          <div className="btn-group">
             <button
               type="button"
-              className="btn-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="offcanvas-body">
-            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Noticias
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+              className={`btn ${selectedButton === '/notices' || selectedButton === '/health' || selectedButton === '/services' || selectedButton === '/events' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img width="20px" height="20px" src={post} alt="Post" />
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => redirectSection('/notices')}
                 >
-                  Publicaciones
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Salud
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Eventos
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Servicios
-                    </a>
-                  </li>
-                </ul>
+                  Noticias
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => redirectSection('/health')}
+                >
+                  Salud
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => redirectSection('/services')}
+                >
+                  Servicios
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => redirectSection('/events')}
+                >
+                  Eventos
+                </button>
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className="d-flex flex-column">
+          <button
+            className="btn btn-warning btn-outline-dark"
+            onClick={() => redirectSection('/publish')}
+          >
+            Publicar
+          </button>
         </div>
       </div>
     </nav>
@@ -156,4 +172,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
