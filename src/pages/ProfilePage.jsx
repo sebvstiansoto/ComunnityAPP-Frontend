@@ -16,7 +16,7 @@ export function ProfilePage() {
   const [fotoPerfilPreviewFile, setFotoPerfilPreviewFile] = useState(null);
   const [bannerPreviewFile, setBannerPreviewFile] = useState(null);
 
-  function getUserInfo(){
+  function getUserInfo() {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
       .then(response => {
         return response.json();
@@ -34,7 +34,7 @@ export function ProfilePage() {
       })
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     getUserInfo();
   }, []);
 
@@ -89,7 +89,7 @@ export function ProfilePage() {
         console.error("Ups algo salió mal 🙄", error);
       });
 
-    
+
   }
 
   return (
@@ -98,10 +98,10 @@ export function ProfilePage() {
         <Navbar />
       </div>
       <div className="banner">
-        <img 
-        width={"100%"}
-        height={"100%"}
-        src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
+        <img
+          width={"100%"}
+          height={"100%"}
+          src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
       </div>
 
       <div className="container mt-5">
@@ -117,7 +117,7 @@ export function ProfilePage() {
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
-              <h2>Biografía</h2>
+              <h2 className="text-success fw-bold">Biografía</h2>
               <button
                 className="btn btn-warning btn-outline-dark"
                 data-bs-toggle="modal"
@@ -128,9 +128,9 @@ export function ProfilePage() {
             </div>
             <div className="mt-3">
               <textarea
-                className="form-control"
+                className="form-control border border-0"
                 rows="5"
-                placeholder="Información adicional..."
+                placeholder="Cuentanos sobre ti..."
                 value={biografia}
                 readOnly
               ></textarea>
@@ -149,7 +149,7 @@ export function ProfilePage() {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="editProfileModalLabel">
+              <h5 className="modal-title text-success" id="editProfileModalLabel">
                 Editar Perfil
               </h5>
               <button
@@ -161,8 +161,8 @@ export function ProfilePage() {
             </div>
             <div className="modal-body bg-success-subtle">
               <form>
-                <div className="form-group text-center">
-                  <label htmlFor="profilePic" className="d-block">
+                <div className="form-group text-center m-2">
+                  <label htmlFor="profilePic" className="d-block fw-bold">
                     Actualizar Foto de Perfil
                   </label>
                   <img
@@ -178,7 +178,7 @@ export function ProfilePage() {
                     onChange={changeFotoPerfil}
                   />
                 </div>
-                <div className="form-group text-center">
+                <div className="form-group text-center m-2">
                   <label htmlFor="bannerPic" className="d-block fw-bold">
                     Actualizar Banner
                   </label>
@@ -190,7 +190,7 @@ export function ProfilePage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="bio">Biografía</label>
+                  <label htmlFor="bio" className="d-block fw-bold m-2">Biografía</label>
                   <textarea
                     className="form-control"
                     id="bio"

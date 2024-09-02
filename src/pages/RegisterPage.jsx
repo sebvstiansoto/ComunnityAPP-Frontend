@@ -65,7 +65,7 @@ export function RegisterPage() {
     return (
         <>
             <div className="d-flex justify-content-center m-3 p-3 text-success-emphasis">
-                <h1>Registrate en Comunidapp</h1>
+                <h1 className="text-success fw-bold">Registrate en Comunidapp</h1>
             </div>
             <div className="d-flex justify-content-center m-3 p-3">
                 <form className="row g-3" onSubmit={sendData}>
@@ -134,7 +134,7 @@ export function RegisterPage() {
                     </div>
 
                     <div className="col-12 text-center">
-                        <button className="btn btn-warning btn-outline-dark" type="submit">Enviar formulario</button>
+                        <button className="btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>
                     </div>
                 </form>
             </div>
