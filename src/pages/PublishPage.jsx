@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import Calendar from 'react-calendar';
+import Clock from 'react-clock';
+import 'react-clock/dist/Clock.css';
+import Footer from "../components/Footer.jsx";
 
 export function PublishPage() {
   const navigate = useNavigate();
@@ -9,16 +13,22 @@ export function PublishPage() {
   let [informacionPublicacion, setInformacion] = useState("");
   let [seccionPublicacion, setSeccion] = useState("");
   let [tiposPublicaciones, setTiposPublicaciones] = useState([]);
+  const [value, onChange] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Fetch the types of publications from the backend
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/tipos_publicaciones")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data fetched from backend:", data); // Añade un log para verificar los datos
+        console.log("Data fetched from backend:", data);
         setTiposPublicaciones(data);
         if (data.length > 0) {
-          setSeccion(data[0].id_tipo_publicaciones);  // Set the first option as the default selected value
+          setSeccion(data[0].id_tipo_publicaciones);
         }
       })
       .catch((error) => console.error("Error fetching tipos_publicaciones:", error));
@@ -68,12 +78,13 @@ export function PublishPage() {
 
   return (
     <>
-      <div className="m-5">
+      <div className="p-0">
         <Navbar />
       </div>
       <div className="container navbar-spacing mt-5 pt-5">
         <div className="row">
-          <div className="col-md-6 bg-success-subtle rounded border border-warning">
+          {/* Columna para la Nueva Publicación */}
+          <div className="col-md-8 bg-success-subtle rounded border border-warning">
             <div className="d-flex justify-content-center mt-5 text-success-emphasis">
               <h3>Nueva publicación</h3>
             </div>
@@ -94,11 +105,27 @@ export function PublishPage() {
               </div>
               <textarea onChange={informationChange} className="form-control mb-3 border border-success" placeholder="Descripción de la publicación" rows="4"></textarea>
             </div>
-            <div className="d-flex justify-content-center m-2">
-              <button className="btn btn-warning btn-outline-dark" onClick={sendData}>Publicar</button>
+            <div className="d-flex justify-content-center m-0">
+              <button className="btn btn-warning btn-outline-dark mb-5" onClick={sendData}>Publicar</button>
             </div>
           </div>
+
+          {/* Columna para el Calendario y el Reloj */}
+          <div className="position-fixed top-5 end-0 m-5 p-3" style={{ width: '300px' }}>
+            <div className="calendar-container mb-4">
+              <Calendar onChange={onChange} value={value} />
+            </div>
+            <div className="clock-container ms-5 ps-4">
+              <h4>Hora Actual:</h4>
+              <Clock value={currentTime} />
+            </div>
+          </div>
+
         </div>
+      </div>
+      <div className="App">
+        {/* Otros componentes y contenido */}
+        <Footer />
       </div>
     </>
   );

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer.jsx";
 
 export function RecoveryPage() {
-
     const navigate = useNavigate();
-
     const [email, setEmail] = useState('');
 
     function changeEmail(e) {
@@ -20,23 +19,23 @@ export function RecoveryPage() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 email: email
             }),
         })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(() => {
-            navigate("/login");
-        })
-        .catch((error) => {
-            console.error('Ups algo salió mal 🙄', error);
-            alert("No se pudo enviar la solicitud. Por favor, intenta nuevamente.");
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(() => {
+                navigate("/login");
+            })
+            .catch((error) => {
+                console.error('Ups algo salió mal 🙄', error);
+                alert("No se pudo enviar la solicitud. Por favor, intenta nuevamente.");
+            });
     }
 
     return (
@@ -58,11 +57,10 @@ export function RecoveryPage() {
                                         required
                                         value={email}
                                         onChange={changeEmail}
-                                        style={{ maxWidth: "300px" }} 
+                                        style={{ maxWidth: "300px" }}
                                     />
                                 </div>
-                                <button 
-                                    onClick={sendData}
+                                <button
                                     type="submit"
                                     className="btn btn-warning btn-outline-dark mt-3"
                                 >
@@ -73,6 +71,8 @@ export function RecoveryPage() {
                     </div>
                 </div>
             </div>
+            {/* Incluye el Footer aquí */}
+            <Footer />
         </div>
     );
 }

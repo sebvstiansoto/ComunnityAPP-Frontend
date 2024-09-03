@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer.jsx";
 
 export function LoginPage() {
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -55,53 +55,56 @@ export function LoginPage() {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 text-success-emphasis">
-      <h1 className="text-success fw-bold">Bienvenido a Comunidapp!</h1>
-      <div className="col-6 col-md-4 d-flex flex-column m-3 p-3">
-        <input
-          onChange={changeEmail}
-          type="email"
-          className="form-control border-2 border-success-subtle mb-3"
-          id="validationDefault02"
-          placeholder="Email"
-          required
-        />
-        <input
-          onChange={changeContraseña}
-          type="password"
-          className="form-control border-2 border-success-subtle mb-3"
-          id="validationDefault03"
-          placeholder="Contraseña"
-          required
-        />
+    <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-success-emphasis mt-5">
+        <h1 className="text-success fw-bold">Bienvenido a Comunidapp!</h1>
+        <div className="col-6 col-md-4 d-flex flex-column m-3 p-3">
+          <input
+            onChange={changeEmail}
+            type="email"
+            className="form-control border-2 border-success-subtle mb-3"
+            id="validationDefault02"
+            placeholder="Email"
+            required
+          />
+          <input
+            onChange={changeContraseña}
+            type="password"
+            className="form-control border-2 border-success-subtle mb-3"
+            id="validationDefault03"
+            placeholder="Contraseña"
+            required
+          />
 
-        <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-success btn-outline-dark m-1 col-4 fw-bold text-light"
-            type="button"
-            onClick={sendData}
-          >
-            Ingresar
-          </button>
-        </div>
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-success btn-outline-dark m-1 col-4 fw-bold text-light"
+              type="button"
+              onClick={sendData}
+            >
+              Ingresar
+            </button>
+          </div>
 
-        <div className="d-flex justify-content-between mb-3">
-          <button
-            onClick={redirectRegister}
-            className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
-            type="submit"
-          >
-            Registrate
-          </button>
-          <button
-            onClick={redirectRecovery}
-            className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
-            type="submit"
-          >
-            Olvidaste tu contraseña?
-          </button>
+          <div className="d-flex justify-content-between mb-3">
+            <button
+              onClick={redirectRegister}
+              className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
+              type="submit"
+            >
+              Registrate
+            </button>
+            <button
+              onClick={redirectRecovery}
+              className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
+              type="submit"
+            >
+              Olvidaste tu contraseña?
+            </button>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

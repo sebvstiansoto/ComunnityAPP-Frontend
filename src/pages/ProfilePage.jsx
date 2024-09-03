@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
@@ -129,7 +130,7 @@ export function ProfilePage() {
             <div className="mt-3">
               <textarea
                 className="form-control border border-0"
-                rows="5"
+                rows="10"
                 placeholder="Cuentanos sobre ti..."
                 value={biografia}
                 readOnly
@@ -220,6 +221,10 @@ export function ProfilePage() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="App">
+        {/* Otros componentes y contenido */}
+        <Footer />
       </div>
     </>
   );
