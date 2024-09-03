@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
@@ -7,7 +8,7 @@ export function Notificaciones() {
 
   const [notificaciones, setNotificaciones] = useState([]);
 
-  // Función para obtener las notificaciones del backend
+
   useEffect(() => {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones")
       .then((response) => {
@@ -17,7 +18,7 @@ export function Notificaciones() {
         return response.json();
       })
       .then((data) => {
-        setNotificaciones(data.notificaciones); // Asegúrate que el backend devuelve un campo 'notificaciones'
+        setNotificaciones(data.notificaciones); 
       })
       .catch((error) => {
         console.error("Error al obtener notificaciones:", error);
@@ -68,4 +69,3 @@ export function Notificaciones() {
     </React.Fragment>
   );
 }
-

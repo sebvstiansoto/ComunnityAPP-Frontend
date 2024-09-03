@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx"
 
 export function Publicacion({ publicacion }) {
 
     const navigate = useNavigate();
+    const params = useParams(); 
 
     const [usuario, setUsuario] = useState("");
+
     const [valoracion, setValoracion] = useState([
         {
             isActive: false
@@ -26,6 +28,24 @@ export function Publicacion({ publicacion }) {
     ]);
     const [comentario, setComentario] = useState("");
     const [telefono, setTelefono] = useState("");
+    const [infoUsuario, setInfoUsuario] = useState("");
+
+    useEffect(() => {
+        getUserInfo();
+      }, []);
+
+    function getUserInfo() {
+        fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/2")
+          .then(response => {
+            return response.json();
+          })
+          .then(responseConverted => {
+          setInfoUsuario(responseConverted);
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1642699146.
+          console.log (responseConverted)
+          })
+      }
+
 
     function changeUsuario(e) {
         setUsuario(e.target.value);
@@ -76,7 +96,8 @@ export function Publicacion({ publicacion }) {
             style={{ maxWidth: "500px" }}
         >
             <div className="card-body">
-                <h5 className="card-title">{publicacion.titulo}</h5>
+                <h5 className="card-title">{publicacion.nombre_usuario}</h5>
+                <h4 className="card-title">{publicacion.titulo}</h4>
                 <p className="card-text">{publicacion.descripcion}</p>
                 <div className="row">
                     <div className="col-12">
