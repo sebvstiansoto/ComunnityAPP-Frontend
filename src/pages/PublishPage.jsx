@@ -81,9 +81,8 @@ export function PublishPage() {
       <div className="p-0">
         <Navbar />
       </div>
-      <div className="container navbar-spacing mt-5 pt-5">
+      <div className="container navbar-spacing mt-5 pt-5 mb-5">
         <div className="row">
-          {/* Columna para la Nueva Publicación */}
           <div className="col-md-8 bg-success-subtle rounded border border-warning">
             <div className="d-flex justify-content-center mt-5 text-success-emphasis">
               <h3>Nueva publicación</h3>
@@ -109,22 +108,35 @@ export function PublishPage() {
               <button className="btn btn-warning btn-outline-dark mb-5" onClick={sendData}>Publicar</button>
             </div>
           </div>
-
-          {/* Columna para el Calendario y el Reloj */}
-          <div className="position-fixed top-5 end-0 m-5 p-3" style={{ width: '300px' }}>
-            <div className="calendar-container mb-4">
+          <div
+            className="col-md-4 position-fixed"
+            style={{
+              right: '5%',
+              top: '20%'
+            }}
+          >
+            <div
+              className="calendar-container m-5"
+              style={{
+                transform: 'scale(0.7)',
+                transformOrigin: 'top right',
+                maxWidth: '300px'
+              }}
+            >
               <Calendar onChange={onChange} value={value} />
             </div>
-            <div className="clock-container ms-5 ps-4">
+
+            <div
+              className="clock-container m-5"
+              style={{ transform: 'scale(0.8)', transformOrigin: 'top right' }}
+            >
               <h4>Hora Actual:</h4>
               <Clock value={currentTime} />
             </div>
           </div>
-
         </div>
       </div>
       <div className="App">
-        {/* Otros componentes y contenido */}
         <Footer />
       </div>
     </>

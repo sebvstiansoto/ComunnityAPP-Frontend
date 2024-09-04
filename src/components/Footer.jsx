@@ -1,9 +1,18 @@
 import React from 'react';
-import footerImage from '../assets/Logo.png'; // Ajusta la ruta según sea necesario
+import footerImage from '../assets/Logo.png';
+import BannerFooter from '../assets/banner-footer.jpg'
 
 const Footer = () => {
     return (
-        <footer className="py-3 bg-light">
+        <footer
+            className="py-3"
+            style={{
+                backgroundImage: `url(${BannerFooter})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
             <div className="container">
                 <div className="d-flex justify-content-center mb-3">
                     <img src={footerImage} alt="Footer Logo" className="img-fluid" style={{ maxWidth: '200px' }} />
@@ -37,11 +46,14 @@ const Footer = () => {
                             </div>
                             <div className="modal-body">
                                 <ul className="list-unstyled">
-                                    <li><strong>¿Pregunta Frecuente 1?</strong></li>
-                                    <li>Respuesta a la primera pregunta frecuente.</li>
-                                    <li><strong>¿Pregunta Frecuente 2?</strong></li>
-                                    <li>Respuesta a la segunda pregunta frecuente.</li>
-                                    {/* Agrega más preguntas y respuestas aquí */}
+                                    <li><strong>¿Para qué sirve Comunidapp?</strong></li>
+                                    <li>Comunidapp es una aplicación diseñada para mantener a la comunidad informada sobre servicios, noticias e información relevante. Además, permite a personas y pymes publicar sus servicios o negocios, y facilita el contacto directo con ellos.</li>
+                                    <li><strong>¿Si publico algo, se mostrará mi número de celular?</strong></li>
+                                    <li>Sí, al publicar algo en Comunidapp, tu número de celular se mostrará para que los usuarios puedan ponerse en contacto directo contigo. Esto está especificado en los términos y condiciones que aceptaste al registrarte en la aplicación. Sin embargo, tu número no se ve directamente; en su lugar, aparece un ícono que envía a los usuarios directamente a tu WhatsApp.</li>
+                                    <li><strong>¿Qué hago si olvido mi contraseña?</strong></li>
+                                    <li>Si olvidas tu contraseña, puedes utilizar la opción de recuperación de contraseña en la pantalla de inicio de sesión. Te enviaremos un enlace para restablecer tu contraseña a tu correo electrónico registrado.</li>
+                                    <li><strong>¿Cómo puedo contactarme con Comunidapp?</strong></li>
+                                    <li>Al final de la página, encontrarás una sección llamada "Comunícate con Comunidapp". Puedes enviarnos un correo electrónico desde allí y nuestro equipo se pondrá en contacto contigo lo antes posible para resolver cualquier duda o inquietud que puedas tener.</li>
                                 </ul>
                             </div>
                             <div className="modal-footer">
@@ -72,7 +84,7 @@ const Footer = () => {
 
                 {/* Enlace de contacto */}
                 <div className="text-center mt-3">
-                    <a href="mailto:comunidapp@gmail.com" className="text-primary">
+                    <a href="mailto:comunidapp.4geek@gmail.com" className="text-primary">
                         Comunicate con Comunidapp
                     </a>
                 </div>

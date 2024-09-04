@@ -40,13 +40,15 @@ export function LoginPage() {
         contraseña: contraseña,
       }),
     })
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((responseConverted) => {
-        localStorage.setItem("username", responseConverted.username);
-        localStorage.setItem("id_usuario", responseConverted.id_usuario);
-        navigate("/profile/" + responseConverted.id_usuario);
+        if (responseConverted.error) {
+          alert("Contraseña incorrecta");
+        } else {
+          localStorage.setItem("username", responseConverted.username);
+          localStorage.setItem("id_usuario", responseConverted.id_usuario);
+          navigate("/profile/" + responseConverted.id_usuario);
+        }
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
@@ -57,7 +59,7 @@ export function LoginPage() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-success-emphasis mt-5">
-        <h1 className="text-success fw-bold">Bienvenido a Comunidapp!</h1>
+        <h1 className="text-success fw-bold">¡Bienvenido a Comunidapp!</h1>
         <div className="col-6 col-md-4 d-flex flex-column m-3 p-3">
           <input
             onChange={changeEmail}
@@ -92,14 +94,14 @@ export function LoginPage() {
               className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
               type="submit"
             >
-              Registrate
+              Regístrate
             </button>
             <button
               onClick={redirectRecovery}
               className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
               type="submit"
             >
-              Olvidaste tu contraseña?
+              ¿Olvidaste tu contraseña?
             </button>
           </div>
         </div>

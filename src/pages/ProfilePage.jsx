@@ -17,6 +17,10 @@ export function ProfilePage() {
   const [fotoPerfilPreviewFile, setFotoPerfilPreviewFile] = useState(null);
   const [bannerPreviewFile, setBannerPreviewFile] = useState(null);
 
+  const [originalBiografia, setOriginalBiografia] = useState("");
+  const [originalFotoPerfil, setOriginalFotoPerfil] = useState("");
+  const [originalBanner, setOriginalBanner] = useState("");
+
   function getUserInfo() {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
       .then(response => {
@@ -25,20 +29,22 @@ export function ProfilePage() {
       .then(responseConverted => {
         setUsername(responseConverted.nombre_usuario);
         setEmail(responseConverted.email);
-        setFotoPerfil(responseConverted.img_perfil)
+        setFotoPerfil(responseConverted.img_perfil);
         setBanner(responseConverted.banner);
         setBiografia(responseConverted.biografia);
         setFotoPerfilPreview(responseConverted.img_perfil);
+        setOriginalBiografia(responseConverted.biografia);
+        setOriginalFotoPerfil(responseConverted.img_perfil);
+        setOriginalBanner(responseConverted.banner);
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   }
 
   useEffect(() => {
     getUserInfo();
   }, []);
-
 
   function changeBiografia(e) {
     setBiografia(e.target.value);
@@ -54,7 +60,6 @@ export function ProfilePage() {
     if (file) {
       reader.readAsDataURL(file);
     }
-
   }
 
   function changeBanner(e) {
@@ -89,8 +94,18 @@ export function ProfilePage() {
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
       });
+  }
 
-
+  function closeModalWithoutSaving() {
+    // Reset to original values
+    setBiografia(originalBiografia);
+    setFotoPerfilPreview(originalFotoPerfil);
+    setBanner(originalBanner);
+    setFotoPerfilPreviewFile(null);
+    setBannerPreviewFile(null);
+    const modalElement = document.getElementById("editProfileModal");
+    const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
   }
 
   return (
@@ -128,13 +143,9 @@ export function ProfilePage() {
               </button>
             </div>
             <div className="mt-3">
-              <textarea
-                className="form-control border border-0"
-                rows="10"
-                placeholder="Cuentanos sobre ti..."
-                value={biografia}
-                readOnly
-              ></textarea>
+              <p className="border border-0">
+                {biografia || "Cuentanos sobre ti..."}
+              </p>
             </div>
           </div>
         </div>
@@ -156,7 +167,7 @@ export function ProfilePage() {
               <button
                 type="button"
                 className="btn-close"
-                data-bs-dismiss="modal"
+                onClick={closeModalWithoutSaving}
                 aria-label="Close"
               ></button>
             </div>
@@ -207,7 +218,7 @@ export function ProfilePage() {
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={closeModalWithoutSaving}
               >
                 Cerrar
               </button>
