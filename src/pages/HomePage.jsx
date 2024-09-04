@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import Clock from 'react-clock';  
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
+import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
@@ -43,20 +44,32 @@ export function HomePage() {
     return (
         <React.Fragment>
             <Navbar />
-            <main className="mt-5 pt-5 container">
-                <div className="row">
-                    <div className="col-md-8 d-flex flex-column justify-content-start align-items-center gap-3">
-                        {publicaciones.map((publicacion, index) => (
-                            <Publicacion publicacion={publicacion} key={index} />
-                        ))}
-                    </div>
-                    <div className="col-md-4">
-                        <div className="calendar-container">
-                            <Calendar onChange={onChange} value={value} />
+            <main
+                className="mt-5 pt-5"
+                style={{
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    width: '100%',
+                    minHeight: '100vh',
+                    color: 'black', // Ajusta el color del texto para que sea legible
+                }}
+            >
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 d-flex flex-column justify-content-start align-items-center gap-3">
+                            {publicaciones.map((publicacion, index) => (
+                                <Publicacion publicacion={publicacion} key={index} />
+                            ))}
                         </div>
-                        <div className="clock-container mt-3">
-                            <h4>Hora Actual:</h4>
-                            <Clock value={currentTime} />  {/* Renderizar el reloj analógico */}
+                        <div className="col-md-4">
+                            <div className="calendar-container">
+                                <Calendar onChange={onChange} value={value} />
+                            </div>
+                            <div className="clock-container mt-3">
+                                <h4>Hora Actual:</h4>
+                                <Clock value={currentTime} />  {/* Renderizar el reloj analógico */}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,6 +78,7 @@ export function HomePage() {
         </React.Fragment>
     );
 }
+
 
 
 

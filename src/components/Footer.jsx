@@ -1,5 +1,5 @@
 import React from 'react';
-import footerImage from '../assets/Logo.png'; // Ajusta la ruta según sea necesario
+import footerImage from '../assets/logo.png'; // Ajusta la ruta según sea necesario
 
 const Footer = () => {
     return (
