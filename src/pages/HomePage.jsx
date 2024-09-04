@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
-import Clock from 'react-clock';  // Importar el componente de reloj analógico
-import 'react-clock/dist/Clock.css';  // Importar los estilos del reloj
+import Clock from 'react-clock';  
+import 'react-clock/dist/Clock.css';  
+import Footer from '../components/Footer.jsx';
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
@@ -60,6 +61,7 @@ export function HomePage() {
                     </div>
                 </div>
             </main>
+            <Footer />
         </React.Fragment>
     );
 }
