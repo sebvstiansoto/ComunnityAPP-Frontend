@@ -48,8 +48,8 @@ export function PublishPage() {
 
   function sendData(e) {
     e.preventDefault();
-
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/crear_publicacion", {
+    const idUser = localStorage.getItem('id_usuario')
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/crear_publicacion/" + idUser, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
