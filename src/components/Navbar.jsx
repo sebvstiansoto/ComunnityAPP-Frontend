@@ -12,17 +12,17 @@ import { Modal, Button } from 'react-bootstrap'; // Asegúrate de que react-boot
 const Navbar = () => {
   const [selectedButton, setSelectedButton] = useState('');
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const id_usuario = localStorage.getItem("id_usuario");
 
   const navigate = useNavigate();
 
   function redirectProfile() {
-    let id_usuario = localStorage.getItem("id_usuario");
     navigate('/profile/' + id_usuario);
     setSelectedButton('profile');
   }
 
   function redirectFavorites() {
-    navigate('/favorites');
+    navigate('/favorites/' + id_usuario);
     setSelectedButton('favorites');
   }
 
@@ -129,7 +129,7 @@ const Navbar = () => {
             <div className="btn-group">
               <button
                 type="button"
-                className={`btn ${selectedButton === '/notices' || selectedButton === '/health' || selectedButton === '/services' || selectedButton === '/events' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
+                className={`btn ${selectedButton === '/notices/' || selectedButton === '/health/' || selectedButton === '/services/' || selectedButton === '/events/' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -139,7 +139,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/notices')}
+                    onClick={() => redirectSection('/notices/' + id_usuario)}
                   >
                     Noticias
                   </button>
@@ -147,7 +147,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/health')}
+                    onClick={() => redirectSection('/health/' + id_usuario)}
                   >
                     Salud
                   </button>
@@ -155,7 +155,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/services')}
+                    onClick={() => redirectSection('/services/' + id_usuario)}
                   >
                     Servicios
                   </button>
@@ -163,7 +163,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/events')}
+                    onClick={() => redirectSection('/events/' + id_usuario)}
                   >
                     Eventos
                   </button>
@@ -175,7 +175,7 @@ const Navbar = () => {
           <div className="d-flex flex-column">
             <button
               className="btn btn-warning btn-outline-dark"
-              onClick={() => redirectSection('/publish')}
+              onClick={() => redirectSection('/publish/' + id_usuario)}
             >
               Publicar
             </button>

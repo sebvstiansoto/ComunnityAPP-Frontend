@@ -9,7 +9,17 @@ export function Favorites() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/" + params.id);
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/" + params.id)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseConverter) => {
+        setFavorites(responseConverter);  // Guardar las publicaciones en el estado
+        console.log(responseConverter);
+      })
+      .catch((error) => {
+        console.error("Error fetching favoritos:", error);
+      });
   },[])
 
   // Renderizar las publicaciones guardadas
@@ -19,21 +29,7 @@ export function Favorites() {
 
       <div className="favorites-page">
         <h1>Favoritos</h1>
-        <div className="favorites-list">
-          {favorites.length > 0 ? (
-            favorites.map((post, index) => (
-              <div key={index} className="card m-auto d-flex justify-content-center" style={{ maxWidth: "500px" }}>
-                <div className="card-body">
-                  <h5 className="card-title">{post.nombre_usuario}</h5>
-                  <h4 className="card-title">{post.titulo}</h4>
-                  <p className="card-text">{post.descripcion}</p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No hay publicaciones guardadas.</p>
-          )}
-        </div>
+
       </div>
       <Footer />
     </React.Fragment>

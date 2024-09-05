@@ -6,35 +6,24 @@ import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
 import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
-import { useParams } from 'react-router-dom';
+import ReactWeather, { useWeatherBit } from 'react-open-weather';
+import 'react-calendar/dist/Calendar.css';
+import WeatherComponent from '../components/Clima.jsx';
 
 export function HomePage() {
-    const params = useParams();
     const [publicaciones, setPublicaciones] = useState([]);
     const [calendarEvents, setCalendarEvents] = useState([]);
     const [currentTime, setCurrentTime] = useState(new Date());
     const calendarRef = useRef(null);
     const [value, onChange] = useState(new Date());
 
+
     useEffect(() => {
         // Obtener publicaciones
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones/' + params.id)
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
             .then(response => response.json())
             .then(data => setPublicaciones(data));
 
-        // Obtener datos del calendario desde la API
-        fetch('URL_DE_TU_API_DE_CALENDARIO')
-            .then(response => response.json())
-            .then(data => {
-                const events = data.map(event => ({
-                    title: event.title,
-                    start: event.start_time,
-                    end: event.end_time
-                }));
-                setCalendarEvents(events);
-            });
-
-        // Actualizar la hora cada segundo
         const interval = setInterval(() => {
             setCurrentTime(new Date());
         }, 1000);
@@ -65,12 +54,14 @@ export function HomePage() {
                             ))}
                         </div>
                         <div className="col-md-4">
-                            <div className="calendar-container">
-                                <Calendar onChange={onChange} value={value} />
+                            <div style={{ 
+                                height: '20vh',
+                             }}>
+                                < WeatherComponent/>
                             </div>
-                            <div className="clock-container mt-3">
-                                <h4>Hora Actual:</h4>
-                                <Clock value={currentTime} />  {/* Renderizar el reloj analógico */}
+
+                            <div className="calendar-container w-75 pt-10">
+                                <Calendar onChange={onChange} value={value} />
                             </div>
                         </div>
                     </div>

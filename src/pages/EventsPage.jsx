@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
-import { useParams } from 'react-router-dom';
 
 export function EventsPage() {
-
-    const params = useParams();
 
     let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {

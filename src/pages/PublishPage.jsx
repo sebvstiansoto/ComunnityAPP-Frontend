@@ -5,12 +5,10 @@ import Calendar from 'react-calendar';
 import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
 import Footer from "../components/Footer.jsx";
-import { useParams } from 'react-router-dom';
 
 
 export function PublishPage() {
 
-  const params = useParams();
   const navigate = useNavigate();
 
   let [tituloPublicacion, setTitulo] = useState("");
@@ -26,7 +24,7 @@ export function PublishPage() {
   }, []);
 
   useEffect(() => {
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/tipos_publicaciones/"  + params.id)
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/tipos_publicaciones")
       .then((response) => response.json())
       .then((data) => {
         console.log("Data fetched from backend:", data);

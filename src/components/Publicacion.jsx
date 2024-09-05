@@ -28,7 +28,6 @@ export function Publicacion({ publicacion }) {
             .then((response) => response.json())
             .then((responseConverted) => {
                 setInfoUsuario(responseConverted);
-                console.log(responseConverted);
             });
     }
 
