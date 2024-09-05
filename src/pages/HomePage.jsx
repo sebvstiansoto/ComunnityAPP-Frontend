@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'
 import Clock from 'react-clock';  
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
-import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
+import backgroundImage from '../assets/background.jpg';
+
+
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
@@ -20,17 +23,6 @@ export function HomePage() {
             .then(response => response.json())
             .then(data => setPublicaciones(data));
 
-        // Obtener datos del calendario desde la API
-        fetch('URL_DE_TU_API_DE_CALENDARIO')
-            .then(response => response.json())
-            .then(data => {
-                const events = data.map(event => ({
-                    title: event.title,
-                    start: event.start_time,
-                    end: event.end_time
-                }));
-                setCalendarEvents(events);
-            });
 
         // Actualizar la hora cada segundo
         const interval = setInterval(() => {

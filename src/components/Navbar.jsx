@@ -172,9 +172,9 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="d-flex flex-column">
+          <div className="d-flex justify-content-end">
             <button
-              className="btn btn-warning btn-outline-dark"
+              className="btn btn-warning btn-outline-dark me-2"
               onClick={() => redirectSection('/publish')}
             >
               Publicar
