@@ -216,14 +216,14 @@ export function Publicacion({ publicacion }) {
                         )}
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <button type="button" className="btn btn-outline-success">
+                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
                             <img
                                 width="20px"
                                 height="20px"
                                 src="/src/assets/whatsapp (3).png"
                                 alt=""
                             />
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
