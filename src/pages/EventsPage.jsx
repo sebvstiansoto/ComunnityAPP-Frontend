@@ -7,7 +7,7 @@ export function EventsPage() {
 
     let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones_filtrada/' + params.id)
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones_filtrada')
             .then(response => response.json())
             .then(data => setPublicaciones(data));
     }, []);

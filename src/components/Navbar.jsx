@@ -12,17 +12,17 @@ import { Modal, Button } from 'react-bootstrap'; // Asegúrate de que react-boot
 const Navbar = () => {
   const [selectedButton, setSelectedButton] = useState('');
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const id_usuario = localStorage.getItem("id_usuario");
 
   const navigate = useNavigate();
 
   function redirectProfile() {
+    const id_usuario = localStorage.getItem("id_usuario");
     navigate('/profile/' + id_usuario);
     setSelectedButton('profile');
   }
 
   function redirectFavorites() {
-    navigate('/favorites/' + id_usuario);
+    navigate('/favorites');
     setSelectedButton('favorites');
   }
 
@@ -139,7 +139,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/notices/' + id_usuario)}
+                    onClick={() => redirectSection('/notices')}
                   >
                     Noticias
                   </button>
@@ -147,7 +147,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/health/' + id_usuario)}
+                    onClick={() => redirectSection('/health')}
                   >
                     Salud
                   </button>
@@ -155,7 +155,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/services/' + id_usuario)}
+                    onClick={() => redirectSection('/services')}
                   >
                     Servicios
                   </button>
@@ -163,7 +163,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/events/' + id_usuario)}
+                    onClick={() => redirectSection('/events')}
                   >
                     Eventos
                   </button>
@@ -175,7 +175,7 @@ const Navbar = () => {
           <div className="d-flex flex-column">
             <button
               className="btn btn-warning btn-outline-dark"
-              onClick={() => redirectSection('/publish/' + id_usuario)}
+              onClick={() => redirectSection('/publish')}
             >
               Publicar
             </button>
