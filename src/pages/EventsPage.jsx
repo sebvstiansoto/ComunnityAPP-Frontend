@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
-import { Publicacion } from '../components/Publicacion.jsx'
+import { Publicacion } from '../components/Publicacion.jsx';
+import { useParams } from 'react-router-dom';
 
 export function EventsPage() {
 
+    const params = useParams();
+
     let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones_filtrada/3')
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones_filtrada/' + params.id)
             .then(response => response.json())
             .then(data => setPublicaciones(data));
     }, []);

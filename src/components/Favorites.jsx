@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 export function Favorites() {
   // Estado para almacenar las publicaciones favoritas
+  const params = useParams();
   const [favorites, setFavorites] = useState([]);
 
-  // Leer las publicaciones guardadas desde el localStorage cuando el componente se monte
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites');
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/" + params.id);
+  },[])
 
   // Renderizar las publicaciones guardadas
   return (

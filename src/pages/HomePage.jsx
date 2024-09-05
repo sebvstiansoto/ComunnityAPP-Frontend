@@ -6,8 +6,10 @@ import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
 import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
+import { useParams } from 'react-router-dom';
 
 export function HomePage() {
+    const params = useParams();
     const [publicaciones, setPublicaciones] = useState([]);
     const [calendarEvents, setCalendarEvents] = useState([]);
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -16,7 +18,7 @@ export function HomePage() {
 
     useEffect(() => {
         // Obtener publicaciones
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones/' + params.id)
             .then(response => response.json())
             .then(data => setPublicaciones(data));
 
