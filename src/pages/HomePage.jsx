@@ -6,7 +6,7 @@ import 'react-calendar/dist/Calendar.css'
 import Clock from 'react-clock';  
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
-import backgroundImage from '../assets/background.jpg';
+import backgroundImage from '../assets/banner-footer.jpg';
 
 
 

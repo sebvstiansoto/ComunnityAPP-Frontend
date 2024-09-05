@@ -1,13 +1,11 @@
 import React from 'react';
 import footerImage from '../assets/Logo.png';
-import BannerFooter from '../assets/banner-footer.jpg'
 
 const Footer = () => {
     return (
         <footer
             className="py-3"
             style={{
-                backgroundImage: `url(${BannerFooter})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
