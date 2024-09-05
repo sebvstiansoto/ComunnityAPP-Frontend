@@ -69,7 +69,6 @@ export function ProfilePage() {
 
   function sendData(e) {
     e.preventDefault();
-    console.log({ biografia, fotoPerfil, banner });
     console.log("Todo preparado para enviar a mi backend 😀");
 
     const formData = new FormData();
@@ -207,10 +206,19 @@ export function ProfilePage() {
                     className="form-control"
                     id="bio"
                     rows="3"
-                    placeholder="Biografía"
+                    placeholder="Redacta tu biografia..."
                     value={biografia}
                     onChange={changeBiografia}
+                    style={{
+                      resize: "none", // Desactiva el redimensionamiento manual
+                      overflow: "hidden", // Oculta las barras de desplazamiento
+                      height: "auto", // Permite que el contenido expanda el textarea
+                      maxHeight: "150px", // Define una altura máxima para el scroll
+                      overflowY: "auto", // Permite el scroll vertical sin mostrar la barra
+                      paddingRight: "10px" // Añade un poco de espacio para el scroll "invisible"
+                    }}
                   ></textarea>
+                  <p></p>
                 </div>
               </form>
             </div>

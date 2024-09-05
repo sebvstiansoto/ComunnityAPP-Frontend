@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+
+// Componente que maneja la biografía y permite edición
+const ChangeBiografiaComponent = () => {
+  const [biografia, setBiografia] = useState("Escribe aquí tu biografía");
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleChange = (e) => {
+    setBiografia(e.target.value);
+  };
+
+  const toggleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
+  return (
+    <div>
+      {isEditing ? (
+        <textarea
+          className="form-control"
+          id="bio"
+          rows="3"
+          value={biografia}
+          onChange={handleChange}
+        ></textarea>
+      ) : (
+        <p>{biografia}</p>
+      )}
+      <button className="btn btn-primary" onClick={toggleEdit}>
+        {isEditing ? "Guardar" : "Editar"}
+      </button>
+    </div>
+  );
+};
+
+export default ChangeBiografiaComponent;

@@ -7,7 +7,7 @@ import 'react-clock/dist/Clock.css';
 import Footer from '../components/Footer.jsx';
 import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
 import 'react-calendar/dist/Calendar.css';
-import WeatherComponent from '../components/Clima.jsx';
+/*import WeatherComponent from '../components/Clima.jsx';*/
 
 
 
@@ -58,7 +58,6 @@ export function HomePage() {
                             <div style={{ 
                                 height: '20vh',
                              }}>
-                                < WeatherComponent/>
                             </div>
 
                             <div className="calendar-container w-75 pt-10">

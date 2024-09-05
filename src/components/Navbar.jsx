@@ -8,26 +8,29 @@ import powerIcon from '../assets/power.png';
 import './../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap'; // Asegúrate de que react-bootstrap esté instalado
+import { useParams } from 'react-router-dom';
 
 const Navbar = () => {
   const [selectedButton, setSelectedButton] = useState('');
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const navigate = useNavigate();
+  const params = useParams();
+  //const id_usuario = localStorage.getItem("id_usuario");
+
 
   function redirectProfile() {
-    const id_usuario = localStorage.getItem("id_usuario");
-    navigate('/profile/' + id_usuario);
+    navigate('/profile/' + params.id);
     setSelectedButton('profile');
   }
 
   function redirectFavorites() {
-    navigate('/favorites');
+    navigate('/favorites/' + params.id);
     setSelectedButton('favorites');
   }
 
   function redirectNotification() {
-    navigate('/notificaciones');
+    navigate('/notificaciones' + params.id);
     setSelectedButton('notification');
   }
 
@@ -37,7 +40,7 @@ const Navbar = () => {
   }
 
   function redirectHome() {
-    navigate('/');
+    navigate('/' + params.id);
     setSelectedButton('home');
   }
 
@@ -129,7 +132,7 @@ const Navbar = () => {
             <div className="btn-group">
               <button
                 type="button"
-                className={`btn ${selectedButton === '/notices/' || selectedButton === '/health/' || selectedButton === '/services/' || selectedButton === '/events/' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
+                className={`btn ${selectedButton === '/notices' || selectedButton === '/health' || selectedButton === '/services' || selectedButton === '/events' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >

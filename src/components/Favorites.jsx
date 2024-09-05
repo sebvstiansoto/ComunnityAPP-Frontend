@@ -8,6 +8,8 @@ export function Favorites() {
   const params = useParams();
   const [favorites, setFavorites] = useState([]);
 
+  
+
   useEffect(() => {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/" + params.id)
       .then((response) => {
@@ -26,11 +28,15 @@ export function Favorites() {
   return (
     <React.Fragment>
       <Navbar />
-
-      <div className="favorites-page">
-        <h1>Favoritos</h1>
-
-      </div>
+        <div>
+          <h1>Favoritos</h1>
+          {favorites.map((favorite, index) => (
+            <div key={index}>
+              <h3>{favorite.id_publicacion}</h3>
+              <p>{favorite.descripcion}</p>
+            </div>
+          ))}
+        </div>
       <Footer />
     </React.Fragment>
   );

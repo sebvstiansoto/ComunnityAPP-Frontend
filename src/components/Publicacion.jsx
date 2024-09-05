@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx";
+import { AnadirFavoritos } from "./AnadirFavoritos.jsx";
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function Publicacion({ publicacion }) {
     }, []);
 
     function getUserInfo() {
-        fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/2")
+        fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
             .then((response) => response.json())
             .then((responseConverted) => {
                 setInfoUsuario(responseConverted);
@@ -106,13 +107,16 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={handleSaveFavorite}
+                            data-bs-toggle="modal"
+                            data-bs-target="#favoritosModal"
+                            alt="Guardar Publicación"
+                            title="Anadir a Favoritos"
                         >
                             <img
                                 width="20px"
                                 height="20px"
                                 src="/src/assets/tag.png"
-                                alt="Guardar como favorito"
+                                alt="Valoración"
                             />
                         </button>
                         <button
@@ -128,6 +132,46 @@ export function Publicacion({ publicacion }) {
                                 alt="Valoración"
                             />
                         </button>
+
+                                                {/* Modal de Favoritos */}
+                                                <div
+                            className="modal fade"
+                            id="favoritosModal"
+                            tabIndex="-1"
+                            aria-labelledby="favoritosModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="favoritosModalLabel">
+                                            Valoración del sitio
+                                        </h1>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        ></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        < AnadirFavoritos />
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-success"
+                                            data-bs-dismiss="modal"
+                                        >
+                                            Cerrar
+                                        </button>
+                                        <button type="button" className="btn btn-outline-warning">
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Modal de valoraciones */}
                         <div
