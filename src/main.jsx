@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   { path: "/register", element: <RegisterPage />},
   { path: "/services/", element: <ServicesPage />},
   { path: "/notificaciones/", element: <Notificaciones />},
-  { path: "/favorites/", element: <Favorites />},
+  { path: "/favorites/:id", element: <Favorites />},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
