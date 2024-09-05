@@ -69,8 +69,11 @@ export function Publicacion({ publicacion }) {
         const segundos = Math.floor(diferencia / 1000);
         const minutos = Math.floor(segundos / 60);
         const horas = Math.floor(minutos / 60);
+        const dias = Math.floor(horas / 24);
 
-        if (horas > 0) {
+        if (dias > 0) {
+            return `Hace ${dias} día${dias > 1 ? 's' : ''}`;
+        } else if (horas > 0) {
             return `Hace ${horas} hora${horas > 1 ? 's' : ''}`;
         } else if (minutos > 0) {
             return `Hace ${minutos} minuto${minutos > 1 ? 's' : ''}`;
@@ -80,11 +83,16 @@ export function Publicacion({ publicacion }) {
     }
 
     return (
-        <div className="card m-auto d-flex justify-content-center" style={{ maxWidth: "500px" }}>
-            <div className="card-body">
-                <h5 className="card-title">{publicacion.nombre_usuario}</h5>
-                <h4 className="card-title">{publicacion.titulo}</h4>
-                <p className="card-text">{publicacion.descripcion}</p>
+        <div
+            className="card m-auto d-flex justify-content-center"
+            style={{ width: "500px", height: "500px" }} // Definimos el tamaño cuadrado de 500x500
+        >
+            <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
+                <div>
+                    <h5 className="card-title">{publicacion.nombre_usuario}</h5>
+                    <h4 className="card-title">{publicacion.titulo}</h4>
+                    <p className="card-text">{publicacion.descripcion}</p>
+                </div>
                 <div className="row">
                     <div className="col-12">
                         <p className="card-text mb-3">
@@ -220,7 +228,7 @@ export function Publicacion({ publicacion }) {
                                 width="20px"
                                 height="20px"
                                 src="/src/assets/whatsapp (3).png"
-                                alt=""
+                                alt="WhatsApp"
                             />
                         </a>
                     </div>

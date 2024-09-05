@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'
 import Clock from 'react-clock';  
 import 'react-clock/dist/Clock.css';  
 import Footer from '../components/Footer.jsx';
@@ -9,6 +10,9 @@ import backgroundImage from '../assets/background.jpg';  // Importa la imagen de
 import ReactWeather, { useWeatherBit } from 'react-open-weather';
 import 'react-calendar/dist/Calendar.css';
 import WeatherComponent from '../components/Clima.jsx';
+import backgroundImage from '../assets/banner-footer.jpg';
+
+
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
