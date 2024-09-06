@@ -34,8 +34,26 @@ export function Publicacion({ publicacion }) {
 
     function sendData(e) {
         e.preventDefault();
-        console.log({ usuario, valoracion, comentario, telefono });
-        console.log("Preparando para enviar datos al backend");
+        const userId = localStorage.getItem('id_usuario');
+        const publicacionId = publicacion.id_publicacion;
+
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/' + params.id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_usuario: parseInt(userId), // id_usuario viene de la URL
+                id_publicacion: publicacionId,  // id_publicacion es pasado como prop
+            }),
+        })
+        .then((response) => response.json())
+        .then((responseConverted) => {
+            alert("Favorito guardado correctamente"); // Cambiar a modal
+        })
+        .catch((error) => {
+            console.error("Error al añadir favorito:", error);
+        });
     }
 
     function handleSaveFavorite() {
@@ -91,8 +109,7 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            data-bs-toggle="modal"
-                            data-bs-target="#favoritosModal"
+                            onClick={sendData}
                             alt="Guardar Publicación"
                             title="Anadir a Favoritos"
                         >
