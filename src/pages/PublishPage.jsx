@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Calendar from 'react-calendar';
-import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
 import Footer from "../components/Footer.jsx";
 
@@ -83,11 +82,11 @@ export function PublishPage() {
       </div>
       <div className="container navbar-spacing mt-5 pt-5 mb-5">
         <div className="row">
-          <div className="col-md-8 bg-success-subtle rounded border border-warning">
+          <div className="col-md-8 rounded border border-warning">
             <div className="d-flex justify-content-center mt-5 text-success-emphasis">
-              <h3>Nueva publicación</h3>
+              <h2>Nueva publicación</h2>
             </div>
-            <div className="border p-5 text-center">
+            <div className="border border-0 p-5 text-center">
               <div className="form-group">
                 <label htmlFor="titulo" className="fw-semibold text-success-emphasis">Título</label>
                 <input onChange={tittleChange} type="text" className="form-control mb-3 border border-success" id="titulo" placeholder="Ingresa el título" />
@@ -130,8 +129,6 @@ export function PublishPage() {
               className="clock-container m-5"
               style={{ transform: 'scale(0.8)', transformOrigin: 'top right' }}
             >
-              <h4>Hora Actual:</h4>
-              <Clock value={currentTime} />
             </div>
           </div>
         </div>

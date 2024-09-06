@@ -61,8 +61,8 @@ export function LoginPage() {
     <main>
       <div className="d-flex flex-column min-vh-100">
         <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-success-emphasis mt-5">
-          <h1 className="text-success fw-bold">¡Bienvenido a Comunidapp!</h1>
-          <div className="col-6 col-md-4 d-flex flex-column m-3 p-3 bg-light bg-opacity-75">
+          <h1 className="text-success-emphasis fw-bold">¡Bienvenido a Comunidapp!</h1>
+          <div className="col-6 col-md-4 d-flex flex-column m-3 p-3">
             {errorMessage && (
               <Alert variant="danger" onClose={() => setErrorMessage("")} dismissible>
                 {errorMessage}

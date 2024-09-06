@@ -39,39 +39,41 @@ export function RecoveryPage() {
     }
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="card mt-5 border border-success">
-                        <div className="card-header text-center bg-warning">
-                            <h3>Recuperar Contraseña</h3>
-                        </div>
-                        <div className="card-body">
-                            <form onSubmit={sendData} className="text-center">
-                                <div className="form-group">
-                                    <input
-                                        type="email"
-                                        className="form-control m-auto"
-                                        id="email"
-                                        placeholder="Introduce tu correo electrónico"
-                                        required
-                                        value={email}
-                                        onChange={changeEmail}
-                                        style={{ maxWidth: "300px" }}
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="btn btn-warning btn-outline-dark mt-3"
-                                >
-                                    Enviar
-                                </button>
-                            </form>
+        <>
+            <div className="container mb-5 pb-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card mt-5 border border-success">
+                            <div className="card-header text-center bg-warning">
+                                <h3>Recuperar Contraseña</h3>
+                            </div>
+                            <div className="card-body">
+                                <form onSubmit={sendData} className="text-center">
+                                    <div className="form-group">
+                                        <input
+                                            type="email"
+                                            className="form-control m-auto"
+                                            id="email"
+                                            placeholder="Introduce tu correo electrónico"
+                                            required
+                                            value={email}
+                                            onChange={changeEmail}
+                                            style={{ maxWidth: "300px" }}
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-warning btn-outline-dark mt-3"
+                                    >
+                                        Enviar
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 }
