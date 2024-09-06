@@ -32,22 +32,6 @@ export function Publicacion({ publicacion }) {
             });
     }
 
-    function changeUsuario(e) {
-        setUsuario(e.target.value);
-    }
-
-    function changeValoracion(e) {
-        setValoracion(e.target.value);
-    }
-
-    function changeComentario(e) {
-        setComentario(e.target.value);
-    }
-
-    function changeTelefono(e) {
-        setTelefono(e.target.value);
-    }
-
     function sendData(e) {
         e.preventDefault();
         console.log({ usuario, valoracion, comentario, telefono });
@@ -155,7 +139,7 @@ export function Publicacion({ publicacion }) {
                                         ></button>
                                     </div>
                                     <div className="modal-body">
-                                        < AnadirFavoritos />
+                                        < AnadirFavoritos id_publicacion={publicacion.id} />
                                     </div>
                                     <div className="modal-footer">
                                         <button

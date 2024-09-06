@@ -21,27 +21,18 @@ const Navbar = () => {
 
   function redirectProfile() {
     navigate('/profile/' + params.id);
-    setSelectedButton('profile');
   }
 
   function redirectFavorites() {
     navigate('/favorites/' + params.id);
-    setSelectedButton('favorites');
   }
 
   function redirectNotification() {
-    navigate('/notificaciones' + params.id);
-    setSelectedButton('notification');
-  }
-
-  function redirectSection(section) {
-    navigate(section);
-    setSelectedButton(section);
+    navigate('/notificaciones/' + params.id);
   }
 
   function redirectHome() {
-    navigate('/' + params.id);
-    setSelectedButton('home');
+    navigate('/home/' + params.id);
   }
 
   function handleLogout() {
@@ -51,6 +42,26 @@ const Navbar = () => {
   function confirmLogout() {
     setShowLogoutModal(false);
     navigate('/login');
+  }
+
+  function redirectServices() {
+    navigate('/services/' + params.id);
+  }
+
+  function redirectNotices() {
+    navigate('/notices/' + params.id);
+  }
+
+  function redirectHealth() {
+    navigate('/health/' + params.id);
+  }
+
+  function redirectEvents() {
+    navigate('/events/' + params.id);
+  }
+
+  function redirectPublish() {
+    navigate('/publish/' + params.id);
   }
 
   return (
@@ -83,8 +94,6 @@ const Navbar = () => {
               name="btnradio"
               id="btnradio1"
               autoComplete="off"
-              checked={selectedButton === 'profile'}
-              onChange={() => setSelectedButton('profile')}
               onClick={redirectProfile}
             />
             <label
@@ -100,8 +109,6 @@ const Navbar = () => {
               name="btnradio"
               id="btnradio3"
               autoComplete="off"
-              checked={selectedButton === 'favorites'}
-              onChange={() => setSelectedButton('favorites')}
               onClick={redirectFavorites}
             />
             <label
@@ -117,8 +124,6 @@ const Navbar = () => {
               name="btnradio"
               id="btnradio4"
               autoComplete="off"
-              checked={selectedButton === 'notification'}
-              onChange={() => setSelectedButton('notification')}
               onClick={redirectNotification}
             />
             <label
@@ -142,7 +147,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/notices')}
+                    onClick={redirectNotices}
                   >
                     Noticias
                   </button>
@@ -150,7 +155,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/health')}
+                    onClick={redirectHealth}
                   >
                     Salud
                   </button>
@@ -158,7 +163,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/services')}
+                    onClick={redirectServices}
                   >
                     Servicios
                   </button>
@@ -166,7 +171,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => redirectSection('/events')}
+                    onClick={redirectEvents}
                   >
                     Eventos
                   </button>
@@ -178,7 +183,7 @@ const Navbar = () => {
           <div className="d-flex justify-content-end">
             <button
               className="btn btn-warning btn-outline-dark me-2"
-              onClick={() => redirectSection('/publish')}
+              onClick={redirectPublish}
             >
               Publicar
             </button>

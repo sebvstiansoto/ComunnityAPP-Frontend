@@ -20,18 +20,18 @@ import { AnadirFavoritos } from "./components/AnadirFavoritos";
 
 
 const router = createBrowserRouter([
-  { path: "/events/", element: <EventsPage /> },
-  { path: "/health", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
-  { path: "/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
-  { path: "/login", element: <LoginPage />},
-  { path: "/notices", element: <NoticesPage />},
+  { path: "/events/:id", element: <EventsPage /> },
+  { path: "/health/:id", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
+  { path: "/home/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
+  { path: "/", element: <LoginPage />},
+  { path: "/notices/:id", element: <NoticesPage />},
   { path: "/profile/:id", element: <ProfilePage />},
-  { path: "/publish", element: <PublishPage />},
+  { path: "/publish/:id", element: <PublishPage />},
   { path: "/changepass", element: <ChangePassword/>},
   { path: "/recovery", element: <RecoveryPage />},
   { path: "/register", element: <RegisterPage />},
-  { path: "/services/", element: <ServicesPage />},
-  { path: "/notificaciones/", element: <Notificaciones />},
+  { path: "/services/:id", element: <ServicesPage />},
+  { path: "/notificaciones/:id", element: <Notificaciones />},
   { path: "/favorites/:id", element: <Favorites />},
   { path: "/anadir/:id", element: <AnadirFavoritos />},
 ]);

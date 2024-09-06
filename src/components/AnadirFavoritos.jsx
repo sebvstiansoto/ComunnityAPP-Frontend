@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/AnadirFavoritos.css'
+import '../styles/AnadirFavoritos.css';
 
-export function AnadirFavoritos() {
+export function AnadirFavoritos({ id_publicacion }) {
     const params = useParams(); // Asegúrate de que id_usuario venga de la URL
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [idPublicacion, setIdPublicacion] = useState(); // Asegúrate de obtener el valor de idPublicacion
 
     // Funciones para manejar los cambios
     function changeTitulo(e) {
@@ -19,8 +18,8 @@ export function AnadirFavoritos() {
 
     // Función para enviar los datos al backend
     function sendData() {
-        // Verifica que idPublicacion no esté vacío antes de hacer la solicitud
-        if (!idPublicacion) {
+        // Verifica que id_publicacion esté definido antes de hacer la solicitud
+        if (!id_publicacion) {
             console.error("El id de la publicación no está definido");
             return;
         }
@@ -32,9 +31,7 @@ export function AnadirFavoritos() {
             },
             body: JSON.stringify({
                 id_usuario: params.id, // id_usuario viene de la URL
-                id_publicacion: idPublicacion,  // Asegúrate de enviar idPublicacion
-                titulo: titulo,
-                descripcion: descripcion,
+                id_publicacion: id_publicacion,  // id_publicacion es pasado como prop
             }),
         })
         .then((response) => response.json())
@@ -43,7 +40,7 @@ export function AnadirFavoritos() {
         })
         .catch((error) => {
             console.error("Error al añadir favorito:", error);
-        });  
+        });
     }
 
     return (
@@ -64,7 +61,7 @@ export function AnadirFavoritos() {
                         onChange={changeDescripcion} 
                     />
                 </label>
-                <button onClick={sendData}>Añadir</button>
+                <button onClick={sendData}>Añadir a Favoritos</button>
             </div>
         </div>
     );

@@ -30,12 +30,6 @@ export function Favorites() {
       <Navbar />
         <div>
           <h1>Favoritos</h1>
-          {favorites.map((favorite, index) => (
-            <div key={index}>
-              <h3>{favorite.id_publicacion}</h3>
-              <p>{favorite.descripcion}</p>
-            </div>
-          ))}
         </div>
       <Footer />
     </React.Fragment>
