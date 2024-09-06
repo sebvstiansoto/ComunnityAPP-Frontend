@@ -71,7 +71,6 @@ export function RecoveryPage() {
                     </div>
                 </div>
             </div>
-            {/* Incluye el Footer aquí */}
             <Footer />
         </div>
     );

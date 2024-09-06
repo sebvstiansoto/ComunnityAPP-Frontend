@@ -17,23 +17,21 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { Notificaciones } from "./components/Notificaciones";
 import { Favorites } from "./components/Favorites";
 
-
-
 const router = createBrowserRouter([
   { path: "/events", element: <EventsPage /> },
-  { path: "/health", element: <HealthPage />},
-  { path: "/", element: <HomePage />},
-  { path: "/login", element: <LoginPage />},
-  { path: "/news", element: <NewsPage />},
-  { path: "/notices", element: <NoticesPage />},
-  { path: "/profile/:id", element: <ProfilePage />},
-  { path: "/publish", element: <PublishPage />},
-  { path: "/changepass", element: <ChangePassword/>},
-  { path: "/recovery", element: <RecoveryPage />},
-  { path: "/register", element: <RegisterPage />},
-  { path: "/services", element: <ServicesPage />},
-  { path: "/notificaciones", element: <Notificaciones />},
-  { path: "/favorites", element: <Favorites />},
+  { path: "/health", element: <HealthPage /> },
+  { path: "/", element: <HomePage /> },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/news", element: <NewsPage /> },
+  { path: "/notices", element: <NoticesPage /> },
+  { path: "/profile/:id", element: <ProfilePage /> },
+  { path: "/publish", element: <PublishPage /> },
+  { path: "/changepass", element: <ChangePassword /> },
+  { path: "/recovery", element: <RecoveryPage /> },
+  { path: "/register", element: <RegisterPage /> },
+  { path: "/services", element: <ServicesPage /> },
+  { path: "/notificaciones", element: <Notificaciones /> },
+  { path: "/favorites", element: <Favorites /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

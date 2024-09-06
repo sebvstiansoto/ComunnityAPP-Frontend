@@ -36,7 +36,6 @@ const Footer = () => {
                     </a>
                 </div>
 
-                {/* Modal Preguntas Frecuentes */}
                 <div className="modal fade" id="faqModal" tabIndex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -63,7 +62,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Modal Políticas de Privacidad */}
                 <div className="modal fade" id="privacyModal" tabIndex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -73,7 +71,6 @@ const Footer = () => {
                             </div>
                             <div className="modal-body">
                                 <p>Aquí va el texto de las políticas de privacidad. Puedes incluir toda la información legal necesaria.</p>
-                                {/* Agrega más contenido sobre políticas de privacidad aquí */}
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -82,7 +79,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Enlace de contacto */}
                 <div className="text-center mt-3">
                     <a href="mailto:comunidapp.4geek@gmail.com" className="text-primary">
                         Comunicate con Comunidapp

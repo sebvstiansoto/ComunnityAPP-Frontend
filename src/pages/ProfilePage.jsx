@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./ProfilePage.css";
+import "../styles/ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
-  const params = useParams(); // Se captura el id del usuario /profile/:id
+  const params = useParams();
 
   const [username, setUsername] = useState("");
   const [biografia, setBiografia] = useState("");
@@ -97,7 +97,6 @@ export function ProfilePage() {
   }
 
   function closeModalWithoutSaving() {
-    // Reset to original values
     setBiografia(originalBiografia);
     setFotoPerfilPreview(originalFotoPerfil);
     setBanner(originalBanner);
@@ -234,7 +233,6 @@ export function ProfilePage() {
         </div>
       </div>
       <div className="App">
-        {/* Otros componentes y contenido */}
         <Footer />
       </div>
     </>

@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
-import Clock from 'react-clock';  
-import 'react-clock/dist/Clock.css';  
+import Clock from 'react-clock';
+import 'react-clock/dist/Clock.css';
 import Footer from '../components/Footer.jsx';
-import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
 
 export function HomePage() {
     const [publicaciones, setPublicaciones] = useState([]);
@@ -46,14 +45,6 @@ export function HomePage() {
             <Navbar />
             <main
                 className="mt-5 pt-5"
-                style={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    width: '100%',
-                    minHeight: '100vh',
-                    color: 'black', // Ajusta el color del texto para que sea legible
-                }}
             >
                 <div className="container">
                     <div className="row">
