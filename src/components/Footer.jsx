@@ -34,7 +34,6 @@ const Footer = () => {
                     </a>
                 </div>
 
-                {/* Modal Preguntas Frecuentes */}
                 <div className="modal fade" id="faqModal" tabIndex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -61,7 +60,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Modal Políticas de Privacidad */}
                 <div className="modal fade" id="privacyModal" tabIndex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -70,8 +68,37 @@ const Footer = () => {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <p>Aquí va el texto de las políticas de privacidad. Puedes incluir toda la información legal necesaria.</p>
-                                {/* Agrega más contenido sobre políticas de privacidad aquí */}
+                                <h5>Política de Privacidad</h5>
+
+                                <h6>1. Recopilación de Datos</h6>
+                                <p>En Comunidapp, recopilamos tu nombre, correo electrónico, número de teléfono y otros datos opcionales para ofrecerte una experiencia personalizada.</p>
+
+                                <h6>2. Uso de la Información</h6>
+                                <p>Utilizamos tu información para:</p>
+                                <ul>
+                                    <li>Gestionar tu cuenta.</li>
+                                    <li>Mejorar nuestros servicios.</li>
+                                    <li>Comunicarnos contigo.</li>
+                                    <li>Garantizar la seguridad de la plataforma.</li>
+                                </ul>
+
+                                <h6>3. Compartición de Datos</h6>
+                                <p>Tu información puede ser compartida con otros usuarios de la plataforma para facilitar la interacción. No compartimos tus datos con terceros externos, salvo por motivos legales.</p>
+
+                                <h6>4. Seguridad</h6>
+                                <p>Implementamos medidas de seguridad para proteger tu información, pero ninguna transmisión de datos es completamente segura.</p>
+
+                                <h6>5. Tus Derechos</h6>
+                                <p>Puedes acceder, corregir o eliminar tu información personal en cualquier momento. Contáctanos si deseas ejercer estos derechos.</p>
+
+                                <h6>6. Retención de Datos</h6>
+                                <p>Mantendremos tus datos mientras uses nuestro servicio o según lo exijan las leyes aplicables.</p>
+
+                                <h6>7. Cambios a la Política</h6>
+                                <p>Nos reservamos el derecho a modificar esta política. Te notificaremos sobre cambios importantes publicando la nueva versión en la plataforma.</p>
+
+                                <h6>8. Contacto</h6>
+                                <p>Si tienes preguntas sobre esta política, escríbenos a <a href="mailto:comunidapp.4geek@gmail.com">comunidapp.4geek@gmail.com</a>.</p>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -80,7 +107,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Enlace de contacto */}
                 <div className="text-center mt-3">
                     <a href="mailto:comunidapp.4geek@gmail.com" className="text-primary">
                         Comunicate con Comunidapp

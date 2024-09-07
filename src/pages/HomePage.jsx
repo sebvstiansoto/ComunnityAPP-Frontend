@@ -38,14 +38,6 @@ export function HomePage() {
             <Navbar />
             <main
                 className="mt-5 pt-5"
-                style={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    width: '100%',
-                    minHeight: '100vh',
-                    color: 'black', // Ajusta el color del texto para que sea legible
-                }}
             >
                 <div className="container">
                     <div className="row">

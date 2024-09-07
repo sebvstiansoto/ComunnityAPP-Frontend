@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer.jsx";
 
 export function RegisterPage() {
@@ -64,7 +64,7 @@ export function RegisterPage() {
                 }
                 return response.json();
             })
-            .then((responseConverted) => {
+            .then(() => {
                 navigate("/login");
             })
             .catch((error) => {
@@ -75,7 +75,7 @@ export function RegisterPage() {
     return (
         <>
             <div className="d-flex justify-content-center m-3 p-3 text-success-emphasis">
-                <h1 className="text-success fw-bold">Regístrate en Comunidapp</h1>
+                <h1 className="text-success-emphasis fw-bold">Regístrate en Comunidapp</h1>
             </div>
             <div className="d-flex justify-content-center m-3 p-3">
                 <form className="row g-3" onSubmit={sendData}>
@@ -142,18 +142,20 @@ export function RegisterPage() {
                             onChange={changePhone}
                         />
                     </div>
-                    <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="invalidCheck2"
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                            required
-                        />
-                        <label className="form-check-label" htmlFor="invalidCheck2">
-                            Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">términos y condiciones</a>
-                        </label>
+                    <div className="col-md-6 mt-5 d-flex align-items-center">
+                        <div className="form-check">
+                            <input
+                                className="border border-success form-check-input"
+                                type="checkbox"
+                                id="invalidCheck2"
+                                checked={isChecked}
+                                onChange={handleCheckboxChange}
+                                required
+                            />
+                            <label className="form-check-label ms-2" htmlFor="invalidCheck2">
+                                Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">términos y condiciones</a>
+                            </label>
+                        </div>
                     </div>
                     <div className="col-12 text-center">
                         <button className="btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>
@@ -184,23 +186,19 @@ export function RegisterPage() {
                                 <li>Notificarte sobre cambios en nuestro servicio.</li>
                                 <li>Proporcionar soporte al cliente.</li>
                                 <li>Recopilar análisis o información valiosa para mejorar nuestro servicio.</li>
-                                <li>Enviar correos electrónicos promocionales relacionados con Comunidapp.</li>
                             </ul>
 
                             <h6>4. Compartición de la Información</h6>
                             <p>Con el fin de ofrecerte un servicio completo y mejorar la comunicación, tu información personal, como tu correo electrónico, nombre de usuario y número de teléfono, puede ser compartida con otros usuarios de Comunidapp. Esto es necesario para facilitar la interacción entre usuarios y para cumplir con el propósito del servicio.</p>
 
-                            <h6>5. Seguridad de la Información</h6>
-                            <p>Implementamos medidas de seguridad para proteger tu información personal. Sin embargo, no podemos garantizar una seguridad absoluta, ya que ningún método de transmisión a través de Internet o método de almacenamiento electrónico es 100% seguro.</p>
-
-                            <h6>6. Derechos del Usuario</h6>
+                            <h6>5. Derechos del Usuario</h6>
                             <p>Tienes el derecho a acceder, corregir o eliminar tu información personal en cualquier momento. Para realizar cualquier cambio en tu información, por favor, contacta con nuestro equipo de soporte.</p>
 
-                            <h6>7. Cambios en los Términos</h6>
+                            <h6>6. Cambios en los Términos</h6>
                             <p>Podemos actualizar nuestros términos y condiciones en cualquier momento. Te notificaremos sobre cualquier cambio mediante la publicación de los nuevos términos en nuestra aplicación. Te recomendamos revisar esta página periódicamente para estar al tanto de cualquier cambio.</p>
 
-                            <h6>8. Contacto</h6>
-                            <p>Si tienes alguna pregunta sobre estos términos, por favor, contáctanos en [tu dirección de correo electrónico de soporte].</p>
+                            <h6>7. Contacto</h6>
+                            <p>Si tienes alguna pregunta sobre estos términos, por favor, contáctanos en <a href="mailto:comunidapp.4geek@gmail.com">comunidapp.4geek@gmail.com</a></p>
                         </div>
 
                         <div className="modal-footer">

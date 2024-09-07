@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./ProfilePage.css";
+import "../styles/ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
-  const params = useParams(); // Se captura el id del usuario /profile/:id
+  const params = useParams();
 
   const [username, setUsername] = useState("");
   const [biografia, setBiografia] = useState("");
@@ -96,7 +96,6 @@ export function ProfilePage() {
   }
 
   function closeModalWithoutSaving() {
-    // Reset to original values
     setBiografia(originalBiografia);
     setFotoPerfilPreview(originalFotoPerfil);
     setBanner(originalBanner);
@@ -119,20 +118,20 @@ export function ProfilePage() {
           src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
       </div>
 
-      <div className="container mt-5">
+      <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-md-3 text-center profile-container">
             <img
               src={fotoPerfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
               alt="Profile Picture"
-              className="profile-image"
+              className="profile-image border border-success"
             />
             <h2>{username}</h2>
             <h5>{email}</h5>
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
-              <h2 className="text-success fw-bold">Biografía</h2>
+              <h2 className="text-success-emphasis fw-bold">Biografía</h2>
               <button
                 className="btn btn-warning btn-outline-dark"
                 data-bs-toggle="modal"
@@ -242,7 +241,6 @@ export function ProfilePage() {
         </div>
       </div>
       <div className="App">
-        {/* Otros componentes y contenido */}
         <Footer />
       </div>
     </>
