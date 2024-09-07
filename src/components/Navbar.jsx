@@ -32,7 +32,7 @@ const Navbar = () => {
   }
 
   function redirectHome() {
-    navigate('/home/' + params.id);
+    navigate('/' + params.id);
   }
 
   function handleLogout() {
@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary fixed-top">
+      <nav className="navbar bg-body-tertiary fixed-top rounded-3">
         <div className="container-fluid">
           <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
 
@@ -77,14 +77,13 @@ const Navbar = () => {
               id="btnradio5"
               autoComplete="off"
               checked={selectedButton === 'home'}
-              onChange={() => setSelectedButton('home')}
               onClick={redirectHome}
             />
             <label
-              className={`btn ${selectedButton === 'home' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio5"
             >
-              <img width="20px" height="20px" src={homeIcon} alt="Home" />
+              <img width="25px" height="25px" src={homeIcon} alt="Home" />
             </label>
 
             {/* Resto de los botones */}
@@ -97,10 +96,10 @@ const Navbar = () => {
               onClick={redirectProfile}
             />
             <label
-              className={`btn ${selectedButton === 'profile' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio1"
             >
-              <img width="20px" height="20px" src={profileUser} alt="Profile" />
+              <img width="25px" height="25px" src={profileUser} alt="Profile" />
             </label>
 
             <input
@@ -112,10 +111,10 @@ const Navbar = () => {
               onClick={redirectFavorites}
             />
             <label
-              className={`btn ${selectedButton === 'favorites' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio3"
             >
-              <img width="20px" height="20px" src={tagIcon} alt="Tag" />
+              <img width="25px" height="25px" src={tagIcon} alt="Tag" />
             </label>
 
             <input
@@ -127,21 +126,21 @@ const Navbar = () => {
               onClick={redirectNotification}
             />
             <label
-              className={`btn ${selectedButton === 'notification' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio4"
             >
-              <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
+              <img width="25px" height="25px" src={bellIcon} alt="Notifications" />
             </label>
 
             {/* Botón con dropdown */}
             <div className="btn-group">
               <button
                 type="button"
-                className={`btn ${selectedButton === '/notices' || selectedButton === '/health' || selectedButton === '/services' || selectedButton === '/events' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
+                className="btn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img width="20px" height="20px" src={post} alt="Post" />
+                <img width="25px" height="25px" src={post} alt="Post" />
               </button>
               <ul className="dropdown-menu">
                 <li>

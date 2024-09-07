@@ -1,23 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'
-import 'react-clock/dist/Clock.css';  
+import 'react-calendar/dist/Calendar.css';
 import Footer from '../components/Footer.jsx';
 import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
-import 'react-calendar/dist/Calendar.css';
 import WeatherComponent from '../components/Clima.jsx';
 
-
-
 export function HomePage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [publicaciones, setPublicaciones] = useState([]);
     const [calendarEvents, setCalendarEvents] = useState([]);
     const [currentTime, setCurrentTime] = useState(new Date());
     const calendarRef = useRef(null);
     const [value, onChange] = useState(new Date());
 
+    // Mover la lógica de redireccionamiento a useEffect
+    useEffect(() => {
+        if (!id) {
+            navigate("/login");
+        }
+    }, [id, navigate]);  // Este useEffect se ejecuta solo si id cambia
 
     useEffect(() => {
         // Obtener publicaciones
@@ -72,7 +77,3 @@ export function HomePage() {
         </React.Fragment>
     );
 }
-
-
-
-

@@ -87,14 +87,15 @@ export function Publicacion({ publicacion }) {
 
     return (
         <div
-            className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "500px" }} // Definimos el tamaño cuadrado de 500x500
+            className="card m-auto d-flex justify-content-center "
+            style={{ width: "70%", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-                    <h5 className="card-title">{publicacion.nombre_usuario}</h5>
-                    <h4 className="card-title">{publicacion.titulo}</h4>
-                    <p className="card-text">{publicacion.descripcion}</p>
+
+                    <h4 className="card-title fw-bold fs-2">{publicacion.titulo}</h4>
+                    <h5 className="card-title fs-6 fst-italic">{publicacion.nombre_usuario}</h5>
+                    <p className="card-text p-2 border-opacity-10 fs-6">{publicacion.descripcion}</p>
                 </div>
                 <div className="row">
                     <div className="col-12">

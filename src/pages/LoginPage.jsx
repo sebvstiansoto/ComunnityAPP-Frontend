@@ -47,7 +47,7 @@ export function LoginPage() {
         } else {
           localStorage.setItem("username", responseConverted.username);
           localStorage.setItem("id_usuario", responseConverted.id_usuario);
-          navigate("/home/" + responseConverted.id_usuario);
+          navigate("/" + responseConverted.id_usuario);
         }
       })
       .catch((error) => {

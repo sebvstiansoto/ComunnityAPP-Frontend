@@ -1,48 +1,43 @@
-
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; 
 import Navbar from "../components/Navbar.jsx";
 
-export function Notificaciones() {
-  const navigate = useNavigate();
+function tiempoTranscurrido(fecha) {
+  const fechaNotificacion = new Date(fecha);
+  const ahora = new Date();
+  const diferencia = ahora - fechaNotificacion;
+  const minutos = Math.floor(diferencia / (1000 * 60));
+  const horas = Math.floor(diferencia / (1000 * 60 * 60));
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  
+  if (minutos < 60) {
+    return `${minutos} minutos`;
+  } else if (horas < 24) {
+    return `${horas} horas`;
+  } else {
+    return `${dias} días`;
+  }
+}
 
+
+
+export function Notificaciones() {
+  const params = useParams();  // Obtener el id de los parámetros de la URL
   const [notificaciones, setNotificaciones] = useState([]);
 
-
   useEffect(() => {
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones")
+    fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + params.id)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
+          return response.json();
       })
-      .then((data) => {
-        setNotificaciones(data.notificaciones); 
+      .then((responseConverted) => {
+        setNotificaciones(responseConverted);
+        console.log(responseConverted)  // Guardar las notificaciones en el estado
       })
       .catch((error) => {
-        console.error("Error al obtener notificaciones:", error);
-      });
-  }, []);
-
-  // Función para calcular el tiempo transcurrido desde un comentario
-  function tiempoTranscurrido(fechaComentario) {
-    const ahora = new Date();
-    const fecha = new Date(fechaComentario);
-    const diferencia = ahora - fecha;
-
-    const segundos = Math.floor(diferencia / 1000);
-    const minutos = Math.floor(segundos / 60);
-    const horas = Math.floor(minutos / 60);
-
-    if (horas > 0) {
-      return `Hace ${horas} hora${horas > 1 ? 's' : ''}`;
-    } else if (minutos > 0) {
-      return `Hace ${minutos} minuto${minutos > 1 ? 's' : ''}`;
-    } else {
-      return `Hace ${segundos} segundo${segundos > 1 ? 's' : ''}`;
-    }
-  }
+        console.error(error);
+      })
+  }, []); // Asegúrate de agregar params.id como dependencia
 
   return (
     <React.Fragment>
@@ -54,7 +49,7 @@ export function Notificaciones() {
               {notificaciones.map((notificacion, index) => (
                 <li key={index} className="list-group-item p-3 d-flex justify-content-between">
                   <p className="m-0">
-                    {notificacion.usuario} {notificacion.texto}
+                    {notificacion.nombre_usuariop} {notificacion.titulo}
                     <a className="text-success" href="">
                       publicación
                     </a>

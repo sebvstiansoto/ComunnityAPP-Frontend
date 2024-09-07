@@ -22,8 +22,8 @@ import { AnadirFavoritos } from "./components/AnadirFavoritos";
 const router = createBrowserRouter([
   { path: "/events/:id", element: <EventsPage /> },
   { path: "/health/:id", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
-  { path: "/home/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
-  { path: "/", element: <LoginPage />},
+  { path: "/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
+  { path: "/login", element: <LoginPage />},
   { path: "/notices/:id", element: <NoticesPage />},
   { path: "/profile/:id", element: <ProfilePage />},
   { path: "/publish/:id", element: <PublishPage />},
