@@ -18,7 +18,7 @@ export function Publicacion({ publicacion }) {
     const [comentario, setComentario] = useState("");
     const [telefono, setTelefono] = useState("");
     const [infoUsuario, setInfoUsuario] = useState("");
-    const [showModal, setShowModal] = useState(false); // Estado para mostrar el modal
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         getUserInfo();
@@ -29,6 +29,30 @@ export function Publicacion({ publicacion }) {
             .then((response) => response.json())
             .then((responseConverted) => {
                 setInfoUsuario(responseConverted);
+            });
+    }
+
+    function sendNotification(e) {
+        e.preventDefault();
+        const userId = localStorage.getItem('id_usuario');
+        const publicacionId = publicacion.id_publicacion;
+
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/' + params.id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_usuario: parseInt(userId), 
+                id_publicacion: publicacionId, 
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log(responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al enviar notificación:", error);
             });
     }
 
@@ -43,27 +67,33 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), // id_usuario viene de la URL
-                id_publicacion: publicacionId,  // id_publicacion es pasado como prop
+                id_usuario: parseInt(userId), 
+                id_publicacion: publicacionId,  
             }),
         })
         .then((response) => response.json())
         .then((responseConverted) => {
-            alert("Favorito guardado correctamente"); // Cambiar a modal
         })
         .catch((error) => {
             console.error("Error al añadir favorito:", error);
         });
     }
 
+    function handleAddToFavorites(e) {
+        e.preventDefault();
+        sendData();           
+        sendNotification();  
+    }
+
+
+
     function handleSaveFavorite() {
         const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
         const nuevaListaFavoritos = [...favoritos, publicacion];
         localStorage.setItem("favoritos", JSON.stringify(nuevaListaFavoritos));
-        setShowModal(true); // Mostrar modal al guardar la publicación
+        setShowModal(true); 
     }
 
-    // Función para calcular el tiempo transcurrido desde la publicación
     function tiempoTranscurrido(fechaPublicacion) {
         const ahora = new Date();
         const fecha = new Date(fechaPublicacion);
@@ -87,20 +117,30 @@ export function Publicacion({ publicacion }) {
 
     return (
         <div
-            className="card m-auto d-flex justify-content-center "
-            style={{ width: "70%", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
+            className="card mb-4 d-flex justify-content-center  "
+            style={{ width: "70%", height: "auto" }} 
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
 
-                    <h4 className="card-title fw-bold fs-2">{publicacion.titulo}</h4>
-                    <h5 className="card-title fs-6 fst-italic">{publicacion.nombre_usuario}</h5>
-                    <p className="card-text p-2 border-opacity-10 fs-6">{publicacion.descripcion}</p>
+                    <h4 className="card-title fw-bold" style={{
+                        fontSize: "1.5rem"
+                    }}>{publicacion.titulo}</h4>
+
+                    <h5 className="card-title fst-italic" style={{
+                        fontSize: "0.8rem"
+                    }}>@{publicacion.nombre_usuario}</h5>
+
+                    <p className="card-text p-2 border-opacity-10" style={{
+                        fontSize: "0.9rem"
+                    }}>{publicacion.descripcion}</p>
                 </div>
                 <div className="row">
                     <div className="col-12">
                         <p className="card-text mb-3">
-                            <small className="text-body-secondary">
+                            <small className="text-body-secondary"  style={{
+                        fontSize: "0.6rem"
+                    }}>
                                 {tiempoTranscurrido(publicacion.hora_publicado)}
                             </small>
                         </p>
@@ -110,13 +150,13 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={sendData}
+                            onClick={handleSaveFavorite}
                             alt="Guardar Publicación"
                             title="Anadir a Favoritos"
                         >
                             <img
-                                width="20px"
-                                height="20px"
+                                width="15px"
+                                height="15px"
                                 src="/src/assets/tag.png"
                                 alt="Valoración"
                             />
@@ -128,8 +168,8 @@ export function Publicacion({ publicacion }) {
                             data-bs-target="#valoracionModal"
                         >
                             <img
-                                width="20px"
-                                height="20px"
+                                width="15px"
+                                height="15px"
                                 src="/src/assets/star.png"
                                 alt="Valoración"
                             />
@@ -157,7 +197,7 @@ export function Publicacion({ publicacion }) {
                                         ></button>
                                     </div>
                                     <div className="modal-body">
-                                        < AnadirFavoritos id_publicacion={publicacion.id} />
+                                        < AnadirFavoritos id_publicacion={publicacion.id}/>
                                     </div>
                                     <div className="modal-footer">
                                         <button
@@ -269,10 +309,10 @@ export function Publicacion({ publicacion }) {
                         )}
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
+                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
                             <img
-                                width="20px"
-                                height="20px"
+                                width="15px"
+                                height="15px"
                                 src="/src/assets/whatsapp (3).png"
                                 alt="WhatsApp"
                             />

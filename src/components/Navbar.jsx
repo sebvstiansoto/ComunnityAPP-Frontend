@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary fixed-top rounded-3">
+      <nav id="navbar" className="navbar bg-body-tertiary  fixed-top rounded-3" style={{}}>
         <div className="container-fluid">
           <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
 
@@ -83,7 +83,7 @@ const Navbar = () => {
               className="btn"
               htmlFor="btnradio5"
             >
-              <img width="25px" height="25px" src={homeIcon} alt="Home" />
+              <img width="20px" height="20px" src={homeIcon} alt="Home" />
             </label>
 
             {/* Resto de los botones */}
@@ -99,7 +99,7 @@ const Navbar = () => {
               className="btn"
               htmlFor="btnradio1"
             >
-              <img width="25px" height="25px" src={profileUser} alt="Profile" />
+              <img width="20px" height="20px" src={profileUser} alt="Profile" />
             </label>
 
             <input
@@ -114,7 +114,7 @@ const Navbar = () => {
               className="btn"
               htmlFor="btnradio3"
             >
-              <img width="25px" height="25px" src={tagIcon} alt="Tag" />
+              <img width="20px" height="20px" src={tagIcon} alt="Tag" />
             </label>
 
             <input
@@ -129,7 +129,7 @@ const Navbar = () => {
               className="btn"
               htmlFor="btnradio4"
             >
-              <img width="25px" height="25px" src={bellIcon} alt="Notifications" />
+              <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
             </label>
 
             {/* Botón con dropdown */}
@@ -140,7 +140,7 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img width="25px" height="25px" src={post} alt="Post" />
+                <img width="20px" height="20px" src={post} alt="Post" />
               </button>
               <ul className="dropdown-menu">
                 <li>
@@ -183,12 +183,15 @@ const Navbar = () => {
             <button
               className="btn btn-warning btn-outline-dark me-2"
               onClick={redirectPublish}
+              style={{
+                fontSize: "0.8rem"
+            }}
             >
               Publicar
             </button>
 
             <button className="btn btn-danger" onClick={handleLogout}>
-              <img width="20px" height="20px" src={powerIcon} alt="Logout" />
+              <img width="15px" height="15px" src={powerIcon} alt="Logout" />
             </button>
 
           </div>

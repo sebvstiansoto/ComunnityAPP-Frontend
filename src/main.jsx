@@ -16,6 +16,7 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { Notificaciones } from "./components/Notificaciones";
 import { Favorites } from "./components/Favorites";
 import { AnadirFavoritos } from "./components/AnadirFavoritos";
+import { PublicacionPage } from "./pages/PublicacionPage";
 
 
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   { path: "/health/:id", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
   { path: "/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
   { path: "/login", element: <LoginPage />},
+  { path: "/", element: <HomePage />},    
   { path: "/notices/:id", element: <NoticesPage />},
   { path: "/profile/:id", element: <ProfilePage />},
   { path: "/publish/:id", element: <PublishPage />},
@@ -34,6 +36,8 @@ const router = createBrowserRouter([
   { path: "/notificaciones/:id", element: <Notificaciones />},
   { path: "/favorites/:id", element: <Favorites />},
   { path: "/anadir/:id", element: <AnadirFavoritos />},
+  { path: "/publicacion/:id", element: <PublicacionPage/>},
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

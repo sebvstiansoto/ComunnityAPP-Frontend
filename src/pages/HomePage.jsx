@@ -60,11 +60,6 @@ export function HomePage() {
                             ))}
                         </div>
                         <div className="col-md-4">
-                            <div style={{ 
-                                height: '20vh',
-                             }}>
-                            </div>
-
                             <div className="calendar-container w-75 pt-10">
                                 <Calendar onChange={onChange} value={value} />
                             </div>

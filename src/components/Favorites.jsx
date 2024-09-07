@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Favorites.css'
@@ -11,8 +11,8 @@ const formatearFecha = (fechaPublicacion) => {
 };
 
 export function Favorites() {
-  // Estado para almacenar las publicaciones favoritas
   const params = useParams();
+  const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -27,25 +27,60 @@ export function Favorites() {
       .catch((error) => {
         console.error("Error fetching favoritos:", error);
       });
-  },[])
+  }, [params.id]); // Incluye params.id para que se actualice cuando cambie
 
-  // Renderizar las publicaciones guardadas
+  const handleClick = (id_publicacion) => {
+    navigate(`/publicacion/${id_publicacion}`); // Redirigir a la ruta de la publicación
+  };
+
   return (
     <React.Fragment>
       <Navbar />
       <div className='container'>
-        <h1>Publicaciones Favoritas</h1>
+        <h1 style={{
+          fontSize: '2rem',
+          marginBottom: '2rem',
+          marginTop: '2rem'
+        }}><strong>Favoritos</strong></h1>
         {favorites.length === 0 ? (
           <p>No hay publicaciones favoritas.</p>
         ) : (
           favorites.map((publicacion, index) => (
-            <div key={index} className='card mb-3'>
+            <div
+              key={index}
+              className='card mb-3'
+              onClick={() => handleClick(publicacion.id_publicacion)} // Escuchar el click y redirigir con el id correcto
+              style={{ cursor: 'pointer' }} // Cambiar el cursor al pasar sobre la card
+            >
               <div className='card-body'>
-                <h2>{publicacion.titulo}</h2>
-                <p><strong>Usuario:</strong> {publicacion.nombre_usuario}</p>
-                <p><strong>Teléfono:</strong> {publicacion.telefono}</p>
-                <p><strong>Fecha de publicación:</strong> {formatearFecha(publicacion.hora_publicado)}</p>
+                <p style={{
+                  fontSize: '0.7rem',
+                }}><strong>@</strong> {publicacion.nombre_usuario}</p>
+
+                <h2 style={{
+                  fontSize: '1.6rem',
+                }}>{publicacion.titulo}</h2>
+
+                <p style={{
+                  fontSize: '0.8rem',
+                }}>
+                  <strong>Descripcion: </strong> {publicacion.descripcion}</p>
+
+                <p style={{
+                  fontSize: '0.7rem',
+                }}>
+                  <strong>Publicado el {formatearFecha(publicacion.hora_publicado)}</strong></p>
+                
               </div>
+              <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
+                            <img
+                                width="15px"
+                                height="15px"
+                                src="/src/assets/whatsapp (3).png"
+                                alt="WhatsApp"
+                            />
+                        </a>
+              
             </div>
           ))
         )}

@@ -1,66 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
-import Navbar from "../components/Navbar.jsx";
-
-function tiempoTranscurrido(fecha) {
-  const fechaNotificacion = new Date(fecha);
-  const ahora = new Date();
-  const diferencia = ahora - fechaNotificacion;
-  const minutos = Math.floor(diferencia / (1000 * 60));
-  const horas = Math.floor(diferencia / (1000 * 60 * 60));
-  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-  
-  if (minutos < 60) {
-    return `${minutos} minutos`;
-  } else if (horas < 24) {
-    return `${horas} horas`;
-  } else {
-    return `${dias} días`;
-  }
-}
-
-
+import { useParams } from 'react-router-dom';
 
 export function Notificaciones() {
-  const params = useParams();  // Obtener el id de los parámetros de la URL
-  const [notificaciones, setNotificaciones] = useState([]);
+  const params = useParams();
+  const [notificacion, setNotificacion] = useState([]);
 
   useEffect(() => {
-    fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + params.id)
-      .then((response) => {
-          return response.json();
-      })
+    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/" + params.id)
+      .then((response) => response.json())
       .then((responseConverted) => {
-        setNotificaciones(responseConverted);
-        console.log(responseConverted)  // Guardar las notificaciones en el estado
+        setNotificacion(responseConverted); // Guardar las notificaciones en el estado
+        console.log(responseConverted);  
       })
       .catch((error) => {
-        console.error(error);
-      })
-  }, []); // Asegúrate de agregar params.id como dependencia
+        console.error("Error al obtener notificaciones:", error);
+      });
+  }, [params.id]);
 
   return (
-    <React.Fragment>
-      <Navbar />
-      <main className="mt-5 pt-5">
-        <div className="row justify-content-center">
-          <div className="col-6">
-            <ul className="list-group list-group-flush">
-              {notificaciones.map((notificacion, index) => (
-                <li key={index} className="list-group-item p-3 d-flex justify-content-between">
-                  <p className="m-0">
-                    {notificacion.nombre_usuariop} {notificacion.titulo}
-                    <a className="text-success" href="">
-                      publicación
-                    </a>
-                  </p>
-                  <small className="text-muted">{tiempoTranscurrido(notificacion.fecha)}</small>
-                </li>
-              ))}
-            </ul>
+    <div>
+      <h2>Notificaciones</h2>
+      {notificacion.length > 0 ? (
+        notificacion.map((notificacion, index) => (
+          <div key={index} className="notificacion">
+            <h4>{notificacion.nombre_usuario} añadió tu publicación "{notificacion.titulo}" a favoritos</h4>
+            <p>Descripción: {notificacion.descripcion}</p>
+            <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
           </div>
-        </div>
-      </main>
-    </React.Fragment>
+        ))
+      ) : (
+        <p>No tienes notificaciones.</p>
+      )}
+    </div>
   );
 }
