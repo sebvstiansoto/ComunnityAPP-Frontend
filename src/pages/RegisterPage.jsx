@@ -77,9 +77,9 @@ export function RegisterPage() {
             <div className="d-flex justify-content-center m-3 p-3 text-success-emphasis">
                 <h1 className="text-success-emphasis fw-bold">Regístrate en Comunidapp</h1>
             </div>
-            <div className="d-flex justify-content-center m-3 p-3">
+            <div className="d-flex justify-content-center  m-3 p-3">
                 <form className="row g-3" onSubmit={sendData}>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="validationDefault02" className="form-label fw-semibold">Email</label>
                         <input
                             type="email"
@@ -91,7 +91,7 @@ export function RegisterPage() {
                             onChange={changeEmail}
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="validationDefaultUsername" className="form-label fw-semibold">Username</label>
                         <div className="input-group">
                             <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle" id="inputGroupPrepend2">@</span>
@@ -106,7 +106,7 @@ export function RegisterPage() {
                             />
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="validationDefaultPassword" className="form-label fw-semibold">Password</label>
                         <input
                             type="password"
@@ -118,7 +118,7 @@ export function RegisterPage() {
                             onChange={changePassword}
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="validationDefaultDocument" className="form-label fw-semibold">Número de documento</label>
                         <input
                             type="text"
@@ -130,7 +130,7 @@ export function RegisterPage() {
                             onChange={changeIdentification}
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-6">
                         <label htmlFor="validationDefaultPhone" className="form-label fw-semibold">Teléfono</label>
                         <input
                             type="tel"
@@ -142,7 +142,7 @@ export function RegisterPage() {
                             onChange={changePhone}
                         />
                     </div>
-                    <div className="col-md-6 mt-5 d-flex align-items-center">
+                    <div className="col-6 mt-5 d-flex align-items-center">
                         <div className="form-check">
                             <input
                                 className="border border-success form-check-input"
