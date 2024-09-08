@@ -11,6 +11,7 @@ const WeatherComponent = () => {
         unit: 'M', // Unidades en métricas (Celsius y Km/h)
     });
 
+
     return (
         <div className='pt-5 w-75'>
             <ReactWeather
