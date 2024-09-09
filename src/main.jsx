@@ -18,8 +18,6 @@ import { Favorites } from "./components/Favorites";
 import { AnadirFavoritos } from "./components/AnadirFavoritos";
 import { PublicacionPage } from "./pages/PublicacionPage";
 
-
-
 const router = createBrowserRouter([
   { path: "/events/:id", element: <EventsPage /> },
   { path: "/health/:id", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
