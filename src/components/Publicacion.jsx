@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx";
 import { AnadirFavoritos } from "./AnadirFavoritos.jsx";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -148,28 +149,21 @@ export function Publicacion({ publicacion }) {
                             className="btn btn-outline-warning"
                             onClick={sendData}
                             alt="Guardar Publicación"
-                            title="Anadir a Favoritos"
+                            title="Añadir a Favoritos"
                         >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/tag.png"
-                                alt="Valoración"
-                            />
+                            <i className="bi bi-bookmark-heart-fill text-dark"></i> {/* Tamaño ajustado con style */}
                         </button>
+
+
                         <button
                             type="button"
                             className="btn btn-outline-warning"
                             data-bs-toggle="modal"
                             data-bs-target="#valoracionModal"
                         >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/star.png"
-                                alt="Valoración"
-                            />
+                            <i className="bi bi-star-fill text-dark "></i>
                         </button>
+
 
                         {/* Modal de Favoritos */}
                         <div
@@ -306,12 +300,7 @@ export function Publicacion({ publicacion }) {
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/whatsapp (3).png"
-                                alt="WhatsApp"
-                            />
+                            <i class="bi bi-whatsapp"></i>
                         </a>
                     </div>
                 </div>

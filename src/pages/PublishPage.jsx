@@ -120,7 +120,7 @@ export function PublishPage() {
             </div>
             <div className="d-flex justify-content-center m-0">
               <button className="btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData}>
-                <i className="bi bi-check-circle-fill me-2"></i> {/* Icono con margen a la derecha */}
+                <i className="bi bi-check-circle-fill me-2"></i>
                 Publicar
               </button>
             </div>
