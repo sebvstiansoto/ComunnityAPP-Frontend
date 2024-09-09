@@ -1,5 +1,5 @@
 /* Contenedor principal del formulario */
-form {
+/*form {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
@@ -8,91 +8,91 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  
   /* Estilos generales para las etiquetas y entradas */
-  label {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: 500;
-  }
-  
-  input[type="text"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  input[type="text"]:focus,
-  textarea:focus,
-  select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-  }
-  
-  /* Estilo del textarea para que se vea igual al input */
-  textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  /* Estilos del botón de enviar */
-  input[type="submit"] {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-  }
-  
-  input[type="submit"]:active {
-    background-color: #004085;
-    box-shadow: none;
-  }
-  
-  /* Estilos del select */
-  select {
-    appearance: none;
-    background: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggMTBsNCA0IDQtNGgtOHptMC00aDE2djJoLTE2eiIvPjwvc3ZnPg==") no-repeat right 10px center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding-right: 30px;
-  }
-  
-  select:focus {
-    border-color: #007bff;
-  }
-  
-  /* Estilos generales */
-  h2 {
-    text-align: center;
-    color: #333;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    font-weight: 600;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-  }
-  
+/*label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Estilo del textarea para que se vea igual al input */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Estilos del botón de enviar */
+input[type="submit"] {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+input[type="submit"]:active {
+  background-color: #004085;
+  box-shadow: none;
+}
+
+/* Estilos del select */
+select {
+  appearance: none;
+  background: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggMTBsNCA0IDQtNGgtOHptMC00aDE2djJoLTE2eiIvPjwvc3ZnPg==") no-repeat right 10px center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding-right: 30px;
+}
+
+select:focus {
+  border-color: #007bff;
+}
+
+/* Estilos generales */
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+}

@@ -32,7 +32,7 @@ const Navbar = () => {
   }
 
   function redirectHome() {
-    navigate('/home/' + params.id);
+    navigate('/' + params.id);
   }
 
   function handleLogout() {
@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary fixed-top">
+      <nav id="navbar" className="navbar bg-body-tertiary  fixed-top rounded-3" style={{}}>
         <div className="container-fluid">
           <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
 
@@ -77,11 +77,10 @@ const Navbar = () => {
               id="btnradio5"
               autoComplete="off"
               checked={selectedButton === 'home'}
-              onChange={() => setSelectedButton('home')}
               onClick={redirectHome}
             />
             <label
-              className={`btn ${selectedButton === 'home' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio5"
             >
               <img width="20px" height="20px" src={homeIcon} alt="Home" />
@@ -97,7 +96,7 @@ const Navbar = () => {
               onClick={redirectProfile}
             />
             <label
-              className={`btn ${selectedButton === 'profile' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio1"
             >
               <img width="20px" height="20px" src={profileUser} alt="Profile" />
@@ -112,7 +111,7 @@ const Navbar = () => {
               onClick={redirectFavorites}
             />
             <label
-              className={`btn ${selectedButton === 'favorites' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio3"
             >
               <img width="20px" height="20px" src={tagIcon} alt="Tag" />
@@ -127,7 +126,7 @@ const Navbar = () => {
               onClick={redirectNotification}
             />
             <label
-              className={`btn ${selectedButton === 'notification' ? 'btn-success' : 'btn-outline-success'}`}
+              className="btn"
               htmlFor="btnradio4"
             >
               <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
@@ -137,7 +136,7 @@ const Navbar = () => {
             <div className="btn-group">
               <button
                 type="button"
-                className={`btn ${selectedButton === '/notices' || selectedButton === '/health' || selectedButton === '/services' || selectedButton === '/events' ? 'btn-success' : 'btn-outline-success'} dropdown-toggle`}
+                className="btn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -184,12 +183,15 @@ const Navbar = () => {
             <button
               className="btn btn-warning btn-outline-dark me-2"
               onClick={redirectPublish}
+              style={{
+                fontSize: "0.8rem"
+            }}
             >
               Publicar
             </button>
 
             <button className="btn btn-danger" onClick={handleLogout}>
-              <img width="20px" height="20px" src={powerIcon} alt="Logout" />
+              <img width="15px" height="15px" src={powerIcon} alt="Logout" />
             </button>
 
           </div>

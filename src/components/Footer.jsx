@@ -4,7 +4,7 @@ import footerImage from '../assets/Logo.png';
 const Footer = () => {
     return (
         <footer
-            className="py-3"
+            className="mb-3"
             style={{
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',

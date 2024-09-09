@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx";
 import { AnadirFavoritos } from "./AnadirFavoritos.jsx";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function Publicacion({ publicacion }) {
     const [comentario, setComentario] = useState("");
     const [telefono, setTelefono] = useState("");
     const [infoUsuario, setInfoUsuario] = useState("");
-    const [showModal, setShowModal] = useState(false); // Estado para mostrar el modal
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         getUserInfo();
@@ -32,8 +33,37 @@ export function Publicacion({ publicacion }) {
             });
     }
 
+    function redirectProfile(userId) {
+        navigate(`/profile/${userId}`);
+    }
+
+
+    function sendNotification(e) {
+        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
+        const userId = localStorage.getItem('id_usuario');
+        const publicacionId = publicacion.id_publicacion;
+
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/' + params.id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log(responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al enviar notificación:", error);
+            });
+    }
+
     function sendData(e) {
-        e.preventDefault();
+        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
@@ -43,31 +73,32 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), // id_usuario viene de la URL
-                id_publicacion: publicacionId,  // id_publicacion es pasado como prop
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
             }),
         })
-        .then((response) => response.json())
-        .then((responseConverted) => {
-            alert("Favorito guardado correctamente"); // Cambiar a modal
-        })
-        .catch((error) => {
-            console.error("Error al añadir favorito:", error);
-        });
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log('Favorito añadido', responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al añadir favorito:", error);
+            });
+    }
+
+    function handleAddToFavorites(e) {
+        e.preventDefault(); // Se asegura que el evento pase y se prevenga el comportamiento predeterminado del formulario
+        sendData(e);        // Pasar el evento aquí
+        sendNotification(e); // Pasar el evento aquí
     }
 
     function handleSaveFavorite() {
         const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
         const nuevaListaFavoritos = [...favoritos, publicacion];
         localStorage.setItem("favoritos", JSON.stringify(nuevaListaFavoritos));
-        setShowModal(true); // Mostrar modal al guardar la publicación
+        setShowModal(true);
     }
 
-    function redirectProfile(userId){
-        navigate('/profile/' + userId);
-    }
-
-    // Función para calcular el tiempo transcurrido desde la publicación
     function tiempoTranscurrido(fechaPublicacion) {
         const ahora = new Date();
         const fecha = new Date(fechaPublicacion);
@@ -92,13 +123,13 @@ export function Publicacion({ publicacion }) {
     return (
         <div
             className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "500px" }} // Definimos el tamaño cuadrado de 500x500
+            style={{ width: "500px", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
-                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
-                        {publicacion.nombre_usuario} 
+                    <div className="card-title d-flex gap-2 align-items-center" style={{ cursor: "pointer" }} onClick={() => redirectProfile(publicacion.id_usuario)}>
+                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle " />
+                        <i>{publicacion.nombre_usuario}</i>
                     </div>
                     <h4 className="card-title">{publicacion.titulo}</h4>
                     <p className="card-text">{publicacion.descripcion}</p>
@@ -118,31 +149,24 @@ export function Publicacion({ publicacion }) {
                             className="btn btn-outline-warning"
                             onClick={sendData}
                             alt="Guardar Publicación"
-                            title="Anadir a Favoritos"
+                            title="Añadir a Favoritos"
                         >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="https://cdn-icons-png.flaticon.com/512/102/102279.png"
-                                alt="Valoración"
-                            />
+                            <i className="bi bi-bookmark-heart-fill text-dark"></i> {/* Tamaño ajustado con style */}
                         </button>
+
+
                         <button
                             type="button"
                             className="btn btn-outline-warning"
                             data-bs-toggle="modal"
                             data-bs-target="#valoracionModal"
                         >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="https://cdn-icons-png.flaticon.com/512/2893/2893811.png"
-                                alt="Valoración"
-                            />
+                            <i className="bi bi-star-fill text-dark "></i>
                         </button>
 
-                                                {/* Modal de Favoritos */}
-                                                <div
+
+                        {/* Modal de Favoritos */}
+                        <div
                             className="modal fade"
                             id="favoritosModal"
                             tabIndex="-1"
@@ -276,12 +300,7 @@ export function Publicacion({ publicacion }) {
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="https://cdn-icons-png.flaticon.com/512/102/102279.png"
-                                alt="WhatsApp"
-                            />
+                            <i class="bi bi-whatsapp"></i>
                         </a>
                     </div>
                 </div>
