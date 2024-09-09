@@ -3,6 +3,7 @@ import "../styles/ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
+import { PublicacionPage } from "../components/MisPublicaciones.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
@@ -120,13 +121,12 @@ export function ProfilePage() {
       </div>
       <div className="banner">
         <img
-          width={"100%"}
-          height={"100%"}
           src={
             banner ||
             "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"
           }
           alt=""
+          className="banner-image"
         />
       </div>
 
@@ -141,16 +141,11 @@ export function ProfilePage() {
               alt="Profile Picture"
               className="profile-image border border-success"
             />
-            <h2>{username}</h2>
-            <h5>{email}</h5>
-          </div>
-          <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
-              <h2 className="text-success-emphasis fw-bold">Biografía</h2>
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="btn btn-warning btn-outline-dark"
+                  className="btn btn-warning btn-outline-dark mt-3"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
                 >
@@ -160,11 +155,15 @@ export function ProfilePage() {
                 ""
               )}
             </div>
-            <div className="mt-3">
-              <p className="border border-0">
-                {biografia || "Cuentanos sobre ti..."}
-              </p>
-            </div>
+            <h2>@<i>{username}</i></h2>
+            <h5>{email}</h5>
+            <h2 className="text-success-emphasis fw-bold">Biografía</h2>
+            <p className="border border-0">
+              {biografia || "Cuentanos sobre ti..."}
+            </p>
+          </div>
+          <div className="col-md-9">
+            <PublicacionPage /> 
           </div>
         </div>
       </div>

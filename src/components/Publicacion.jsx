@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FavStar } from "./FavStar.jsx";
-import { AnadirFavoritos } from "./AnadirFavoritos.jsx";
-import { StarRating } from "./StarRating.jsx";
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -121,8 +118,7 @@ export function Publicacion({ publicacion }) {
             style={{ width: "500px", height: "auto" }} 
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
-                <div>
-                <StarRating id_publicacion={publicacion.id_publicacion} />
+                <div>  
                     <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
                         <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
                         <i>{publicacion.nombre_usuario}</i> 
@@ -143,7 +139,7 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={sendData}
+                            onClick={handleAddToFavorites}
                             alt="Guardar Publicación"
                             title="Anadir a Favoritos"
                         >

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export function StarRating({ id_publicacion }) {
   const [rating, setRating] = useState(0); 
   const [hover, setHover] = useState(0);   
+  const params = useParams(); 
   
   const handleRating = (value) => {
     setRating(value);
@@ -10,6 +12,14 @@ export function StarRating({ id_publicacion }) {
   };
 
   const sendRating = (cantidad) => {
+    // Recuperar id_usuario desde localStorage
+    const id_usuario = localStorage.getItem('id_usuario');
+    
+    if (!id_usuario) {
+      alert('Usuario no identificado');
+      return;
+    }
+
     fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/valoracion/${id_publicacion}`, {
       method: 'POST',
       headers: {
@@ -17,6 +27,8 @@ export function StarRating({ id_publicacion }) {
       },
       body: JSON.stringify({
         cantidad: cantidad,
+        id_publicacion: id_publicacion,
+        id_usuario: id_usuario,  // Asegurarse de que el id_usuario está presente
       }),
     })
     .then(response => response.json())
@@ -60,3 +72,4 @@ export function StarRating({ id_publicacion }) {
     </div>
   );
 }
+s
