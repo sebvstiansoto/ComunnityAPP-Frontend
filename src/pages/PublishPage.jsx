@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Calendar from 'react-calendar';
 import 'react-clock/dist/Clock.css';
@@ -9,6 +9,7 @@ import Footer from "../components/Footer.jsx";
 export function PublishPage() {
 
   const navigate = useNavigate();
+  const params = useParams();
 
   let [tituloPublicacion, setTitulo] = useState("");
   let [informacionPublicacion, setInformacion] = useState("");
@@ -70,7 +71,7 @@ export function PublishPage() {
         return response.json();
       })
       .then(() => {
-        navigate("/");
+        navigate("/" + params.id);
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);

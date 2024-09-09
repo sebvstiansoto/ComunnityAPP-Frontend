@@ -115,31 +115,23 @@ export function Publicacion({ publicacion }) {
     }
 
     return (
-        <div
-            className="card mb-4 d-flex justify-content-center  "
-            style={{ width: "70%", height: "auto" }} 
+<div
+            className="card m-auto d-flex justify-content-center"
+            style={{ width: "500px", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-
-                    <h4 className="card-title fw-bold" style={{
-                        fontSize: "1.5rem"
-                    }}>{publicacion.titulo}</h4>
-
-                    <h5 className="card-title fst-italic" style={{
-                        fontSize: "0.8rem"
-                    }}>@{publicacion.nombre_usuario}</h5>
-
-                    <p className="card-text p-2 border-opacity-10" style={{
-                        fontSize: "0.9rem"
-                    }}>{publicacion.descripcion}</p>
+                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
+                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
+                        <i>{publicacion.nombre_usuario}</i> 
+                    </div>
+                    <h4 className="card-title">{publicacion.titulo}</h4>
+                    <p className="card-text">{publicacion.descripcion}</p>
                 </div>
                 <div className="row">
                     <div className="col-12">
                         <p className="card-text mb-3">
-                            <small className="text-body-secondary"  style={{
-                        fontSize: "0.6rem"
-                    }}>
+                            <small className="text-body-secondary">
                                 {tiempoTranscurrido(publicacion.hora_publicado)}
                             </small>
                         </p>
@@ -149,13 +141,13 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={handleAddToFavorites}  // Se asegura que se pasa el evento
+                            onClick={sendData}
                             alt="Guardar Publicación"
                             title="Anadir a Favoritos"
                         >
                             <img
-                                width="15px"
-                                height="15px"
+                                width="20px"
+                                height="20px"
                                 src="/src/assets/tag.png"
                                 alt="Valoración"
                             />
@@ -167,15 +159,15 @@ export function Publicacion({ publicacion }) {
                             data-bs-target="#valoracionModal"
                         >
                             <img
-                                width="15px"
-                                height="15px"
+                                width="20px"
+                                height="20px"
                                 src="/src/assets/star.png"
                                 alt="Valoración"
                             />
                         </button>
 
-                        {/* Modal de Favoritos */}
-                        <div
+                                                {/* Modal de Favoritos */}
+                                                <div
                             className="modal fade"
                             id="favoritosModal"
                             tabIndex="-1"
@@ -196,7 +188,7 @@ export function Publicacion({ publicacion }) {
                                         ></button>
                                     </div>
                                     <div className="modal-body">
-                                        < AnadirFavoritos id_publicacion={publicacion.id}/>
+                                        < AnadirFavoritos id_publicacion={publicacion.id} />
                                     </div>
                                     <div className="modal-footer">
                                         <button
@@ -308,10 +300,10 @@ export function Publicacion({ publicacion }) {
                         )}
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
+                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
                             <img
-                                width="15px"
-                                height="15px"
+                                width="20px"
+                                height="20px"
                                 src="/src/assets/whatsapp (3).png"
                                 alt="WhatsApp"
                             />
