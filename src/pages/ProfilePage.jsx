@@ -74,12 +74,28 @@ export function ProfilePage() {
   function sendData(e) {
     e.preventDefault();
     console.log("Todo preparado para enviar a mi backend 😀");
-
+  
     const formData = new FormData();
-    formData.append("biografia", biografia);
-    formData.append("banner", bannerPreviewFile);
-    formData.append("img_perfil", fotoPerfilPreviewFile);
-
+  
+    // Solo agregamos los campos que han sido modificados
+    if (biografia !== originalBiografia) {
+      formData.append("biografia", biografia);
+    }
+  
+    if (fotoPerfilPreviewFile) {
+      formData.append("img_perfil", fotoPerfilPreviewFile);
+    }
+  
+    if (bannerPreviewFile) {
+      formData.append("banner", bannerPreviewFile);
+    }
+  
+    // Si no hay cambios, no hacemos la petición
+    if (!formData.has("biografia") && !formData.has("img_perfil") && !formData.has("banner")) {
+      console.log("No hay cambios que guardar");
+      return;
+    }
+  
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
         params.id,
@@ -189,6 +205,7 @@ export function ProfilePage() {
                 className="btn-close"
                 onClick={closeModalWithoutSaving}
                 aria-label="Close"
+                
               ></button>
             </div>
             <div className="modal-body bg-success-subtle">

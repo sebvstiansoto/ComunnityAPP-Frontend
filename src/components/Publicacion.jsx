@@ -82,6 +82,7 @@ export function Publicacion({ publicacion }) {
         e.preventDefault(); 
         sendData(e);        
         sendNotification(e); 
+        handleSaveFavorite();
     }
 
     function handleSaveFavorite() {

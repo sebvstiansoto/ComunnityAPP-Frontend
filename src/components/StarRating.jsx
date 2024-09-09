@@ -72,4 +72,3 @@ export function StarRating({ id_publicacion }) {
     </div>
   );
 }
-s
