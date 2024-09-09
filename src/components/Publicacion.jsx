@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -30,6 +31,11 @@ export function Publicacion({ publicacion }) {
             });
     }
 
+    function redirectProfile(userId) {
+        navigate(`/profile/${userId}`);
+    }
+
+
     function sendNotification(e) {
         e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
         const userId = localStorage.getItem('id_usuario');
@@ -41,8 +47,8 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), 
-                id_publicacion: publicacionId, 
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
             }),
         })
             .then((response) => response.json())
@@ -65,17 +71,17 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), 
-                id_publicacion: publicacionId,  
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
             }),
         })
-        .then((response) => response.json())
-        .then((responseConverted) => {
-            console.log('Favorito añadido', responseConverted);
-        })
-        .catch((error) => {
-            console.error("Error al añadir favorito:", error);
-        });
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log('Favorito añadido', responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al añadir favorito:", error);
+            });
     }
 
     function handleAddToFavorites(e) {
@@ -89,7 +95,7 @@ export function Publicacion({ publicacion }) {
         const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
         const nuevaListaFavoritos = [...favoritos, publicacion];
         localStorage.setItem("favoritos", JSON.stringify(nuevaListaFavoritos));
-        setShowModal(true); 
+        setShowModal(true);
     }
 
     function tiempoTranscurrido(fechaPublicacion) {
@@ -114,7 +120,7 @@ export function Publicacion({ publicacion }) {
     }
 
     return (
-<div
+        <div
             className="card m-auto d-flex justify-content-center"
             style={{ width: "500px", height: "auto" }} 
         >
@@ -142,14 +148,9 @@ export function Publicacion({ publicacion }) {
                             className="btn btn-outline-warning"
                             onClick={handleAddToFavorites}
                             alt="Guardar Publicación"
-                            title="Anadir a Favoritos"
+                            title="Añadir a Favoritos"
                         >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/tag.png"
-                                alt="Valoración"
-                            />
+                            <i className="bi bi-bookmark-heart-fill text-dark"></i> {/* Tamaño ajustado con style */}
                         </button>
 
                         {/* Modal de confirmación de guardado */}
@@ -193,12 +194,7 @@ export function Publicacion({ publicacion }) {
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/whatsapp (3).png"
-                                alt="WhatsApp"
-                            />
+                        <i class="bi bi-whatsapp"></i>
                         </a>
                     </div>
                 </div>
