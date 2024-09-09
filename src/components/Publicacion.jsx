@@ -88,6 +88,7 @@ export function Publicacion({ publicacion }) {
         e.preventDefault(); 
         sendData(e);        
         sendNotification(e); 
+        handleSaveFavorite();
     }
 
     function handleSaveFavorite() {
@@ -145,7 +146,7 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={sendData}
+                            onClick={handleAddToFavorites}
                             alt="Guardar Publicación"
                             title="Añadir a Favoritos"
                         >
@@ -192,8 +193,8 @@ export function Publicacion({ publicacion }) {
                         )}
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
-                            <i class="bi bi-whatsapp"></i>
+                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
+                        <i class="bi bi-whatsapp"></i>
                         </a>
                     </div>
                 </div>
