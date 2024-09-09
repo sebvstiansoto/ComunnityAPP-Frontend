@@ -40,7 +40,7 @@ export function RecoveryPage() {
 
     return (
         <>
-            <div className="container mb-5 pb-5">
+            <div className="container mt-0">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card mt-5 border border-success">
@@ -70,10 +70,11 @@ export function RecoveryPage() {
                                 </form>
                             </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
             </div>
-            <Footer />
+
         </>
     );
 }

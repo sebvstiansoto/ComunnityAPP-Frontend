@@ -111,9 +111,9 @@ export function LoginPage() {
                 ¿Olvidaste tu contraseña?
               </button>
             </div>
+            <Footer />
           </div>
         </div>
-        <Footer />
       </div>
     </main>
   );

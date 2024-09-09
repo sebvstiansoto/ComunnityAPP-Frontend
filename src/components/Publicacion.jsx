@@ -32,6 +32,11 @@ export function Publicacion({ publicacion }) {
             });
     }
 
+    function redirectProfile(userId) {
+        navigate(`/profile/${userId}`);
+    }
+
+
     function sendNotification(e) {
         e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
         const userId = localStorage.getItem('id_usuario');
@@ -43,8 +48,8 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), 
-                id_publicacion: publicacionId, 
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
             }),
         })
             .then((response) => response.json())
@@ -67,17 +72,17 @@ export function Publicacion({ publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), 
-                id_publicacion: publicacionId,  
+                id_usuario: parseInt(userId),
+                id_publicacion: publicacionId,
             }),
         })
-        .then((response) => response.json())
-        .then((responseConverted) => {
-            console.log('Favorito añadido', responseConverted);
-        })
-        .catch((error) => {
-            console.error("Error al añadir favorito:", error);
-        });
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log('Favorito añadido', responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al añadir favorito:", error);
+            });
     }
 
     function handleAddToFavorites(e) {
@@ -90,7 +95,7 @@ export function Publicacion({ publicacion }) {
         const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
         const nuevaListaFavoritos = [...favoritos, publicacion];
         localStorage.setItem("favoritos", JSON.stringify(nuevaListaFavoritos));
-        setShowModal(true); 
+        setShowModal(true);
     }
 
     function tiempoTranscurrido(fechaPublicacion) {
@@ -115,15 +120,15 @@ export function Publicacion({ publicacion }) {
     }
 
     return (
-<div
+        <div
             className="card m-auto d-flex justify-content-center"
             style={{ width: "500px", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
-                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
-                        <i>{publicacion.nombre_usuario}</i> 
+                    <div className="card-title d-flex gap-2 align-items-center" style={{ cursor: "pointer" }} onClick={() => redirectProfile(publicacion.id_usuario)}>
+                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle " />
+                        <i>{publicacion.nombre_usuario}</i>
                     </div>
                     <h4 className="card-title">{publicacion.titulo}</h4>
                     <p className="card-text">{publicacion.descripcion}</p>
@@ -166,8 +171,8 @@ export function Publicacion({ publicacion }) {
                             />
                         </button>
 
-                                                {/* Modal de Favoritos */}
-                                                <div
+                        {/* Modal de Favoritos */}
+                        <div
                             className="modal fade"
                             id="favoritosModal"
                             tabIndex="-1"

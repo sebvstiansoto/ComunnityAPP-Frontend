@@ -18,3 +18,32 @@ body {
 main {
     min-height: 100vh;
 }
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 3rem;
+    color: #0a290b;
+    text-shadow: 4px 4px 4px rgba(157, 212, 174, 0.815);
+}
+
+h2 {
+    font-family: "Homer Simpson UI";
+}
+
+label {
+    font-family: "Homer Simpson UI";
+    font-size: large;
+}
+
+input {
+    font-family: "Homer Simpson UI";
+}
+
+h3 {
+    font-family: "Homer Simpson UI";
+    font-weight: bolder;
+}
+
+textarea {
+    font-family: "Homer Simpson UI";
+}
