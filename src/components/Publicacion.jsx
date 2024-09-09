@@ -123,7 +123,7 @@ export function Publicacion({ publicacion }) {
     return (
         <div
             className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
+            style={{ width: "500px", height: "auto" }}
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
