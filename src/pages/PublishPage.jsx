@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar.jsx";
 import Calendar from 'react-calendar';
 import Footer from "../components/Footer.jsx";
 import WeatherComponent from "../components/Clima.jsx";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export function PublishPage() {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ export function PublishPage() {
                 <input
                   onChange={titleChange}
                   type="text"
-                  className="form-control mb-4 border border-success"
+                  className="form-control mb-4 border border-success border-opacity-50"
                   id="titulo"
                   placeholder="Ingresa el título"
                 />
@@ -99,7 +100,7 @@ export function PublishPage() {
                 <label htmlFor="seccion" className="mb-4 fw-semibold text-success-emphasis">Sección</label>
                 <select
                   onChange={sectionChange}
-                  className="form-control mb-5 border border-success"
+                  className="form-control mb-5 border border-success border-opacity-50"
                   id="seccion"
                   value={seccionPublicacion}
                 >
@@ -112,14 +113,18 @@ export function PublishPage() {
               </div>
               <textarea
                 onChange={informationChange}
-                className="form-control mb-4 border border-success"
+                className="form-control mb-4 border border-success border-opacity-50"
                 placeholder="Descripción de la publicación"
                 rows="7"
               ></textarea>
             </div>
             <div className="d-flex justify-content-center m-0">
-              <button className="btn btn-warning btn-outline-dark mb-5" onClick={sendData}>Publicar</button>
+              <button className="btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData}>
+                <i className="bi bi-check-circle-fill me-2"></i> {/* Icono con margen a la derecha */}
+                Publicar
+              </button>
             </div>
+
           </div>
           <div className="col-md-4">
             <div className="calendar-container w-75 pt-10 ms-5">

@@ -3,6 +3,7 @@ import "../styles/ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export function ProfilePage() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function ProfilePage() {
   function getUserInfo() {
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
-        params.id
+      params.id
     )
       .then((response) => {
         return response.json();
@@ -81,7 +82,7 @@ export function ProfilePage() {
 
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
-        params.id,
+      params.id,
       {
         method: "PATCH",
         body: formData,
@@ -139,10 +140,10 @@ export function ProfilePage() {
                 "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
               }
               alt="Profile Picture"
-              className="profile-image border border-success"
+              className="profile-image border border-secondary"
             />
             <h2>{username}</h2>
-            <h5>{email}</h5>
+            <h6>{email}</h6>
           </div>
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
@@ -150,10 +151,10 @@ export function ProfilePage() {
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="btn btn-warning btn-outline-dark"
+                  className="btn btn-warning btn-outline-dark fw-medium"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
-                >
+                ><i class="bi bi-gear-fill me-1"></i>
                   Editar Perfil
                 </button>
               ) : (
@@ -180,7 +181,7 @@ export function ProfilePage() {
           <div className="modal-content">
             <div className="modal-header">
               <h5
-                className="modal-title text-success"
+                className="modal-title text-success-emphasis"
                 id="editProfileModalLabel"
               >
                 Editar Perfil
@@ -259,9 +260,9 @@ export function ProfilePage() {
               </button>
               <button
                 type="button"
-                className="btn btn-warning btn-outline-dark"
+                className="btn btn-warning btn-outline-dark fw-medium"
                 onClick={sendData}
-              >
+              ><i class="bi bi-check-circle-fill me-1"></i>
                 Guardar cambios
               </button>
             </div>

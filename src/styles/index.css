@@ -47,3 +47,8 @@ h3 {
 textarea {
     font-family: "Homer Simpson UI";
 }
+
+h6 {
+    font-family: "Homer Simpson UI";
+    font-weight: bolder;
+}
