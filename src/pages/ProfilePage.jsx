@@ -22,11 +22,14 @@ export function ProfilePage() {
   const [originalBanner, setOriginalBanner] = useState("");
 
   function getUserInfo() {
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
-      .then(response => {
+    fetch(
+      "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
+        params.id
+    )
+      .then((response) => {
         return response.json();
       })
-      .then(responseConverted => {
+      .then((responseConverted) => {
         setUsername(responseConverted.nombre_usuario);
         setEmail(responseConverted.email);
         setFotoPerfil(responseConverted.img_perfil);
@@ -37,7 +40,7 @@ export function ProfilePage() {
         setOriginalFotoPerfil(responseConverted.img_perfil);
         setOriginalBanner(responseConverted.banner);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -76,10 +79,14 @@ export function ProfilePage() {
     formData.append("banner", bannerPreviewFile);
     formData.append("img_perfil", fotoPerfilPreviewFile);
 
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id, {
-      method: "PATCH",
-      body: formData,
-    })
+    fetch(
+      "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
+        params.id,
+      {
+        method: "PATCH",
+        body: formData,
+      }
+    )
       .then((response) => {
         return response.json();
       })
@@ -115,14 +122,22 @@ export function ProfilePage() {
         <img
           width={"100%"}
           height={"100%"}
-          src={banner || "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"} alt="" />
+          src={
+            banner ||
+            "https://img.freepik.com/vector-premium/banner-ciudad-ecologica-verde_174191-51.jpg"
+          }
+          alt=""
+        />
       </div>
 
       <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-md-3 text-center profile-container">
             <img
-              src={fotoPerfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
+              src={
+                fotoPerfil ||
+                "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+              }
               alt="Profile Picture"
               className="profile-image border border-success"
             />
@@ -132,13 +147,18 @@ export function ProfilePage() {
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="text-success-emphasis fw-bold">Biografía</h2>
-              <button
-                className="btn btn-warning btn-outline-dark"
-                data-bs-toggle="modal"
-                data-bs-target="#editProfileModal"
-              >
-                Editar Perfil
-              </button>
+
+              {params.id == localStorage.getItem("id_usuario") ? (
+                <button
+                  className="btn btn-warning btn-outline-dark"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editProfileModal"
+                >
+                  Editar Perfil
+                </button>
+              ) : (
+                ""
+              )}
             </div>
             <div className="mt-3">
               <p className="border border-0">
@@ -159,7 +179,10 @@ export function ProfilePage() {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title text-success" id="editProfileModalLabel">
+              <h5
+                className="modal-title text-success"
+                id="editProfileModalLabel"
+              >
                 Editar Perfil
               </h5>
               <button
@@ -176,7 +199,10 @@ export function ProfilePage() {
                     Actualizar Foto de Perfil
                   </label>
                   <img
-                    src={fotoPerfilPreview || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"}
+                    src={
+                      fotoPerfilPreview ||
+                      "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+                    }
                     alt="Profile Picture"
                     className="profile-image mb-3"
                     style={{ width: "150px", height: "150px" }}
@@ -200,7 +226,9 @@ export function ProfilePage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="bio" className="d-block fw-bold m-2">Biografía</label>
+                  <label htmlFor="bio" className="d-block fw-bold m-2">
+                    Biografía
+                  </label>
                   <textarea
                     className="form-control"
                     id="bio"
@@ -214,7 +242,7 @@ export function ProfilePage() {
                       height: "auto", // Permite que el contenido expanda el textarea
                       maxHeight: "150px", // Define una altura máxima para el scroll
                       overflowY: "auto", // Permite el scroll vertical sin mostrar la barra
-                      paddingRight: "10px" // Añade un poco de espacio para el scroll "invisible"
+                      paddingRight: "10px", // Añade un poco de espacio para el scroll "invisible"
                     }}
                   ></textarea>
                   <p></p>
