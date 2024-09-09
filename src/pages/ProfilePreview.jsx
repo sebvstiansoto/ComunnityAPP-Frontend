@@ -6,7 +6,6 @@ import Footer from "../components/Footer.jsx";
 import { PublicacionPage } from "../components/PublicacionPage.jsx";
 
 export function ProfilePage() {
-  const navigate = useNavigate();
   const params = useParams();
 
   const [username, setUsername] = useState("");

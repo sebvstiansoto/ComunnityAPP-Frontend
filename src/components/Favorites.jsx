@@ -27,8 +27,8 @@ export function Favorites() {
       });
   }, [params.id]);
 
-  const handleClick = (id_publicacion) => {
-    navigate(`/publicacion/${id_publicacion}`);
+  const handleClick = (id_usuario) => {
+    navigate(`/profile/${id_usuario}`);
   };
 
   const eliminarFavorito = (id_publicacion) => {
@@ -68,7 +68,7 @@ export function Favorites() {
               className='card mb-3'
               style={{ cursor: 'pointer' }}
             >
-              <div className='card-body' onClick={() => handleClick(publicacion.id_publicacion)}>
+              <div className='card-body' onClick={() => handleClick(publicacion.id_usuario)}>
                 <p style={{ fontSize: '0.7rem' }}><strong>@</strong> {publicacion.nombre_usuario}</p>
                 <h2 style={{ fontSize: '1.6rem' }}>{publicacion.titulo}</h2>
                 <p style={{ fontSize: '0.8rem' }}><strong>Descripcion: </strong> {publicacion.descripcion}</p>

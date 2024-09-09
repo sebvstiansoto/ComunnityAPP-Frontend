@@ -192,7 +192,7 @@ export function Publicacion({ publicacion }) {
                         )}
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + "+569426090"}>
+                        <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
                             <img
                                 width="20px"
                                 height="20px"
