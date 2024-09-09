@@ -5,7 +5,7 @@ import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Footer from '../components/Footer.jsx';
-import backgroundImage from '../assets/background.jpg';  // Importa la imagen de fondo
+import backgroundImage from '../assets/background.jpg'; 
 import WeatherComponent from '../components/Clima.jsx';
 
 export function HomePage() {
@@ -17,15 +17,13 @@ export function HomePage() {
     const calendarRef = useRef(null);
     const [value, onChange] = useState(new Date());
 
-    // Mover la lógica de redireccionamiento a useEffect
     useEffect(() => {
         if (!id) {
             navigate("/login");
         }
-    }, [id, navigate]);  // Este useEffect se ejecuta solo si id cambia
+    }, [id, navigate]);  
 
     useEffect(() => {
-        // Obtener publicaciones
         fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
             .then(response => response.json())
             .then(data => setPublicaciones(data));
@@ -34,7 +32,6 @@ export function HomePage() {
             setCurrentTime(new Date());
         }, 1000);
 
-        // Limpiar el intervalo al desmontar el componente
         return () => clearInterval(interval);
     }, []);
 

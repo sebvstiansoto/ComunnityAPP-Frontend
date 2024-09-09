@@ -5,10 +5,10 @@ const WeatherComponent = () => {
     // Usa el hook para obtener el estado del clima
     const { data, isLoading, errorMessage } = useWeatherBit({
         key: 'b946ce3fad6f4d42bc919b32b28cf033',
-        lat: '-39.814', // Latitud de Valdivia
-        lon: '-73.246', // Longitud de Valdivia
-        lang: 'es', // Idioma en español
-        unit: 'M', // Unidades en métricas (Celsius y Km/h)
+        lat: '-39.814', 
+        lon: '-73.246', 
+        lang: 'es', 
+        unit: 'M', 
     });
 
 
@@ -19,9 +19,9 @@ const WeatherComponent = () => {
                 errorMessage={errorMessage}
                 data={data}
                 lang="es"
-                locationLabel="Valdivia" // Etiqueta de ubicación
-                unitsLabels={{ temperature: 'C', windSpeed: 'Km/h' }} // Unidades para temperatura y velocidad del viento
-                showForecast={true} // Mostrar el pronóstico
+                locationLabel="Valdivia" 
+                unitsLabels={{ temperature: 'C', windSpeed: 'Km/h' }} 
+                showForecast={true} 
             />
         </div>
     );

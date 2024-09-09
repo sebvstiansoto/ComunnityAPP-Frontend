@@ -7,7 +7,6 @@ export function ChangePassword() {
     const [token, setToken] = useState('');
 
     useEffect(() => {
-        // Obtener el token desde la URL (por ejemplo, ?token=...)
         const urlParams = new URLSearchParams(window.location.search);
         const tokenFromUrl = urlParams.get('token');
         if (tokenFromUrl) {
@@ -40,7 +39,6 @@ export function ChangePassword() {
             return;
         }
 
-        // Enviar datos al backend
         fetch('http://localhost:3000/newpassword', {
             method: 'POST',
             headers: {
@@ -48,7 +46,7 @@ export function ChangePassword() {
             },
             body: JSON.stringify({ 
                 contraseña: contraseña,
-                token: token  // Incluir el token en el cuerpo de la solicitud
+                token: token  
             }),
         })
         .then((response) => {
@@ -61,7 +59,6 @@ export function ChangePassword() {
         })
         .then((responseConverted) => {
             alert(responseConverted.message + " 🤩🙂🤩🤗");
-            // Limpiar los inputs
             setContraseña('');
             setConfirmarContraseña('');
         })

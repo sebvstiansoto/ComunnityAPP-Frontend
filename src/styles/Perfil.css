@@ -1,0 +1,82 @@
+/* Estilos generales para el contenedor */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo de los encabezados principales */
+h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Tarjeta de publicación y usuarios */
+.publicacion-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publicacion-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos de los títulos en las tarjetas */
+.publicacion-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* Estilos de los textos dentro de las tarjetas */
+.publicacion-card p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+.publicacion-card p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Estilo del contenedor de usuarios */
+.usuarios-container {
+    margin-top: 40px;
+}
+
+.usuarios-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+/* Estilos para usuarios */
+.publicacion-card .usuario-bio {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .publicacion-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .publicacion-card p {
+        font-size: 0.9rem;
+    }
+}

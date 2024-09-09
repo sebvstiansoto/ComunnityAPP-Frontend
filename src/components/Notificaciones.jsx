@@ -9,7 +9,7 @@ export function Notificaciones() {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/" + params.id)
       .then((response) => response.json())
       .then((responseConverted) => {
-        setNotificacion(responseConverted); // Guardar las notificaciones en el estado
+        setNotificacion(responseConverted); 
         console.log(responseConverted);  
       })
       .catch((error) => {

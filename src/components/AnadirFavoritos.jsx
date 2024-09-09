@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom';
 import '../styles/AnadirFavoritos.css';
 
 export function AnadirFavoritos({ id_publicacion }) {
-    const params = useParams(); // Asegúrate de que id_usuario venga de la URL
+    const params = useParams(); 
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [notificaciones, setNotificaciones] = useState([]);
 
-    // Funciones para manejar los cambios
     function changeTitulo(e) {
         setTitulo(e.target.value);
     }
@@ -17,7 +16,6 @@ export function AnadirFavoritos({ id_publicacion }) {
         setDescripcion(e.target.value);
     }
 
-    // Función para enviar la notificación
     function sendNotification() {
         if (!id_publicacion) {
             console.error("El id de la publicación no está definido");
@@ -29,8 +27,8 @@ export function AnadirFavoritos({ id_publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: parseInt(userId), // id_usuario_receptor viene del localStorage
-                id_publicacion: id_publicacion,  // id_publicacion es pasado como prop
+                id_usuario: parseInt(userId), 
+                id_publicacion: id_publicacion,  
             }),
         })
             .then((response) => response.json())
@@ -42,7 +40,6 @@ export function AnadirFavoritos({ id_publicacion }) {
             });
     }
 
-    // Función para enviar los datos al backend y añadir a favoritos
     function sendData() {
         if (!id_publicacion) {
             console.error("El id de la publicación no está definido");
@@ -55,8 +52,8 @@ export function AnadirFavoritos({ id_publicacion }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: params.id, // id_usuario viene de la URL
-                id_publicacion: id_publicacion,  // id_publicacion es pasado como prop
+                id_usuario: params.id, 
+                id_publicacion: id_publicacion,  
             }),
         })
         .then((response) => response.json())
@@ -68,11 +65,10 @@ export function AnadirFavoritos({ id_publicacion }) {
         });
     }
 
-    // Manejador para añadir a favoritos y enviar notificación
     function handleAddToFavorites(e) {
         e.preventDefault();
-        sendData();           // Añadir la publicación a favoritos
-        sendNotification();  // Enviar notificación al dueño de la publicación
+        sendData();           
+        sendNotification();  
     }
 
     return (

@@ -7,7 +7,7 @@ import '../styles/Favorites.css';
 const formatearFecha = (fechaPublicacion) => {
   const fecha = new Date(fechaPublicacion);
   const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
-  return fecha.toLocaleDateString('es-ES', opciones); // Formato: "7 septiembre 2024"
+  return fecha.toLocaleDateString('es-ES', opciones); 
 };
 
 export function Favorites() {
@@ -15,7 +15,6 @@ export function Favorites() {
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
 
-  // Cargar favoritos
   useEffect(() => {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/" + params.id)
       .then((response) => response.json())
@@ -28,12 +27,10 @@ export function Favorites() {
       });
   }, [params.id]);
 
-  // Redirigir a la publicación
   const handleClick = (id_publicacion) => {
     navigate(`/publicacion/${id_publicacion}`);
   };
 
-  // Eliminar favorito
   const eliminarFavorito = (id_publicacion) => {
     fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/${params.id}/${id_publicacion}`, {
       method: 'DELETE',
@@ -44,7 +41,6 @@ export function Favorites() {
     .then((response) => response.json())
     .then((responseConverted) => {
       if (responseConverted.message === 'Favorito eliminado correctamente') {
-        // Actualizar la lista de favoritos eliminando el elemento correspondiente
         setFavorites(favorites.filter(fav => fav.id_publicacion !== id_publicacion));
         alert('Publicación eliminada de favoritos');
       } else {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FavStar } from "./FavStar.jsx";
 import { AnadirFavoritos } from "./AnadirFavoritos.jsx";
+import { StarRating } from "./StarRating.jsx";
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ export function Publicacion({ publicacion }) {
     }
 
     function sendData(e) {
-        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
+        e.preventDefault(); 
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
@@ -81,9 +82,9 @@ export function Publicacion({ publicacion }) {
     }
 
     function handleAddToFavorites(e) {
-        e.preventDefault(); // Se asegura que el evento pase y se prevenga el comportamiento predeterminado del formulario
-        sendData(e);        // Pasar el evento aquí
-        sendNotification(e); // Pasar el evento aquí
+        e.preventDefault(); 
+        sendData(e);        
+        sendNotification(e); 
     }
 
     function handleSaveFavorite() {
@@ -117,10 +118,11 @@ export function Publicacion({ publicacion }) {
     return (
 <div
             className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "auto" }} // Definimos el tamaño cuadrado de 500x500
+            style={{ width: "500px", height: "auto" }} 
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
+                <StarRating id_publicacion={publicacion.id_publicacion} />
                     <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
                         <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
                         <i>{publicacion.nombre_usuario}</i> 
@@ -152,113 +154,6 @@ export function Publicacion({ publicacion }) {
                                 alt="Valoración"
                             />
                         </button>
-                        <button
-                            type="button"
-                            className="btn btn-outline-warning"
-                            data-bs-toggle="modal"
-                            data-bs-target="#valoracionModal"
-                        >
-                            <img
-                                width="20px"
-                                height="20px"
-                                src="/src/assets/star.png"
-                                alt="Valoración"
-                            />
-                        </button>
-
-                                                {/* Modal de Favoritos */}
-                                                <div
-                            className="modal fade"
-                            id="favoritosModal"
-                            tabIndex="-1"
-                            aria-labelledby="favoritosModalLabel"
-                            aria-hidden="true"
-                        >
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="favoritosModalLabel">
-                                            Valoración del sitio
-                                        </h1>
-                                        <button
-                                            type="button"
-                                            className="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"
-                                        ></button>
-                                    </div>
-                                    <div className="modal-body">
-                                        < AnadirFavoritos id_publicacion={publicacion.id} />
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-success"
-                                            data-bs-dismiss="modal"
-                                        >
-                                            Cerrar
-                                        </button>
-                                        <button type="button" className="btn btn-outline-warning">
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Modal de valoraciones */}
-                        <div
-                            className="modal fade"
-                            id="valoracionModal"
-                            tabIndex="-1"
-                            aria-labelledby="valoracionModalLabel"
-                            aria-hidden="true"
-                        >
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="valoracionModalLabel">
-                                            Valoración del sitio
-                                        </h1>
-                                        <button
-                                            type="button"
-                                            className="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"
-                                        ></button>
-                                    </div>
-                                    <div className="modal-body">
-                                        {valoracion.map((val, index) => (
-                                            <FavStar
-                                                key={index}
-                                                isActive={val.isActive}
-                                                activate={() => {
-                                                    setValoracion((prev) =>
-                                                        prev.map((valor, i) =>
-                                                            i <= index
-                                                                ? { isActive: !valor.isActive }
-                                                                : { isActive: false }
-                                                        )
-                                                    );
-                                                }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-success"
-                                            data-bs-dismiss="modal"
-                                        >
-                                            Cerrar
-                                        </button>
-                                        <button type="button" className="btn btn-outline-warning">
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Modal de confirmación de guardado */}
                         {showModal && (
