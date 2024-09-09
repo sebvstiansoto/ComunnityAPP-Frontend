@@ -33,7 +33,7 @@ export function Publicacion({ publicacion }) {
     }
 
     function sendNotification(e) {
-        e.preventDefault();
+        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
@@ -57,7 +57,7 @@ export function Publicacion({ publicacion }) {
     }
 
     function sendData(e) {
-        e.preventDefault();
+        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
@@ -73,6 +73,7 @@ export function Publicacion({ publicacion }) {
         })
         .then((response) => response.json())
         .then((responseConverted) => {
+            console.log('Favorito añadido', responseConverted);
         })
         .catch((error) => {
             console.error("Error al añadir favorito:", error);
@@ -80,12 +81,10 @@ export function Publicacion({ publicacion }) {
     }
 
     function handleAddToFavorites(e) {
-        e.preventDefault();
-        sendData();           
-        sendNotification();  
+        e.preventDefault(); // Se asegura que el evento pase y se prevenga el comportamiento predeterminado del formulario
+        sendData(e);        // Pasar el evento aquí
+        sendNotification(e); // Pasar el evento aquí
     }
-
-
 
     function handleSaveFavorite() {
         const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
@@ -150,7 +149,7 @@ export function Publicacion({ publicacion }) {
                         <button
                             type="button"
                             className="btn btn-outline-warning"
-                            onClick={handleSaveFavorite}
+                            onClick={handleAddToFavorites}  // Se asegura que se pasa el evento
                             alt="Guardar Publicación"
                             title="Anadir a Favoritos"
                         >
@@ -175,8 +174,8 @@ export function Publicacion({ publicacion }) {
                             />
                         </button>
 
-                                                {/* Modal de Favoritos */}
-                                                <div
+                        {/* Modal de Favoritos */}
+                        <div
                             className="modal fade"
                             id="favoritosModal"
                             tabIndex="-1"
