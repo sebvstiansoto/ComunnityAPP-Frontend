@@ -123,7 +123,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="/src/assets/tag.png"
+                                src="https://cdn-icons-png.flaticon.com/512/102/102279.png"
                                 alt="Valoración"
                             />
                         </button>
@@ -136,7 +136,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="/src/assets/star.png"
+                                src="https://cdn-icons-png.flaticon.com/512/2893/2893811.png"
                                 alt="Valoración"
                             />
                         </button>
@@ -279,7 +279,7 @@ export function Publicacion({ publicacion }) {
                             <img
                                 width="20px"
                                 height="20px"
-                                src="/src/assets/whatsapp (3).png"
+                                src="https://cdn-icons-png.flaticon.com/512/102/102279.png"
                                 alt="WhatsApp"
                             />
                         </a>
