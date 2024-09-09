@@ -125,7 +125,6 @@ export function Publicacion({ publicacion }) {
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-                <StarRating id_publicacion={publicacion.id_publicacion} />
                     <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
                         <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
                         <i>{publicacion.nombre_usuario}</i> 

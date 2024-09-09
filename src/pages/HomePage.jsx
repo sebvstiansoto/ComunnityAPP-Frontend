@@ -5,7 +5,6 @@ import { Publicacion } from '../components/Publicacion.jsx';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Footer from '../components/Footer.jsx';
-import backgroundImage from '../assets/background.jpg'; 
 import WeatherComponent from '../components/Clima.jsx';
 
 export function HomePage() {
