@@ -56,17 +56,26 @@ export function Favorites() {
     <React.Fragment>
       <Navbar />
       <div className='container'>
-        <h1 style={{ fontSize: '2rem', marginBottom: '2rem', marginTop: '2rem' }}>
-          <strong>Favoritos</strong>
-        </h1>
-        {favorites.length === 0 ? (
-          <p>No hay publicaciones favoritas.</p>
-        ) : (
-          favorites.map((publicacion, index) => (
+    <h1 style={{ fontSize: '2rem', marginBottom: '2rem', marginTop: '1rem' }}>
+      <strong>Favoritos</strong>
+    </h1>
+    {favorites.length === 0 ? (
+      <p>No hay publicaciones favoritas.</p>
+    ) : (
+      <div className="row">
+        {favorites.map((publicacion, index) => (
+          <div key={index} className='col-md-4 col-sm-6 mb-4'>
             <div
-              key={index}
-              className='card mb-3'
-              style={{ cursor: 'pointer' }}
+              className='card h-100'
+              style={{
+                cursor: 'pointer',
+                width: '100%',
+                maxWidth: '500px',
+                height: '500px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
             >
               <div className='card-body' onClick={() => handleClick(publicacion.id_publicacion)}>
                 <p style={{ fontSize: '0.7rem' }}><strong>@</strong> {publicacion.nombre_usuario}</p>
@@ -75,22 +84,26 @@ export function Favorites() {
                 <p style={{ fontSize: '0.7rem' }}><strong>Publicado el {formatearFecha(publicacion.hora_publicado)}</strong></p>
               </div>
 
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between p-3">
                 <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
                   <img width="15px" height="15px" src="/src/assets/whatsapp (3).png" alt="WhatsApp" />
                 </a>
-                {/* Botón para eliminar de favoritos */}
                 <button
-                  className="btn btn-outline-danger"
+                  className="btn btn-outline-danger btn-sm"  // Reduzco el tamaño del botón
+                  style={{ fontSize: '0.75rem' }} // Opcional: Ajusta el tamaño de la fuente
                   onClick={() => eliminarFavorito(publicacion.id_publicacion)}
                 >
                   Eliminar de Favoritos
                 </button>
               </div>
             </div>
-          ))
-        )}
+          </div>
+        ))}
       </div>
+    )}
+</div>
+
+
       <Footer />
     </React.Fragment>
   );
