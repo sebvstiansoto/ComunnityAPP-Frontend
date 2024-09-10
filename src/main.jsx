@@ -16,7 +16,6 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { Notificaciones } from "./components/Notificaciones";
 import { Favorites } from "./components/Favorites";
 import { AnadirFavoritos } from "./components/AnadirFavoritos";
-import { PublicacionPage } from "./components/PublicacionPage";
 
 const router = createBrowserRouter([
   { path: "/events/:id", element: <EventsPage /> },
@@ -34,7 +33,6 @@ const router = createBrowserRouter([
   { path: "/notificaciones/:id", element: <Notificaciones />},
   { path: "/favorites/:id", element: <Favorites />},
   { path: "/anadir/:id", element: <AnadirFavoritos />},
-  { path: "/publicacion/:id", element: <PublicacionPage/>},
 
 ]);
 

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { PublicacionPage } from "../components/PublicacionPage.jsx";
 
 export function ProfilePage() {
   const navigate = useNavigate();
