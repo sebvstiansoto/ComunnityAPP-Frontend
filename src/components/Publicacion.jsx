@@ -6,38 +6,15 @@ export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [usuario, setUsuario] = useState("");
-    const [valoracion, setValoracion] = useState([
-        { isActive: false },
-        { isActive: false },
-        { isActive: false },
-        { isActive: false },
-        { isActive: false },
-    ]);
-    const [comentario, setComentario] = useState("");
-    const [telefono, setTelefono] = useState("");
-    const [infoUsuario, setInfoUsuario] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     useEffect(() => {
-        getUserInfo();
+        // Si necesitas cargar datos del usuario o algún otro dato, hazlo aquí
     }, []);
 
-    function getUserInfo() {
-        fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" + params.id)
-            .then((response) => response.json())
-            .then((responseConverted) => {
-                setInfoUsuario(responseConverted);
-            });
-    }
-
-    function redirectProfile(userId) {
-        navigate(`/profile/${userId}`);
-    }
-
-
     function sendNotification(e) {
-        e.preventDefault(); // Aseguramos que el evento se pase y se prevenga su comportamiento por defecto
+        e.preventDefault();
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
@@ -51,51 +28,53 @@ export function Publicacion({ publicacion }) {
                 id_publicacion: publicacionId,
             }),
         })
-            .then((response) => response.json())
-            .then((responseConverted) => {
-                console.log(responseConverted);
-            })
-            .catch((error) => {
-                console.error("Error al enviar notificación:", error);
-            });
+        .then((response) => response.json())
+        .then((responseConverted) => {
+            console.log(responseConverted);
+        })
+        .catch((error) => {
+            console.error("Error al enviar notificación:", error);
+        });
     }
 
     function sendData(e) {
-        e.preventDefault(); 
+        e.preventDefault();
         const userId = localStorage.getItem('id_usuario');
         const publicacionId = publicacion.id_publicacion;
 
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/' + params.id, {
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/' + publicacionId, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 id_usuario: parseInt(userId),
-                id_publicacion: publicacionId,
             }),
         })
-            .then((response) => response.json())
-            .then((responseConverted) => {
-                console.log('Favorito añadido', responseConverted);
-            })
-            .catch((error) => {
-                console.error("Error al añadir favorito:", error);
-            });
+        .then((response) => {
+            if (response.status === 201) {
+                return response.json();  // Favorito añadido correctamente
+            } else if (response.status === 409) {
+                throw new Error("La publicación ya está en tus favoritos.");
+            } else {
+                throw new Error("Hubo un error al añadir a favoritos.");
+            }
+        })
+        .then((responseConverted) => {
+            setModalMessage("Favorito añadido correctamente.");
+            setShowModal(true);
+        })
+        .catch((error) => {
+            setModalMessage(error.message);
+            setShowModal(true);
+            console.error("Error al añadir favorito:", error);
+        });
     }
 
     function handleAddToFavorites(e) {
-        e.preventDefault(); 
-        sendData(e);        
-        sendNotification(e); 
-        handleSaveFavorite();
-    }
-
-    function handleSaveFavorite() {
-        const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-        const nuevaListaFavoritos = [...favoritos, publicacion];
-        localStorage.setItem("favoritos", JSON.stringify(nuevaListaFavoritos));
-        setShowModal(true);
+        e.preventDefault();
+        sendData(e);
+        sendNotification(e);
     }
 
     function tiempoTranscurrido(fechaPublicacion) {
@@ -122,11 +101,11 @@ export function Publicacion({ publicacion }) {
     return (
         <div
             className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "auto" }} 
+            style={{ width: "500px", height: "auto" }}
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div>
-                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => redirectProfile(publicacion.id_usuario)}>
+                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => navigate(`/profile/${publicacion.id_usuario}`)}>
                         <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
                         <i>{publicacion.nombre_usuario}</i> 
                     </div>
@@ -142,7 +121,6 @@ export function Publicacion({ publicacion }) {
                         </p>
                     </div>
                     <div className="col-6">
-                        {/* Botón para guardar publicación como favorita */}
                         <button
                             type="button"
                             className="btn btn-outline-warning"
@@ -150,10 +128,10 @@ export function Publicacion({ publicacion }) {
                             alt="Guardar Publicación"
                             title="Añadir a Favoritos"
                         >
-                            <i className="bi bi-bookmark-heart-fill text-dark"></i> {/* Tamaño ajustado con style */}
+                            <i className="bi bi-bookmark-heart-fill text-dark"></i>
                         </button>
 
-                        {/* Modal de confirmación de guardado */}
+                        {/* Modal de confirmación o error */}
                         {showModal && (
                             <div
                                 className="modal fade show"
@@ -167,7 +145,7 @@ export function Publicacion({ publicacion }) {
                                     <div className="modal-content">
                                         <div className="modal-header">
                                             <h5 className="modal-title" id="successModalLabel">
-                                                Publicación guardada
+                                                {modalMessage.includes("correctamente") ? "Éxito" : "Advertencia"}
                                             </h5>
                                             <button
                                                 type="button"
@@ -176,7 +154,7 @@ export function Publicacion({ publicacion }) {
                                             ></button>
                                         </div>
                                         <div className="modal-body">
-                                            Tu publicación fue guardada exitosamente.
+                                            {modalMessage}
                                         </div>
                                         <div className="modal-footer">
                                             <button
@@ -194,7 +172,7 @@ export function Publicacion({ publicacion }) {
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
-                        <i class="bi bi-whatsapp"></i>
+                            <i className="bi bi-whatsapp"></i>
                         </a>
                     </div>
                 </div>

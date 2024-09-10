@@ -38,7 +38,7 @@ export function HomePage() {
         <React.Fragment>
             <Navbar />
             <main
-                className="mt-5 pt-5"
+                className="mt-1"
             >
                 <div className="container">
                     <div className="row">
