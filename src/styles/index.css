@@ -20,35 +20,39 @@ main {
 }
 
 h1 {
-    font-family: 'Georgia', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 3rem;
     color: #0a290b;
     text-shadow: 4px 4px 4px rgba(157, 212, 174, 0.815);
 }
 
 h2 {
-    font-family: "Homer Simpson UI";
+    font-family: 'Nunito', sans-serif;
 }
 
 label {
-    font-family: "Homer Simpson UI";
+    font-family: 'Nunito', sans-serif;
     font-size: large;
 }
 
-input {
-    font-family: "Homer Simpson UI";
+.input-costum {
+    font-family: 'Nunito', sans-serif;
 }
 
 h3 {
-    font-family: "Homer Simpson UI";
+    font-family: 'Nunito', sans-serif;
     font-weight: bolder;
 }
 
 textarea {
-    font-family: "Homer Simpson UI";
+    font-family: 'Nunito', sans-serif;
 }
 
 h6 {
-    font-family: "Homer Simpson UI";
+    font-family: 'Nunito', sans-serif;
     font-weight: bolder;
+}
+
+.custom-button {
+    font-family: 'Nunito', sans-serif;
 }

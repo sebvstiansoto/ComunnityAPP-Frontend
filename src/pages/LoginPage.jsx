@@ -71,7 +71,7 @@ export function LoginPage() {
             <input
               onChange={changeEmail}
               type="email"
-              className="form-control border-2 border-success-subtle mb-3"
+              className="input-costum form-control border-2 border-success-subtle mb-3"
               id="validationDefault02"
               placeholder="Email"
               required
@@ -79,7 +79,7 @@ export function LoginPage() {
             <input
               onChange={changeContraseña}
               type="password"
-              className="form-control border-2 border-success-subtle mb-3"
+              className="input-costum form-control border-2 border-success-subtle mb-3"
               id="validationDefault03"
               placeholder="Contraseña"
               required
@@ -87,7 +87,7 @@ export function LoginPage() {
 
             <div className="d-flex justify-content-center">
               <button
-                className="btn btn-success btn-outline-dark m-1 col-4 fw-bold text-light"
+                className="custom-button btn btn-success btn-outline-dark m-1 col-4 fw-bold text-light"
                 type="button"
                 onClick={sendData}
               >
@@ -98,14 +98,14 @@ export function LoginPage() {
             <div className="d-flex justify-content-between mb-3">
               <button
                 onClick={redirectRegister}
-                className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
+                className="custom-button btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
                 type="submit"
               >
                 Regístrate
               </button>
               <button
                 onClick={redirectRecovery}
-                className="btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
+                className="custom-button btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
                 type="submit"
               >
                 ¿Olvidaste tu contraseña?

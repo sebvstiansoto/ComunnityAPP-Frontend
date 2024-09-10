@@ -16,23 +16,27 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { Notificaciones } from "./components/Notificaciones";
 import { Favorites } from "./components/Favorites";
 import { AnadirFavoritos } from "./components/AnadirFavoritos";
+import '@fontsource/nunito';
+import '@fontsource/nunito/400.css';
+import '@fontsource/nunito/400-italic.css';
+
 
 const router = createBrowserRouter([
   { path: "/events/:id", element: <EventsPage /> },
-  { path: "/health/:id", element: <HealthPage />},      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
-  { path: "/:id", element: <HomePage />},             // puede ingresar al HomePage y si no es redireccionado a LoginPage
-  { path: "/login", element: <LoginPage />},
-  { path: "/", element: <HomePage />},    
-  { path: "/notices/:id", element: <NoticesPage />},
-  { path: "/profile/:id", element: <ProfilePage />},
-  { path: "/publish/:id", element: <PublishPage />},
-  { path: "/changepass", element: <ChangePassword/>},
-  { path: "/recovery", element: <RecoveryPage />},
-  { path: "/register", element: <RegisterPage />},
-  { path: "/services/:id", element: <ServicesPage />},
-  { path: "/notificaciones/:id", element: <Notificaciones />},
-  { path: "/favorites/:id", element: <Favorites />},
-  { path: "/anadir/:id", element: <AnadirFavoritos />},
+  { path: "/health/:id", element: <HealthPage /> },      // Como anadir el useParams en esta ruta y agregar una condicional si el usuario esta logeado
+  { path: "/:id", element: <HomePage /> },             // puede ingresar al HomePage y si no es redireccionado a LoginPage
+  { path: "/login", element: <LoginPage /> },
+  { path: "/", element: <HomePage /> },
+  { path: "/notices/:id", element: <NoticesPage /> },
+  { path: "/profile/:id", element: <ProfilePage /> },
+  { path: "/publish/:id", element: <PublishPage /> },
+  { path: "/changepass", element: <ChangePassword /> },
+  { path: "/recovery", element: <RecoveryPage /> },
+  { path: "/register", element: <RegisterPage /> },
+  { path: "/services/:id", element: <ServicesPage /> },
+  { path: "/notificaciones/:id", element: <Notificaciones /> },
+  { path: "/favorites/:id", element: <Favorites /> },
+  { path: "/anadir/:id", element: <AnadirFavoritos /> },
 
 ]);
 

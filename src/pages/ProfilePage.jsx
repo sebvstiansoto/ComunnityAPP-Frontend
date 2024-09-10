@@ -162,7 +162,7 @@ export function ProfilePage() {
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="btn btn-warning btn-outline-dark fw-medium mb-3"
+                  className="input-costum btn btn-warning btn-outline-dark fw-bold mb-3"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
                 ><i class="bi bi-gear-fill me-1"></i>
@@ -256,12 +256,12 @@ export function ProfilePage() {
                     value={biografia}
                     onChange={changeBiografia}
                     style={{
-                      resize: "none", // Desactiva el redimensionamiento manual
-                      overflow: "hidden", // Oculta las barras de desplazamiento
-                      height: "auto", // Permite que el contenido expanda el textarea
-                      maxHeight: "150px", // Define una altura máxima para el scroll
-                      overflowY: "auto", // Permite el scroll vertical sin mostrar la barra
-                      paddingRight: "10px", // Añade un poco de espacio para el scroll "invisible"
+                      resize: "none",
+                      overflow: "hidden",
+                      height: "auto",
+                      maxHeight: "150px",
+                      overflowY: "auto",
+                      paddingRight: "10px",
                     }}
                   ></textarea>
                   <p></p>
@@ -271,14 +271,7 @@ export function ProfilePage() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
-                onClick={closeModalWithoutSaving}
-              >
-                Cerrar
-              </button>
-              <button
-                type="button"
-                className="btn btn-warning btn-outline-dark fw-medium"
+                className="input-costum btn btn-warning btn-outline-dark fw-bold"
                 onClick={sendData}
               ><i class="bi bi-check-circle-fill me-1"></i>
                 Guardar cambios

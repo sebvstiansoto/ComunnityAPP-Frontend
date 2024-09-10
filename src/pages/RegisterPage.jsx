@@ -84,7 +84,7 @@ export function RegisterPage() {
                             <label htmlFor="validationDefault02" className="form-label text-success-emphasis fw-semibold">Email</label>
                             <input
                                 type="email"
-                                className="form-control border-2 border-success-subtle"
+                                className="input-costum form-control border-2 border-success-subtle"
                                 id="validationDefault02"
                                 placeholder="usuario@gmail.com"
                                 required
@@ -98,7 +98,7 @@ export function RegisterPage() {
                                 <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle" id="inputGroupPrepend2">@</span>
                                 <input
                                     type="text"
-                                    className="form-control border-2 border-success-subtle"
+                                    className="input-costum form-control border-2 border-success-subtle"
                                     id="validationDefaultUsername"
                                     placeholder="Nombre de usuario"
                                     required
@@ -111,7 +111,7 @@ export function RegisterPage() {
                             <label htmlFor="validationDefaultPassword" className="form-label text-success-emphasis fw-semibold">Password</label>
                             <input
                                 type="password"
-                                className="form-control border-2 border-success-subtle"
+                                className="input-costum form-control border-2 border-success-subtle"
                                 id="validationDefaultPassword"
                                 placeholder="Contraseña"
                                 required
@@ -123,7 +123,7 @@ export function RegisterPage() {
                             <label htmlFor="validationDefaultDocument" className="form-label text-success-emphasis fw-semibold">Número de documento</label>
                             <input
                                 type="text"
-                                className="form-control border-2 border-success-subtle"
+                                className="input-costum form-control border-2 border-success-subtle"
                                 id="validationDefaultDocument"
                                 placeholder="00000000-0"
                                 required
@@ -137,7 +137,7 @@ export function RegisterPage() {
                                 <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle">+569</span>
                                 <input
                                     type="tel"
-                                    className="form-control border-2 border-success-subtle"
+                                    className="input-costum form-control border-2 border-success-subtle"
                                     id="validationDefaultPhone"
                                     placeholder="Número de teléfono"
                                     required
@@ -163,7 +163,7 @@ export function RegisterPage() {
                             </div>
                         </div>
                         <div className="col-12 text-center">
-                            <button className="btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>
+                            <button className="custom-button btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>
                         </div>
                     </form>
                 </div>

@@ -29,17 +29,10 @@
 
 .bio-paragraph {
   background-color: rgb(243, 243, 243);
-  /* Fondo blanco */
   padding: 20px;
-  /* Espaciado interno */
   border-radius: 5%;
-  /* Esquinas redondeadas opcional */
   display: inline-block;
-  /* Ajusta el tamaño del cuadro al contenido */
   max-width: 100%;
-  /* Evita que el cuadro sea más grande que el contenedor */
   word-wrap: break-word;
-  /* Permite que las palabras largas se dividan */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Sombra más pronunciada */
 }

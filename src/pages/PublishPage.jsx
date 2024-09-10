@@ -91,7 +91,7 @@ export function PublishPage() {
                 <input
                   onChange={titleChange}
                   type="text"
-                  className="form-control mb-4 border border-success border-opacity-50"
+                  className="input-costum form-control mb-4 border border-success border-opacity-50"
                   id="titulo"
                   placeholder="Ingresa el título"
                 />
@@ -100,7 +100,7 @@ export function PublishPage() {
                 <label htmlFor="seccion" className="mb-4 fw-semibold text-success-emphasis">Sección</label>
                 <select
                   onChange={sectionChange}
-                  className="form-control mb-5 border border-success border-opacity-50"
+                  className="input-costum form-control mb-5 border border-success border-opacity-50"
                   id="seccion"
                   value={seccionPublicacion}
                 >
@@ -113,13 +113,13 @@ export function PublishPage() {
               </div>
               <textarea
                 onChange={informationChange}
-                className="form-control mb-4 border border-success border-opacity-50"
+                className="input-costum form-control mb-4 border border-success border-opacity-50"
                 placeholder="Descripción de la publicación"
                 rows="7"
               ></textarea>
             </div>
             <div className="d-flex justify-content-center m-0">
-              <button className="btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData}>
+              <button className="input-costum btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData}>
                 <i className="bi bi-check-circle-fill me-2"></i>
                 Publicar
               </button>
