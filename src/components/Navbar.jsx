@@ -7,7 +7,7 @@ import homeIcon from '../assets/home.png';
 import powerIcon from '../assets/power.png';
 import './../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap'; // Asegúrate de que react-bootstrap esté instalado
+import { Modal, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 const Navbar = () => {
@@ -145,7 +145,7 @@ const Navbar = () => {
               <ul className="dropdown-menu">
                 <li>
                   <button
-                    className="dropdown-item"
+                    className="custom-font dropdown-item"
                     onClick={redirectNotices}
                   >
                     Noticias
@@ -153,7 +153,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    className="dropdown-item"
+                    className="custom-font dropdown-item"
                     onClick={redirectHealth}
                   >
                     Salud
@@ -161,7 +161,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    className="dropdown-item"
+                    className="custom-font dropdown-item"
                     onClick={redirectServices}
                   >
                     Servicios
@@ -169,7 +169,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    className="dropdown-item"
+                    className="custom-font dropdown-item"
                     onClick={redirectEvents}
                   >
                     Eventos
@@ -181,16 +181,13 @@ const Navbar = () => {
 
           <div className="d-flex justify-content-end">
             <button
-              className="btn btn-warning btn-outline-dark me-2"
+              className="custom-font fs-6 fw-medium btn btn-warning btn-outline-dark me-2"
               onClick={redirectPublish}
-              style={{
-                fontSize: "0.8rem"
-            }}
             >
               Publicar
             </button>
 
-            <button className="btn btn-danger" onClick={handleLogout}>
+            <button className="btn btn-danger border border-secondary" onClick={handleLogout}>
               <img width="15px" height="15px" src={powerIcon} alt="Logout" />
             </button>
 

@@ -28,13 +28,13 @@ export function Publicacion({ publicacion }) {
                 id_publicacion: publicacionId,
             }),
         })
-        .then((response) => response.json())
-        .then((responseConverted) => {
-            console.log(responseConverted);
-        })
-        .catch((error) => {
-            console.error("Error al enviar notificación:", error);
-        });
+            .then((response) => response.json())
+            .then((responseConverted) => {
+                console.log(responseConverted);
+            })
+            .catch((error) => {
+                console.error("Error al enviar notificación:", error);
+            });
     }
 
     function sendData(e) {
@@ -51,24 +51,24 @@ export function Publicacion({ publicacion }) {
                 id_usuario: parseInt(userId),
             }),
         })
-        .then((response) => {
-            if (response.status === 201) {
-                return response.json();  // Favorito añadido correctamente
-            } else if (response.status === 409) {
-                throw new Error("La publicación ya está en tus favoritos.");
-            } else {
-                throw new Error("Hubo un error al añadir a favoritos.");
-            }
-        })
-        .then((responseConverted) => {
-            setModalMessage("Favorito añadido correctamente.");
-            setShowModal(true);
-        })
-        .catch((error) => {
-            setModalMessage(error.message);
-            setShowModal(true);
-            console.error("Error al añadir favorito:", error);
-        });
+            .then((response) => {
+                if (response.status === 201) {
+                    return response.json();  // Favorito añadido correctamente
+                } else if (response.status === 409) {
+                    throw new Error("La publicación ya está en tus favoritos.");
+                } else {
+                    throw new Error("Hubo un error al añadir a favoritos.");
+                }
+            })
+            .then((responseConverted) => {
+                setModalMessage("Favorito añadido correctamente.");
+                setShowModal(true);
+            })
+            .catch((error) => {
+                setModalMessage(error.message);
+                setShowModal(true);
+                console.error("Error al añadir favorito:", error);
+            });
     }
 
     function handleAddToFavorites(e) {
@@ -104,10 +104,10 @@ export function Publicacion({ publicacion }) {
             style={{ width: "500px", height: "auto" }}
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
-                <div>
-                    <div className="card-title d-flex gap-2 align-items-center" style={{cursor: "pointer"}} onClick={() => navigate(`/profile/${publicacion.id_usuario}`)}>
-                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle "/>
-                        <i>{publicacion.nombre_usuario}</i> 
+                <div className="custom-font">
+                    <div className="card-title d-flex gap-2 align-items-center" style={{ cursor: "pointer" }} onClick={() => navigate(`/profile/${publicacion.id_usuario}`)}>
+                        <img src={publicacion.img_perfil || "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"} alt="" width={30} height={30} className="rounded-circle " />
+                        <i>{publicacion.nombre_usuario}</i>
                     </div>
                     <h4 className="card-title">{publicacion.titulo}</h4>
                     <p className="card-text">{publicacion.descripcion}</p>

@@ -18,7 +18,7 @@ const Footer = () => {
                 <div className="text-center mb-3">
                     <a
                         href="#"
-                        className="text-primary me-3"
+                        className="custom-font fs-6 fw-bold text-primary me-3"
                         data-bs-toggle="modal"
                         data-bs-target="#faqModal"
                     >
@@ -26,7 +26,7 @@ const Footer = () => {
                     </a>
                     <a
                         href="#"
-                        className="text-primary"
+                        className="custom-font fs-6 fw-bold text-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#privacyModal"
                     >
@@ -107,7 +107,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="text-center mt-3">
+                <div className="custom-font fs-6 fw-bold text-center mt-3">
                     <a href="mailto:comunidapp.4geek@gmail.com" className="text-primary">
                         Comunicate con Comunidapp
                     </a>

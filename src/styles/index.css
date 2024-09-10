@@ -35,10 +35,6 @@ label {
     font-size: large;
 }
 
-.input-costum {
-    font-family: 'Nunito', sans-serif;
-}
-
 h3 {
     font-family: 'Nunito', sans-serif;
     font-weight: bolder;
@@ -53,6 +49,6 @@ h6 {
     font-weight: bolder;
 }
 
-.custom-button {
+.custom-font {
     font-family: 'Nunito', sans-serif;
 }

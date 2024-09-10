@@ -162,7 +162,7 @@ export function ProfilePage() {
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="input-costum btn btn-warning btn-outline-dark fw-bold mb-3"
+                  className="custom-font btn btn-warning btn-outline-dark fw-bold mb-3"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
                 ><i class="bi bi-gear-fill me-1"></i>
@@ -198,7 +198,7 @@ export function ProfilePage() {
           <div className="modal-content">
             <div className="modal-header">
               <h5
-                className="modal-title text-success-emphasis"
+                className="custom-font fw-bold modal-title text-success-emphasis"
                 id="editProfileModalLabel"
               >
                 Editar Perfil
@@ -228,7 +228,7 @@ export function ProfilePage() {
                   />
                   <input
                     type="file"
-                    className="form-control-file"
+                    className="custom-font form-control-file"
                     id="profilePic"
                     onChange={changeFotoPerfil}
                   />
@@ -239,7 +239,7 @@ export function ProfilePage() {
                   </label>
                   <input
                     type="file"
-                    className="form-control-file"
+                    className="custom-font form-control-file"
                     id="bannerPic"
                     onChange={changeBanner}
                   />
@@ -249,7 +249,7 @@ export function ProfilePage() {
                     Biografía
                   </label>
                   <textarea
-                    className="form-control"
+                    className="custom-font form-control"
                     id="bio"
                     rows="3"
                     placeholder="Redacta tu biografia..."
@@ -271,7 +271,7 @@ export function ProfilePage() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="input-costum btn btn-warning btn-outline-dark fw-bold"
+                className="custom-font btn btn-warning btn-outline-dark fw-bold"
                 onClick={sendData}
               ><i class="bi bi-check-circle-fill me-1"></i>
                 Guardar cambios
