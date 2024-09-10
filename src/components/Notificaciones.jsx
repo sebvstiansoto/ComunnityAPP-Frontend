@@ -44,6 +44,7 @@ export function Notificaciones() {
   }, [params.id]);
 
   return (
+    <>
     <div>
       <h2>Notificaciones</h2>
       {loading ? (
@@ -61,7 +62,7 @@ export function Notificaciones() {
       )}
     </div>
     <Footer />
-   </React.Fragment>
+   </>
   );
 }
 
