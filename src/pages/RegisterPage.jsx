@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer.jsx";
+import Loading from "../assets/loading.gif";
 
 export function RegisterPage() {
+    let [loading, setLoading] = useState(false);
     let [nombre_usuario, setUsername] = useState("");
     let [contraseña, setPassword] = useState("");
     let [email, setEmail] = useState("");
@@ -45,6 +47,8 @@ export function RegisterPage() {
         console.log({ nombre_usuario, contraseña, email, telefono, identificacion });
         console.log("Todo preparado para enviar a mi backend 😀");
 
+        setLoading(true);
+    
         fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/registro', {
             method: 'POST',
             headers: {
@@ -60,14 +64,17 @@ export function RegisterPage() {
         })
             .then((response) => {
                 if (!response.ok) {
+                    setLoading(false);
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(() => {
+                setLoading(false);
                 navigate("/");
             })
             .catch((error) => {
+                setLoading(false);
                 console.error('Ups algo salió mal 🙄', error);
             });
     }
@@ -163,7 +170,10 @@ export function RegisterPage() {
                             </div>
                         </div>
                         <div className="col-12 text-center">
-                            <button className="custom-font btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>
+
+                            { (loading) ? <img src={Loading} alt="cargando" /> : <button className="custom-font btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>  }
+
+                            
                         </div>
                     </form>
                 </div>
