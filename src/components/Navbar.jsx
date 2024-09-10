@@ -7,17 +7,17 @@ import homeIcon from '../assets/home.png';
 import powerIcon from '../assets/power.png';
 import './../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap'; // Asegúrate de que react-bootstrap esté instalado
+import { Modal, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import Notificaciones from './Notificaciones';
 
 const Navbar = () => {
   const [selectedButton, setSelectedButton] = useState('');
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showNotificationModal, setShowNotificationModal] = useState(false); // Estado para controlar el modal de notificaciones
 
   const navigate = useNavigate();
   const params = useParams();
-  //const id_usuario = localStorage.getItem("id_usuario");
-
 
   function redirectProfile() {
     navigate('/profile/' + params.id);
@@ -27,8 +27,8 @@ const Navbar = () => {
     navigate('/favorites/' + params.id);
   }
 
-  function redirectNotification() {
-    navigate('/notificaciones/' + params.id);
+  function handleNotifications() {
+    setShowNotificationModal(true);
   }
 
   function redirectHome() {
@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav id="navbar" className="navbar bg-body-tertiary  fixed-top rounded-3" style={{}}>
+      <nav id="navbar" className="navbar bg-body-tertiary fixed-top rounded-3" style={{}}>
         <div className="container-fluid">
           <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
 
@@ -123,7 +123,7 @@ const Navbar = () => {
               name="btnradio"
               id="btnradio4"
               autoComplete="off"
-              onClick={redirectNotification}
+              onClick={handleNotifications} // Se abre el modal de notificaciones
             />
             <label
               className="btn"
@@ -185,7 +185,7 @@ const Navbar = () => {
               onClick={redirectPublish}
               style={{
                 fontSize: "0.8rem"
-            }}
+              }}
             >
               Publicar
             </button>
@@ -207,6 +207,24 @@ const Navbar = () => {
         <Modal.Footer>
           <Button variant="primary" onClick={confirmLogout}>
             Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal para notificaciones */}
+      <Modal show={showNotificationModal} onHide={() => setShowNotificationModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Notificaciones</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            {/* Aquí puedes mapear las notificaciones si las tienes como un array */}
+            <Notificaciones />
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowNotificationModal(false)}>
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>

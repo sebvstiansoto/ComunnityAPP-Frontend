@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx';
+import Footer from '../components/Footer.jsx';
 
 export function ServicesPage() {
 
@@ -23,6 +24,7 @@ console.log (publicaciones)
                         <Publicacion publicacion={publicacion} key={index} />
                     ))}
                 </div>
+                <Footer />
             </main>
         </React.Fragment>
     );
