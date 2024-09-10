@@ -52,7 +52,7 @@ export function RecoveryPage() {
                                     <div className="form-group">
                                         <input
                                             type="email"
-                                            className="form-control m-auto"
+                                            className="custom-font form-control m-auto"
                                             id="email"
                                             placeholder="Introduce tu correo electrónico"
                                             required
@@ -63,7 +63,7 @@ export function RecoveryPage() {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="btn btn-warning btn-outline-dark mt-3"
+                                        className="custom-font btn btn-warning btn-outline-dark mt-3"
                                     >
                                         Enviar
                                     </button>

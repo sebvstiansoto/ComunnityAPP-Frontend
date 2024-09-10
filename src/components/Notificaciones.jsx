@@ -26,34 +26,36 @@ function tiempoTranscurrido(fechaPublicacion) {
 
 export function Notificaciones() {
   const params = useParams();
-  const [notificacion, setNotificacion] = useState([]);
+  const [notificaciones, setNotificaciones] = useState([]);
+  const [loading, setLoading] = useState(true);  // Agregado para manejar el estado de carga
 
   useEffect(() => {
-    fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/" + params.id)
+    setLoading(true); // Comienza a cargar
+    fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + params.id)
       .then((response) => response.json())
-      .then((responseConverted) => {
-        setNotificacion(responseConverted); 
-        console.log(responseConverted);  
+      .then((data) => {
+        setNotificaciones(data);
+        setLoading(false); // Deja de cargar cuando los datos han sido recibidos
       })
       .catch((error) => {
         console.error("Error al obtener notificaciones:", error);
+        setLoading(false); // También dejamos de cargar en caso de error
       });
   }, [params.id]);
 
   return (
-    <React.Fragment>
-    <Navbar />
-    <div className="container mt-1">
-      {notificacion.length > 0 ? (
-        <table className="table table-striped">
-          <tbody>
-            {notificacion.map((notificacion, index) => (
-              <tr key={index}>
-                <td>{notificacion.nombre_usuario} ha guardado esta publicación {tiempoTranscurrido(notificacion.hora_publicado)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div>
+      <h2>Notificaciones</h2>
+      {loading ? (
+        <p>Cargando notificaciones...</p>
+      ) : notificaciones.length > 0 ? (
+        notificaciones.map((notificacion) => (
+          <div key={notificacion.id} className="notificacion">
+            <h4>{notificacion.nombre_usuario} añadió tu publicación "{notificacion.titulo}" a favoritos</h4>
+            <p>Descripción: {notificacion.descripcion}</p>
+            <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
+          </div>
+        ))
       ) : (
         <p>No tienes notificaciones.</p>
       )}

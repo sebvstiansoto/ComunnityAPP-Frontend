@@ -3,11 +3,9 @@ import "../styles/ProfilePage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import { PublicacionPage } from "../components/PublicacionPage.jsx";
 
 export function ProfilePage() {
-  const navigate = useNavigate();
   const params = useParams();
 
   const [username, setUsername] = useState("");
@@ -26,7 +24,7 @@ export function ProfilePage() {
   function getUserInfo() {
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
-      params.id
+        params.id
     )
       .then((response) => {
         return response.json();
@@ -75,31 +73,31 @@ export function ProfilePage() {
   function sendData(e) {
     e.preventDefault();
     console.log("Todo preparado para enviar a mi backend 😀");
-
+  
     const formData = new FormData();
-
+  
     // Solo agregamos los campos que han sido modificados
     if (biografia !== originalBiografia) {
       formData.append("biografia", biografia);
     }
-
+  
     if (fotoPerfilPreviewFile) {
       formData.append("img_perfil", fotoPerfilPreviewFile);
     }
-
+  
     if (bannerPreviewFile) {
       formData.append("banner", bannerPreviewFile);
     }
-
+  
     // Si no hay cambios, no hacemos la petición
     if (!formData.has("biografia") && !formData.has("img_perfil") && !formData.has("banner")) {
       console.log("No hay cambios que guardar");
       return;
     }
-
+  
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
-      params.id,
+        params.id,
       {
         method: "PATCH",
         body: formData,
@@ -147,42 +145,40 @@ export function ProfilePage() {
         />
       </div>
 
-      <div className="container mt-5 mb-5 me-5">
+      <div className="container mt-5 mb-5">
         <div className="row">
-          <div className="col-md-4 text-center profile-container">
+          <div className="col-md-3 text-center profile-container">
             <img
               src={
                 fotoPerfil ||
                 "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
               }
               alt="Profile Picture"
-              className="profile-image border border-secondary mb-3"
+              className="profile-image border border-success"
             />
             <div className="d-flex justify-content-between align-items-center">
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="custom-font btn btn-warning btn-outline-dark fw-bold mb-3"
+                  className="btn btn-warning btn-outline-dark mt-3"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
-                ><i class="bi bi-gear-fill me-1"></i>
+                >
                   Editar Perfil
                 </button>
               ) : (
                 ""
               )}
             </div>
-            <h2 className="mb-0">@<i>{username}</i></h2>
-            <h2 className="text-success-emphasis fw-bold mb-3 mt-2">Biografía</h2>
-            <p className="bio-paragraph border border-0">
+            <h2>@<i>{username}</i></h2>
+            <h5>{email}</h5>
+            <h2 className="text-success-emphasis fw-bold">Biografía</h2>
+            <p className="border border-0">
               {biografia || "Cuentanos sobre ti..."}
             </p>
-            <h5>{email}</h5>
-
-
           </div>
-          <div className="col-md-8">
-            <PublicacionPage />
+          <div className="col-md-9">
+            <PublicacionPage /> 
           </div>
         </div>
       </div>
@@ -198,7 +194,7 @@ export function ProfilePage() {
           <div className="modal-content">
             <div className="modal-header">
               <h5
-                className="custom-font fw-bold modal-title text-success-emphasis"
+                className="modal-title text-success"
                 id="editProfileModalLabel"
               >
                 Editar Perfil
@@ -208,7 +204,7 @@ export function ProfilePage() {
                 className="btn-close"
                 onClick={closeModalWithoutSaving}
                 aria-label="Close"
-
+                
               ></button>
             </div>
             <div className="modal-body bg-success-subtle">
@@ -228,7 +224,7 @@ export function ProfilePage() {
                   />
                   <input
                     type="file"
-                    className="custom-font form-control-file"
+                    className="form-control-file"
                     id="profilePic"
                     onChange={changeFotoPerfil}
                   />
@@ -239,7 +235,7 @@ export function ProfilePage() {
                   </label>
                   <input
                     type="file"
-                    className="custom-font form-control-file"
+                    className="form-control-file"
                     id="bannerPic"
                     onChange={changeBanner}
                   />
@@ -249,19 +245,19 @@ export function ProfilePage() {
                     Biografía
                   </label>
                   <textarea
-                    className="custom-font form-control"
+                    className="form-control"
                     id="bio"
                     rows="3"
                     placeholder="Redacta tu biografia..."
                     value={biografia}
                     onChange={changeBiografia}
                     style={{
-                      resize: "none",
-                      overflow: "hidden",
-                      height: "auto",
-                      maxHeight: "150px",
-                      overflowY: "auto",
-                      paddingRight: "10px",
+                      resize: "none", // Desactiva el redimensionamiento manual
+                      overflow: "hidden", // Oculta las barras de desplazamiento
+                      height: "auto", // Permite que el contenido expanda el textarea
+                      maxHeight: "150px", // Define una altura máxima para el scroll
+                      overflowY: "auto", // Permite el scroll vertical sin mostrar la barra
+                      paddingRight: "10px", // Añade un poco de espacio para el scroll "invisible"
                     }}
                   ></textarea>
                   <p></p>
@@ -271,9 +267,16 @@ export function ProfilePage() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="custom-font btn btn-warning btn-outline-dark fw-bold"
+                className="btn btn-secondary"
+                onClick={closeModalWithoutSaving}
+              >
+                Cerrar
+              </button>
+              <button
+                type="button"
+                className="btn btn-warning btn-outline-dark"
                 onClick={sendData}
-              ><i class="bi bi-check-circle-fill me-1"></i>
+              >
                 Guardar cambios
               </button>
             </div>

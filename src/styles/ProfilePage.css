@@ -1,12 +1,18 @@
 .banner {
-  background-size: cover;
+  width: 100%;
   height: 300px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  /* Ajusta esta altura según lo que necesites */
+  overflow: hidden;
+  position: relative;
 }
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Mantiene la proporción de la imagen mientras cubre el área del banner */
+}
+
 
 .profile-image {
   width: 200px;
@@ -19,4 +25,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.bio-paragraph {
+  background-color: rgb(243, 243, 243);
+  padding: 20px;
+  border-radius: 5%;
+  display: inline-block;
+  max-width: 100%;
+  word-wrap: break-word;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
