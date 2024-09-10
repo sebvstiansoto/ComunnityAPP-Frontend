@@ -75,28 +75,28 @@ export function ProfilePage() {
   function sendData(e) {
     e.preventDefault();
     console.log("Todo preparado para enviar a mi backend 😀");
-  
+
     const formData = new FormData();
-  
+
     // Solo agregamos los campos que han sido modificados
     if (biografia !== originalBiografia) {
       formData.append("biografia", biografia);
     }
-  
+
     if (fotoPerfilPreviewFile) {
       formData.append("img_perfil", fotoPerfilPreviewFile);
     }
-  
+
     if (bannerPreviewFile) {
       formData.append("banner", bannerPreviewFile);
     }
-  
+
     // Si no hay cambios, no hacemos la petición
     if (!formData.has("biografia") && !formData.has("img_perfil") && !formData.has("banner")) {
       console.log("No hay cambios que guardar");
       return;
     }
-  
+
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
       params.id,
@@ -147,22 +147,22 @@ export function ProfilePage() {
         />
       </div>
 
-      <div className="container mt-5 mb-5">
+      <div className="container mt-5 mb-5 me-5">
         <div className="row">
-          <div className="col-md-3 text-center profile-container">
+          <div className="col-md-4 text-center profile-container">
             <img
               src={
                 fotoPerfil ||
                 "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
               }
               alt="Profile Picture"
-              className="profile-image border border-secondary"
+              className="profile-image border border-secondary mb-3"
             />
             <div className="d-flex justify-content-between align-items-center">
 
               {params.id == localStorage.getItem("id_usuario") ? (
                 <button
-                  className="btn btn-warning btn-outline-dark fw-medium"
+                  className="btn btn-warning btn-outline-dark fw-medium mb-3"
                   data-bs-toggle="modal"
                   data-bs-target="#editProfileModal"
                 ><i class="bi bi-gear-fill me-1"></i>
@@ -172,15 +172,17 @@ export function ProfilePage() {
                 ""
               )}
             </div>
-            <h2>@<i>{username}</i></h2>
-            <h5>{email}</h5>
-            <h2 className="text-success-emphasis fw-bold">Biografía</h2>
-            <p className="border border-0">
+            <h2 className="mb-0">@<i>{username}</i></h2>
+            <h2 className="text-success-emphasis fw-bold mb-3 mt-2">Biografía</h2>
+            <p className="bio-paragraph border border-0">
               {biografia || "Cuentanos sobre ti..."}
             </p>
+            <h5>{email}</h5>
+
+
           </div>
-          <div className="col-md-9">
-            <PublicacionPage /> 
+          <div className="col-md-8">
+            <PublicacionPage />
           </div>
         </div>
       </div>
@@ -206,7 +208,7 @@ export function ProfilePage() {
                 className="btn-close"
                 onClick={closeModalWithoutSaving}
                 aria-label="Close"
-                
+
               ></button>
             </div>
             <div className="modal-body bg-success-subtle">
