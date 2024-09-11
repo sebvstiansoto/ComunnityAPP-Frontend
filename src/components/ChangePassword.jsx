@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as jwt_decode from 'jwt-decode';
+import { useParams } from "react-router-dom";
 
 
 export function ChangePassword() {
 
     const navigate = useNavigate();
+    const params = useParams();
+
 
     const [currentPassword, setCurrentPassword] = useState(""); // Nueva línea
     const [newPassword, setNewPassword] = useState("");
@@ -48,7 +51,7 @@ export function ChangePassword() {
             return;
         }
 
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/actualizarpwd', {  // Cambié la URL a /actualizarpwd
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/actualizarpwd/' + params.id, {  // Cambié la URL a /actualizarpwd
             method: 'PATCH',  // Cambié a PATCH ya que es lo que espera el backend
             headers: {
                 'Content-Type': 'application/json',

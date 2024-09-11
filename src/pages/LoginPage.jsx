@@ -98,20 +98,13 @@ export function LoginPage() {
               </button>}
             </div>
 
-            <div className="d-flex justify-content-between mb-3">
+            <div className="d-flex justify-content-center mb-3">
               <button
                 onClick={redirectRegister}
                 className="custom-font btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
                 type="submit"
               >
                 Regístrate
-              </button>
-              <button
-                onClick={redirectRecovery}
-                className="custom-font btn btn-warning btn-outline-dark col-6 m-1 fw-bold"
-                type="submit"
-              >
-                ¿Olvidaste tu contraseña?
               </button>
             </div>
             <Footer />
