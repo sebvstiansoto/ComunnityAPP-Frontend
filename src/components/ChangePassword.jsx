@@ -1,99 +1,140 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as jwt_decode from 'jwt-decode';
+
 
 export function ChangePassword() {
-    const [contraseña, setContraseña] = useState('');
-    const [confirmarContraseña, setConfirmarContraseña] = useState('');
-    const [error, setError] = useState('');
-    const [token, setToken] = useState('');
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tokenFromUrl = urlParams.get('token');
-        if (tokenFromUrl) {
-            setToken(tokenFromUrl);
-        } else {
-            setError('Token de recuperación no encontrado en la URL.');
+    const navigate = useNavigate();
+
+    const [currentPassword, setCurrentPassword] = useState(""); // Nueva línea
+    const [newPassword, setNewPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+    const [isPasswordsMatch, setIsPasswordsMatch] = useState(false);
+
+    function getEmailFromToken() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return null;
         }
-    }, []);
-
-    function changeContraseña(e) {
-        setContraseña(e.target.value);
+    
+        const decodedToken = jwt_decode(token);
+        return decodedToken.email; // Asegúrate de que el email esté presente en el token
     }
     
-    function changeConfirmarContraseña(e) {
-        setConfirmarContraseña(e.target.value);
+    const email = getEmailFromToken(); // Obtiene el email dinámicamente
+
+    function handleCurrentPasswordChange(e) { // Nueva función
+        setCurrentPassword(e.target.value);
     }
 
-    function sendData(e) {
-        e.preventDefault();
+    function handleNewPasswordChange(e) {
+        setNewPassword(e.target.value);
+        validatePasswords(e.target.value, repeatPassword);
+    }
 
-        setError('');
+    function handleRepeatPasswordChange(e) {
+        setRepeatPassword(e.target.value);
+        validatePasswords(newPassword, e.target.value);
+    }
 
-        if (contraseña !== confirmarContraseña) {
-            setError('Las contraseñas no coinciden.');
+    function validatePasswords(newPass, repeatPass) {
+        setIsPasswordsMatch(newPass === repeatPass && newPass !== "");
+    }
+
+    function handleClick() {
+        if (!isPasswordsMatch) {
+            alert("Las contraseñas no coinciden o están vacías.");
             return;
         }
 
-        if (!token) {
-            setError('Token de recuperación no válido.');
-            return;
-        }
-
-        fetch('http://localhost:3000/newpassword', {
-            method: 'POST',
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/actualizarpwd', {  // Cambié la URL a /actualizarpwd
+            method: 'PATCH',  // Cambié a PATCH ya que es lo que espera el backend
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
-                contraseña: contraseña,
-                token: token  
+                email: getEmailFromToken(),  // Asegúrate de pasar el email aquí o obtenerlo dinámicamente
+                contraseña_actual: currentPassword,
+                nueva_contraseña: newPassword,
             }),
         })
         .then((response) => {
             if (!response.ok) {
-                return response.text().then((text) => {
-                    throw new Error(`HTTP error! status: ${response.status}, details: ${text}`);
-                });
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then((responseConverted) => {
-            alert(responseConverted.message + " 🤩🙂🤩🤗");
-            setContraseña('');
-            setConfirmarContraseña('');
+            alert("Contraseña actualizada con éxito");
+            navigate("/login");
         })
         .catch((error) => {
             console.error('Ups algo salió mal 🙄', error);
-            setError('Hubo un problema al actualizar la contraseña. Por favor, intenta nuevamente.');
         });
     }
 
     return (
-        <div>
-            <form onSubmit={sendData}>
-                <div className="form-group">
-                    <label htmlFor="contraseña">Contraseña Nueva</label>
-                    <input 
-                        type="password" 
-                        className="form-control" 
-                        id="contraseña" 
-                        value={contraseña} 
-                        onChange={changeContraseña} 
-                    />
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5 border border-success">
+                        <div className="card-header text-center bg-warning">
+                            <h3>Actualizar Contraseña</h3>
+                        </div>
+                        <div className="card-body">
+                            <div className="form-group mb-3">
+                                <label htmlFor="currentPassword">Contraseña Actual</label>  {/* Nuevo campo */}
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="currentPassword"
+                                    placeholder="Introduce tu contraseña actual"
+                                    value={currentPassword}
+                                    onChange={handleCurrentPasswordChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="newPassword">Nueva Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="newPassword"
+                                    placeholder="Introduce tu nueva contraseña"
+                                    value={newPassword}
+                                    onChange={handleNewPasswordChange}
+                                    onBlur={() => validatePasswords(newPassword, repeatPassword)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group mb-4">
+                                <label htmlFor="repeatPassword">Repetir Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="repeatPassword"
+                                    placeholder="Repite tu nueva contraseña"
+                                    value={repeatPassword}
+                                    onChange={handleRepeatPasswordChange}
+                                    onBlur={() => validatePasswords(newPassword, repeatPassword)}
+                                    required
+                                />
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <button
+                                    onClick={handleClick}
+                                    type="button"
+                                    className="btn btn-warning btn-outline-dark"
+                                    disabled={!isPasswordsMatch}
+                                >
+                                    Actualizar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="confirmarContraseña">Confirmar Contraseña</label>
-                    <input 
-                        type="password" 
-                        className="form-control" 
-                        id="confirmarContraseña" 
-                        value={confirmarContraseña} 
-                        onChange={changeConfirmarContraseña} 
-                    />
-                </div>
-                {error && <div className="alert alert-danger">{error}</div>}
-                <button type="submit" className="btn btn-primary">Actualizar Contraseña</button>
-            </form>
+            </div>
         </div>
     );
 }
