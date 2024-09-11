@@ -20,12 +20,12 @@ export function PublicacionPage() {
     }, [params.id]); 
 
     return (
-        <div className="container">
+        <div className="">
             {publicaciones.length === 0 ? (
                 <p>No se encontró ninguna publicación.</p>
             ) : (
                 publicaciones.map((publicacion) => (
-                    <div key={publicacion.id_publicacion} className="publicacion-card">
+                    <div key={publicacion.id_publicacion} className="publicacion-card ms-4">
                         <h2>{publicacion.titulo}</h2>
                         <p><strong>Autor:</strong> {publicacion.nombre_usuario}</p>
                         <p><strong>Descripción:</strong> {publicacion.descripcion}</p>

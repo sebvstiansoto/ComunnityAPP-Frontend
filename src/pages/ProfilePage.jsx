@@ -133,7 +133,7 @@ export function ProfilePage() {
 
   return (
     <>
-      <div className="m-5">
+      <div className="mt-5">
         <Navbar />
       </div>
       <div className="banner">
@@ -147,45 +147,49 @@ export function ProfilePage() {
         />
       </div>
 
-      <div className="container mt-5 mb-5 me-5">
-        <div className="row">
-          <div className="col-md-4 text-center profile-container">
-            <img
-              src={
-                fotoPerfil ||
-                "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
-              }
-              alt="Profile Picture"
-              className="profile-image border border-secondary mb-3"
-            />
-            <div className="d-flex justify-content-between align-items-center">
-
-              {params.id == localStorage.getItem("id_usuario") ? (
-                <button
-                  className="custom-font btn btn-warning btn-outline-dark fw-bold mb-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editProfileModal"
-                ><i class="bi bi-gear-fill me-1"></i>
-                  Editar Perfil
-                </button>
-              ) : (
-                ""
-              )}
-            </div>
-            <h2 className="mb-0">@<i>{username}</i></h2>
-            <h2 className="text-success-emphasis fw-bold mb-3 mt-2">Biografía</h2>
-            <p className="bio-paragraph border border-0">
-              {biografia || "Cuentanos sobre ti..."}
-            </p>
-            <h5>{email}</h5>
-
-
-          </div>
-          <div className="col-md-8">
-            <PublicacionPage />
-          </div>
-        </div>
+      <div className="container d-flex flex-column flex-md-row justify-content-between">
+  <div className="d-flex flex-column flex-md-row justify-content-between w-100">
+    
+    <div className="d-flex flex-column align-items-center profile-container w-100 w-md-50 mb-3">
+      <img
+        src={
+          fotoPerfil ||
+          "https://diariocronica1.cdn.net.ar/252/storage252/images/94/29/942948_2fd5ca2e1820ae983b013514ccdd6c63a6a2e01a63890864e8eecbd5b63cd368/lg.webp"
+        }
+        alt="Profile Picture"
+        className="profile-image border border-secondary mb-3"
+      />
+      <div className="">
+        {params.id == localStorage.getItem("id_usuario") ? (
+          <button
+            className="custom-font btn btn-warning btn-outline-dark fw-bold mb-3"
+            data-bs-toggle="modal"
+            data-bs-target="#editProfileModal"
+          >
+            <i className="bi bi-gear-fill me-1"></i>
+            Editar Perfil
+          </button>
+        ) : (
+          ""
+        )}
       </div>
+      <h2 className="mb-0">
+        @<i>{username}</i>
+      </h2>
+      <h2 className="text-success-emphasis fw-bold mb-3 mt-2">Biografía</h2>
+      <p className="bio-paragraph border border-0">
+        {biografia || "Cuentanos sobre ti..."}
+      </p>
+      <h5>{email}</h5>
+    </div>
+
+    <div className="col-12 col-md-8 d-flex w-75 w-md-50 ">
+      <PublicacionPage />
+    </div>
+    
+  </div>
+</div>
+
 
       <div
         className="modal fade"

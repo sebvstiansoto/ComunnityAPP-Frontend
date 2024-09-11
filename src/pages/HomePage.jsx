@@ -48,8 +48,8 @@ export function HomePage() {
                             ))}
                         </div>
                         <div className="col-md-4">
-                            <div className="calendar-container w-75 pt-10">
-                                <Calendar onChange={onChange} value={value} />
+                            <div className="calendar-container w-75 mt-3">
+                                <Calendar onChange={onChange} value={value}/>
                             </div>
                             <WeatherComponent />
                         </div>

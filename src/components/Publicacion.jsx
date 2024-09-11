@@ -101,7 +101,7 @@ export function Publicacion({ publicacion }) {
     return (
         <div
             className="card m-auto d-flex justify-content-center"
-            style={{ width: "500px", height: "auto" }}
+            style={{ width: "70%", height: "auto" }}
         >
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                 <div className="custom-font">

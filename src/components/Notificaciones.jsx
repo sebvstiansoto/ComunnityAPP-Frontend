@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from './Navbar';
 import Footer from './Footer';
 
-// Función para calcular el tiempo transcurrido desde la publicación
 function tiempoTranscurrido(fechaPublicacion) {
   const ahora = new Date();
   const diferenciaEnMilisegundos = ahora - new Date(fechaPublicacion);
@@ -25,44 +23,67 @@ function tiempoTranscurrido(fechaPublicacion) {
 }
 
 export function Notificaciones() {
-  const params = useParams();
   const [notificaciones, setNotificaciones] = useState([]);
-  const [loading, setLoading] = useState(true);  // Agregado para manejar el estado de carga
+  const [loading, setLoading] = useState(true);
+
+  // Obtener el id_usuario desde el localStorage (por ejemplo, el usuario autenticado)
+  const idUsuario = localStorage.getItem("id_usuario");
+
+  if (idUsuario) {
+    useEffect(() => {
+      fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + idUsuario)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener notificaciones");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setNotificaciones(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error al obtener notificaciones:", error);
+          setLoading(false);
+        });
+    }, [idUsuario]);
+  } else {
+    console.error("No se encontró el id_usuario en localStorage");
+  }
 
   useEffect(() => {
-    setLoading(true); // Comienza a cargar
-    fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + params.id)
+    fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/notificaciones/` + idUsuario)
       .then((response) => response.json())
       .then((data) => {
         setNotificaciones(data);
-        setLoading(false); // Deja de cargar cuando los datos han sido recibidos
+        setLoading(false); // Deja de cargar una vez que obtienes las notificaciones
       })
       .catch((error) => {
         console.error("Error al obtener notificaciones:", error);
-        setLoading(false); // También dejamos de cargar en caso de error
+        setLoading(false); // Deja de cargar si hay un error
       });
-  }, [params.id]);
+  }, [idUsuario]);
 
   return (
     <>
-    <div>
-      <h2>Notificaciones</h2>
-      {loading ? (
-        <p>Cargando notificaciones...</p>
-      ) : notificaciones.length > 0 ? (
-        notificaciones.map((notificacion) => (
-          <div key={notificacion.id} className="notificacion">
-            <h4>{notificacion.nombre_usuario} añadió tu publicación "{notificacion.titulo}" a favoritos</h4>
-            <p>Descripción: {notificacion.descripcion}</p>
-            <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
-          </div>
-        ))
-      ) : (
-        <p>No tienes notificaciones.</p>
-      )}
-    </div>
-    <Footer />
-   </>
+      <div>
+        <h2>Notificaciones</h2>
+        {loading ? (
+          <p>Cargando notificaciones...</p>
+        ) : notificaciones.length > 0 ? (
+          notificaciones.map((notificacion) => (
+            <div key={notificacion.id} className="notificacion">
+              <h4>{notificacion.nombre_usuario} añadió tu publicación "{notificacion.titulo}" a favoritos</h4>
+              <p>Descripción: {notificacion.descripcion}</p>
+              <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
+            </div>
+          ))
+        ) : (
+          <p>No tienes notificaciones.</p>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 
