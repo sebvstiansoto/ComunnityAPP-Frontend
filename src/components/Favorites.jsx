@@ -14,6 +14,8 @@ export function Favorites() {
   const params = useParams();
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/favoritos/" + params.id)
@@ -42,14 +44,23 @@ export function Favorites() {
       .then((responseConverted) => {
         if (responseConverted.message === 'Favorito eliminado correctamente') {
           setFavorites(favorites.filter(fav => fav.id_publicacion !== id_publicacion));
-          alert('Publicación eliminada de favoritos');
+          setModalMessage('Publicación eliminada de favoritos');
+          setShowModal(true);
         } else {
-          alert(responseConverted.error || 'Error al eliminar favorito');
+          setModalMessage(responseConverted.error || 'Error al eliminar favorito');
+          setShowModal(true);
         }
       })
       .catch((error) => {
         console.error("Error al eliminar favorito:", error);
+        setModalMessage('Error al eliminar favorito');
+        setShowModal(true);
       });
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setModalMessage('');
   };
 
   return (
@@ -86,7 +97,7 @@ export function Favorites() {
 
                   <div className="d-flex justify-content-between p-3">
                     <a type="button" className="btn btn-outline-success" href={"https://wa.me/" + publicacion.telefono}>
-                      <i class="bi bi-whatsapp"></i>
+                      <i className="bi bi-whatsapp"></i>
                     </a>
                     <button
                       className="custom-button fw-bold btn btn-outline-danger btn-sm"
@@ -103,6 +114,19 @@ export function Favorites() {
         )}
       </div>
 
+      {/* Modal */}
+      {showModal && (
+        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-body d-flex d-flex justify-content-between">
+                <p className='d-flex justify-content-center'>{modalMessage}</p>
+                <button type="button" className="btn btn-primary " onClick={closeModal}>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </React.Fragment>
