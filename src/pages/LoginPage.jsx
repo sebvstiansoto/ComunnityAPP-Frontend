@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer.jsx";
 import { Alert } from 'react-bootstrap';
+import Loading from '../assets/loading.gif'
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,7 +29,7 @@ export function LoginPage() {
 
   function sendData(e) {
     e.preventDefault();
-
+    setLoading(true);
     console.log({ email, contraseña });
     console.log("Preparando para enviar datos al backend");
 
@@ -86,13 +88,14 @@ export function LoginPage() {
             />
 
             <div className="d-flex justify-content-center">
-              <button
+              {loading ? <img src={Loading} alt="cargando" /> : <button
                 className="custom-font btn btn-success btn-outline-dark m-1 col-4 fw-bold text-light"
                 type="button"
                 onClick={sendData}
+                disabled={loading}
               >
-                Ingresar
-              </button>
+                {loading ? "Iniciando Sesion..." : "Ingresar"}
+              </button>}
             </div>
 
             <div className="d-flex justify-content-between mb-3">

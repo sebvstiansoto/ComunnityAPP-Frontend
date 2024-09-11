@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Loading from '../assets/loading.gif'
 
 export function Publicacion({ publicacion }) {
     const navigate = useNavigate();
     const params = useParams();
+    const [loading, setLoading] = useState(false);
 
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
@@ -74,7 +76,6 @@ export function Publicacion({ publicacion }) {
     function handleAddToFavorites(e) {
         e.preventDefault();
         sendData(e);
-        sendNotification(e);
     }
 
     function tiempoTranscurrido(fechaPublicacion) {

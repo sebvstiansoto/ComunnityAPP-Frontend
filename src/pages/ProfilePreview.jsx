@@ -4,9 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { PublicacionPage } from "../components/PublicacionPage.jsx";
+import Loading from '../assets/loading.gif'
 
 export function ProfilePage() {
   const params = useParams();
+  const [loading, setLoading] = useState(false);
 
   const [username, setUsername] = useState("");
   const [biografia, setBiografia] = useState("");
@@ -112,6 +114,7 @@ export function ProfilePage() {
         const modalElement = document.getElementById("editProfileModal");
         const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
@@ -272,13 +275,9 @@ export function ProfilePage() {
               >
                 Cerrar
               </button>
-              <button
-                type="button"
-                className="btn btn-warning btn-outline-dark"
-                onClick={sendData}
-              >
-                Guardar cambios
-              </button>
+
+              {loading ? <img src={Loading} alt="cargando" /> : <button type="submit" className="btn btn-warning btn-outline-dark" onClick={sendData}
+              >{loading ? "Guardando Cambios..." : "Guardar Cambiossssssss"}</button> }
             </div>
           </div>
         </div>

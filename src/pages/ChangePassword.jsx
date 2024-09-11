@@ -1,13 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as jwt_decode from 'jwt-decode';
+
 
 export function ChangePassword() {
 
     const navigate = useNavigate();
 
+    const [currentPassword, setCurrentPassword] = useState(""); // Nueva línea
     const [newPassword, setNewPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [isPasswordsMatch, setIsPasswordsMatch] = useState(false);
+
+    function getEmailFromToken() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return null;
+        }
+    
+        const decodedToken = jwt_decode(token);
+        return decodedToken.email; // Asegúrate de que el email esté presente en el token
+    }
+    
+    const email = getEmailFromToken(); // Obtiene el email dinámicamente
+
+    function handleCurrentPasswordChange(e) { // Nueva función
+        setCurrentPassword(e.target.value);
+    }
 
     function handleNewPasswordChange(e) {
         setNewPassword(e.target.value);
@@ -29,27 +48,25 @@ export function ChangePassword() {
             return;
         }
 
-        console.log('Contraseña actualizada');
-
-        fetch('http://localhost:3000/recuperacion', {
-            method: 'POST',
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/actualizarpwd', {  // Cambié la URL a /actualizarpwd
+            method: 'PATCH',  // Cambié a PATCH ya que es lo que espera el backend
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
-                newPassword,
+                email: getEmailFromToken(),  // Asegúrate de pasar el email aquí o obtenerlo dinámicamente
+                contraseña_actual: currentPassword,
+                nueva_contraseña: newPassword,
             }),
         })
         .then((response) => {
-            console.log('Response Status:', response.status); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then((responseConverted) => {
-            console.log('Response JSON:', responseConverted);
-            console.log('Redirigiendo al login...');
+            alert("Contraseña actualizada con éxito");
             navigate("/login");
         })
         .catch((error) => {
@@ -66,6 +83,18 @@ export function ChangePassword() {
                             <h3>Actualizar Contraseña</h3>
                         </div>
                         <div className="card-body">
+                            <div className="form-group mb-3">
+                                <label htmlFor="currentPassword">Contraseña Actual</label>  {/* Nuevo campo */}
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="currentPassword"
+                                    placeholder="Introduce tu contraseña actual"
+                                    value={currentPassword}
+                                    onChange={handleCurrentPasswordChange}
+                                    required
+                                />
+                            </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="newPassword">Nueva Contraseña</label>
                                 <input

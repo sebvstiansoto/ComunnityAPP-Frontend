@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer.jsx";
 import Loading from "../assets/loading.gif";
+import * as rutHelpers from 'rut-helpers';
 
 export function RegisterPage() {
     let [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ export function RegisterPage() {
     }
 
     function changeIdentification(e) {
+        rutHelpers.rutValidate(identificacion)
         setIdentification(e.target.value);
     }
 
@@ -38,17 +40,45 @@ export function RegisterPage() {
         setIsChecked(e.target.checked);
     }
 
+    function validarFormulario() {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\+569[0-9]{8}$/;
+
+        if (!emailRegex.test(email)) {
+            alert("Por favor, ingrese un correo válido.");
+            return false;
+        }
+        if (nombre_usuario.length < 4) {
+            alert("El nombre de usuario debe tener al menos 4 caracteres.");
+            return false;
+        }
+        if (contraseña.length < 6) {
+            alert("La contraseña debe tener al menos 6 caracteres.");
+            return false;
+        }
+        if (!phoneRegex.test(telefono)) {
+            alert("Por favor, ingrese un número de teléfono válido de 8 dígitos.");
+            return false;
+        }
+        return true;
+    }
+
     function sendData(e) {
         e.preventDefault();
+
         if (!isChecked) {
             alert("Debes aceptar los términos y condiciones.");
             return;
         }
-        console.log({ nombre_usuario, contraseña, email, telefono, identificacion });
-        console.log("Todo preparado para enviar a mi backend 😀");
+
+        if (!validarFormulario()) {
+            return;
+        }
+
+        const formattedPhone = `${telefono}`;
 
         setLoading(true);
-    
+
         fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/registro', {
             method: 'POST',
             headers: {
@@ -58,25 +88,25 @@ export function RegisterPage() {
                 nombre_usuario: nombre_usuario,
                 contraseña: contraseña,
                 email: email,
-                telefono: telefono,
+                telefono: formattedPhone,
                 identificacion: identificacion
             }),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    setLoading(false);
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(() => {
+        .then((response) => {
+            if (!response.ok) {
                 setLoading(false);
-                navigate("/");
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.error('Ups algo salió mal 🙄', error);
-            });
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(() => {
+            setLoading(false);
+            navigate("/");
+        })
+        .catch((error) => {
+            setLoading(false);
+            console.error('Ups algo salió mal 🙄', error);
+        });
     }
 
     return (
@@ -88,26 +118,26 @@ export function RegisterPage() {
                 <div className="d-flex justify-content-center">
                     <form className="row g-3" onSubmit={sendData}>
                         <div className="col-md-6">
-                            <label htmlFor="validationDefault02" className="form-label text-success-emphasis fw-semibold">Email</label>
+                            <label htmlFor="validationDefault02" className="form-label text-success-emphasis fw-semibold">Correo Electronico</label>
                             <input
                                 type="email"
                                 className="custom-font form-control border-2 border-success-subtle"
                                 id="validationDefault02"
-                                placeholder="usuario@gmail.com"
+                                placeholder=""
                                 required
                                 value={email}
                                 onChange={changeEmail}
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="validationDefaultUsername" className="form-label text-success-emphasis fw-semibold">Username</label>
+                            <label htmlFor="validationDefaultUsername" className="form-label text-success-emphasis fw-semibold">Nombre de usuario</label>
                             <div className="input-group">
                                 <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle" id="inputGroupPrepend2">@</span>
                                 <input
                                     type="text"
                                     className="custom-font form-control border-2 border-success-subtle"
                                     id="validationDefaultUsername"
-                                    placeholder="Nombre de usuario"
+                                    placeholder="Al menos 4 caracteres..."
                                     required
                                     value={nombre_usuario}
                                     onChange={changeUsername}
@@ -115,12 +145,12 @@ export function RegisterPage() {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="validationDefaultPassword" className="form-label text-success-emphasis fw-semibold">Password</label>
+                            <label htmlFor="validationDefaultPassword" className="form-label text-success-emphasis fw-semibold">Contraseña</label>
                             <input
                                 type="password"
                                 className="custom-font form-control border-2 border-success-subtle"
                                 id="validationDefaultPassword"
-                                placeholder="Contraseña"
+                                placeholder="Debe tener al menos 8 caracteres."
                                 required
                                 value={contraseña}
                                 onChange={changePassword}
@@ -132,7 +162,7 @@ export function RegisterPage() {
                                 type="text"
                                 className="custom-font form-control border-2 border-success-subtle"
                                 id="validationDefaultDocument"
-                                placeholder="00000000-0"
+                                placeholder="Ingresa los digitos añadiendo un guion antes del digito verificador."
                                 required
                                 value={identificacion}
                                 onChange={changeIdentification}
@@ -141,18 +171,16 @@ export function RegisterPage() {
                         <div className="col-md-6">
                             <label htmlFor="validationDefaultPhone" className="form-label text-success-emphasis fw-semibold">Teléfono</label>
                             <div className="input-group">
-                                <span className="input-group-text bg-warning bg-gradient border-2 border-success-subtle">+569</span>
                                 <input
                                     type="tel"
                                     className="custom-font form-control border-2 border-success-subtle"
                                     id="validationDefaultPhone"
-                                    placeholder="Número de teléfono"
+                                    placeholder='Ej: "+569XXXXXXXX"'
                                     required
                                     value={telefono}
                                     onChange={changePhone}
                                 />
                             </div>
-
                         </div>
                         <div className="col-md-6 mt-5 d-flex align-items-center">
                             <div className="form-check">
@@ -170,57 +198,10 @@ export function RegisterPage() {
                             </div>
                         </div>
                         <div className="col-12 text-center">
-
-                            { (loading) ? <img src={Loading} alt="cargando" /> : <button className="custom-font btn btn-warning btn-outline-dark fw-bold" type="submit">Enviar formulario</button>  }
-
-                            
+                            {loading ? <img src={Loading} alt="cargando" /> : <button className="custom-font btn btn-warning btn-outline-dark fw-bold" type="submit" disabled={loading}>
+                                {loading ? "Enviando..." : "Enviar formulario"}</button>}
                         </div>
                     </form>
-                </div>
-                {/* Modal */}
-                <div className="modal fade" id="privacyModal" tabIndex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="privacyModalLabel">Políticas de Privacidad</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                <h5>Términos y Condiciones</h5>
-
-                                <h6>1. Aceptación de Términos</h6>
-                                <p>Al registrarte en Comunidapp, aceptas los términos y condiciones descritos en este documento. Si no estás de acuerdo con alguno de estos términos, por favor, no utilices nuestro servicio.</p>
-
-                                <h6>2. Información Personal</h6>
-                                <p>En Comunidapp, recopilamos y almacenamos tu información personal, que incluye, entre otros, tu nombre, correo electrónico y número de teléfono. Esta información es necesaria para el funcionamiento del servicio y para proporcionarte una experiencia personalizada.</p>
-
-                                <h6>3. Uso de la Información</h6>
-                                <p>Tu información personal puede ser utilizada para los siguientes propósitos:</p>
-                                <ul>
-                                    <li>Proporcionar y mantener nuestro servicio.</li>
-                                    <li>Notificarte sobre cambios en nuestro servicio.</li>
-                                    <li>Proporcionar soporte al cliente.</li>
-                                    <li>Recopilar análisis o información valiosa para mejorar nuestro servicio.</li>
-                                </ul>
-
-                                <h6>4. Compartición de la Información</h6>
-                                <p>Con el fin de ofrecerte un servicio completo y mejorar la comunicación, tu información personal, como tu correo electrónico, nombre de usuario y número de teléfono, puede ser compartida con otros usuarios de Comunidapp. Esto es necesario para facilitar la interacción entre usuarios y para cumplir con el propósito del servicio.</p>
-
-                                <h6>5. Derechos del Usuario</h6>
-                                <p>Tienes el derecho a acceder, corregir o eliminar tu información personal en cualquier momento. Para realizar cualquier cambio en tu información, por favor, contacta con nuestro equipo de soporte.</p>
-
-                                <h6>6. Cambios en los Términos</h6>
-                                <p>Podemos actualizar nuestros términos y condiciones en cualquier momento. Te notificaremos sobre cualquier cambio mediante la publicación de los nuevos términos en nuestra aplicación. Te recomendamos revisar esta página periódicamente para estar al tanto de cualquier cambio.</p>
-
-                                <h6>7. Contacto</h6>
-                                <p>Si tienes alguna pregunta sobre estos términos, por favor, contáctanos en <a href="mailto:comunidapp.4geek@gmail.com">comunidapp.4geek@gmail.com</a></p>
-                            </div>
-
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <Footer />
             </div>

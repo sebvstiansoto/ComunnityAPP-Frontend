@@ -5,10 +5,12 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { PublicacionPage } from "../components/PublicacionPage.jsx";
+import Loading from '../assets/loading.gif'
 
 export function ProfilePage() {
   const navigate = useNavigate();
   const params = useParams();
+  const [loading, setLoading] = useState(false);
 
   const [username, setUsername] = useState("");
   const [biografia, setBiografia] = useState("");
@@ -96,6 +98,7 @@ export function ProfilePage() {
       console.log("No hay cambios que guardar");
       return;
     }
+    setLoading(true);
 
     fetch(
       "https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/usuario/" +
@@ -114,6 +117,7 @@ export function ProfilePage() {
         const modalElement = document.getElementById("editProfileModal");
         const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Ups algo salió mal 🙄", error);
@@ -273,13 +277,10 @@ export function ProfilePage() {
               </form>
             </div>
             <div className="modal-footer">
-              <button
-                type="button"
-                className="custom-font btn btn-warning btn-outline-dark fw-bold"
-                onClick={sendData}
+              {loading ? <img src={Loading} alt="cargando" /> : <button type="button" className="custom-font btn btn-warning btn-outline-dark fw-bold" onClick={sendData} disabled={loading}
               ><i class="bi bi-check-circle-fill me-1"></i>
-                Guardar cambios
-              </button>
+                {loading ? "Guardando Cambios..." : "Guardar Cambioss"}
+              </button>}
             </div>
           </div>
         </div>

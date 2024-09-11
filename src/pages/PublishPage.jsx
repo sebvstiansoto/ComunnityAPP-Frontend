@@ -5,10 +5,12 @@ import Calendar from 'react-calendar';
 import Footer from "../components/Footer.jsx";
 import WeatherComponent from "../components/Clima.jsx";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Loading from '../assets/loading.gif'
 
 export function PublishPage() {
   const params = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const [tituloPublicacion, setTitulo] = useState("");
   const [informacionPublicacion, setInformacion] = useState("");
@@ -50,6 +52,7 @@ export function PublishPage() {
   function sendData(e) {
     e.preventDefault();
     const idUser = localStorage.getItem('id_usuario');
+    setLoading(true);
     fetch(`https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/crear_publicacion/${idUser}`, {
       method: "POST",
       headers: {
@@ -120,10 +123,10 @@ export function PublishPage() {
               ></textarea>
             </div>
             <div className="d-flex justify-content-center m-0">
-              <button className="custom-font btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData}>
+              {loading ? <img src={Loading} alt="cargando" /> : <button className="custom-font btn btn-warning btn-outline-dark mb-5 fw-bold" onClick={sendData} disabled={loading}>
                 <i className="bi bi-check-circle-fill me-2"></i>
-                Publicar
-              </button>
+                {loading ? "Publicando..." : "Publicar"}
+              </button>}
             </div>
 
           </div>

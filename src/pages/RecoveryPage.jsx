@@ -14,7 +14,7 @@ export function RecoveryPage() {
         e.preventDefault();
         console.log('Enviando datos...', { email });
 
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/recuperar_contraseña', {
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/recuperacion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
