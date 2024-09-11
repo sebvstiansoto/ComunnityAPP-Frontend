@@ -66,24 +66,25 @@ export function Notificaciones() {
 
   return (
     <>
-      <div>
-        <h2>Notificaciones</h2>
-        {loading ? (
-          <p>Cargando notificaciones...</p>
-        ) : notificaciones.length > 0 ? (
-          notificaciones.map((notificacion) => (
-            <div key={notificacion.id} className="notificacion">
-              <h4>{notificacion.nombre_usuario} añadió tu publicación "{notificacion.titulo}" a favoritos</h4>
-              <p>Descripción: {notificacion.descripcion}</p>
-              <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
-            </div>
-          ))
-        ) : (
-          <p>No tienes notificaciones.</p>
-        )}
-      </div>
-      <Footer />
-    </>
+    <div>
+      <h2>Notificaciones</h2>
+      {loading ? (
+        <p>Cargando notificaciones...</p>
+      ) : notificaciones.length > 0 ? (
+        notificaciones.map((notificacion) => (
+          <div key={notificacion.hora_notificacion} className="notificacion">
+            <h4>{notificacion.usuario_interactuante} interactuó con tu publicación "{notificacion.titulo}"</h4>
+            <p>Descripción: {notificacion.descripcion}</p>
+            <p>Hora de la publicación: {new Date(notificacion.hora_publicado).toLocaleString()}</p>
+            <p>Notificado el: {new Date(notificacion.hora_notificacion).toLocaleString()}</p>
+          </div>
+        ))
+      ) : (
+        <p>No tienes notificaciones.</p>
+      )}
+    </div>
+    <Footer />
+  </>
   );
 }
 

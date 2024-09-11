@@ -27,9 +27,9 @@ const Navbar = () => {
     navigate('/favorites/' + params.id);
   }
 
-  function handleNotifications() {
+  /*function handleNotifications() {
     setShowNotificationModal(true);
-  }
+  } */
 
   function redirectHome() {
     navigate('/' + params.id);
@@ -115,21 +115,6 @@ const Navbar = () => {
               htmlFor="btnradio3"
             >
               <img width="20px" height="20px" src={tagIcon} alt="Tag" />
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio4"
-              autoComplete="off"
-              onClick={handleNotifications} // Se abre el modal de notificaciones
-            />
-            <label
-              className="btn"
-              htmlFor="btnradio4"
-            >
-              <img width="20px" height="20px" src={bellIcon} alt="Notifications" />
             </label>
 
             {/* Botón con dropdown */}
