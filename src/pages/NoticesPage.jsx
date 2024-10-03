@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { Publicacion } from '../components/Publicacion.jsx'
+import Footer from '../components/Footer.jsx';
 
 export function NoticesPage() {
 
     let [publicaciones, setPublicaciones] = useState([]);
     useEffect(() => {
-        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones')
+        fetch('https://comunidappbackend-sebastian-sotos-projects-c217a73f.vercel.app/obtener_publicaciones_filtrada/4')
             .then(response => response.json())
             .then(data => setPublicaciones(data));
     }, []);
@@ -22,6 +23,7 @@ console.log (publicaciones)
                         <Publicacion publicacion={publicacion} key={index} />
                     ))}
                 </div>
+                <Footer />
             </main>
         </React.Fragment>
     );

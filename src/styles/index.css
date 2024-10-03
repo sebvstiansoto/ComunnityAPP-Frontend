@@ -1,3 +1,54 @@
 * {
-border-sizing: border-box;
+    border-sizing: border-box;
+}
+
+
+
+body {
+    background-image: url('../assets/banner-footer.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3rem;
+    color: #0a290b;
+    text-shadow: 4px 4px 4px rgba(157, 212, 174, 0.815);
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+}
+
+label {
+    font-family: 'Nunito', sans-serif;
+    font-size: large;
+}
+
+h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bolder;
+}
+
+textarea {
+    font-family: 'Nunito', sans-serif;
+}
+
+h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bolder;
+}
+
+.custom-font {
+    font-family: 'Nunito', sans-serif;
 }
